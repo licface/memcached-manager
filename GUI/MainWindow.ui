@@ -18,12 +18,109 @@
   <widget class="QWidget" name="centralwidget" >
    <property name="geometry" >
     <rect>
-     <x>137</x>
+     <x>170</x>
      <y>26</y>
-     <width>455</width>
+     <width>422</width>
      <height>375</height>
     </rect>
    </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_3" >
+    <item>
+     <widget class="QToolBox" name="tbMain" >
+      <property name="frameShape" >
+       <enum>QFrame::Panel</enum>
+      </property>
+      <property name="currentIndex" >
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="MTasks" >
+       <property name="geometry" >
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>402</width>
+         <height>259</height>
+        </rect>
+       </property>
+       <attribute name="label" >
+        <string>Managment Tasks</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout" >
+        <item>
+         <widget class="QGroupBox" name="gbClearKey" >
+          <property name="title" >
+           <string>Delete Key(s)</string>
+          </property>
+          <property name="flat" >
+           <bool>false</bool>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_2" >
+           <item row="0" column="0" >
+            <widget class="QLabel" name="lblCacheKeys" >
+             <property name="text" >
+              <string>Cache Key(s)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" >
+            <widget class="QLineEdit" name="txtCacheKeys" />
+           </item>
+           <item row="1" column="1" >
+            <widget class="QPushButton" name="btnCacheKeys" >
+             <property name="text" >
+              <string>Delete Key(s)</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="gbTasks" >
+          <property name="title" >
+           <string>Server Admin Tasks</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout" >
+           <item row="0" column="0" >
+            <widget class="QPushButton" name="btnFlushCache" >
+             <property name="text" >
+              <string>Flush All Cache Keys</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" >
+            <widget class="QPushButton" name="btnRestart" >
+             <property name="text" >
+              <string>Restart Server</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="SlabsKeys" >
+       <property name="geometry" >
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>402</width>
+         <height>259</height>
+        </rect>
+       </property>
+       <attribute name="label" >
+        <string>Slabs &amp;&amp; Keys</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="Stats" >
+       <attribute name="label" >
+        <string>Stats</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar" >
    <property name="geometry" >
@@ -65,7 +162,7 @@
     <rect>
      <x>0</x>
      <y>26</y>
-     <width>131</width>
+     <width>164</width>
      <height>375</height>
     </rect>
    </property>
@@ -80,7 +177,7 @@
      <rect>
       <x>0</x>
       <y>23</y>
-      <width>131</width>
+      <width>164</width>
       <height>352</height>
      </rect>
     </property>
