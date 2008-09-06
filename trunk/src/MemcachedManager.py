@@ -23,7 +23,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         print ip
         print port
         print name
-        self.serverTreeItems.append(QListViewItem(self.serverTree, ))
+        #self.serverTreeItems.append(QListViewItem(self.serverTree, ))
         
 
         
