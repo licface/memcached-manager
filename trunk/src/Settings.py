@@ -1,8 +1,8 @@
-from configobj import ConfigObj
 import os
 import sys
 from Clusters import Cluster
 from Servers import Server
+import pickle
 
 class Settings:
     settings = None
@@ -38,36 +38,47 @@ class ServerSettings:
             
         if not self.__dict__.has_key('config') or self.config is None:
             if os.path.exists(self.configPath) is not True:
-                self.config = ConfigObj()
-                self.config.filename = self.configPath
-                self.config['clusters'] = []
-                self.config.write()
+                self.config = {'clusters': []}
             else:
-                self.config = ConfigObj(self.configPath)
+                self.config = pickle.load(open(self.configPath, 'rb'))
             
     def loadClusters(self):
         if not self.__dict__.has_key('clusters') or self.clusters is None:
             self.clusters = []
             for cluster in self.config['clusters']:
-                tCluster = Cluster(self.config['clusters'][cluster]['name'])
-                for server in self.config['clusters'][cluster]['servers']:
+                tCluster = Cluster(cluster['name'])
+                for server in cluster['servers']:
                     tServer = Server(
-                                     self.config['clusters'][cluster]['servers'][server]['name'],
-                                     self.config['clusters'][cluster]['servers'][server]['ip'],
-                                     self.config['clusters'][cluster]['servers'][server]['port']
+                                     server['name'],
+                                     server['ip'],
+                                     server['port']
                                      )
                     tCluster.addServer(tServer)
                 self.clusters.append(tCluster)
+                
+            if len(self.clusters) <= 0:
+                self.addDefaults()
+        
+    def addDefaults(self):
+        tCluster = Cluster('Default Cluster')
+        tServer = Server('Demo Server', '127.0.0.1', '11211')
+        tCluster.addServer(tServer)
+        self.addCluster(tCluster)
             
     def save(self):
         self.config['clusters'] = []
         for cluster in self.clusters:
             self.config['clusters'].append(cluster.save())
             
-        self.config.write()
+        pickle.dump(self.config, open(self.configPath, 'wb'))
         
     def getClusters(self):
         return self.clusters
+    
+    def getCluster(self, name):
+        for cluster in self.clusters:
+            if cluster.name == name:
+                return cluster
     
     def getServers(self, cluster):
         pass
@@ -76,7 +87,8 @@ class ServerSettings:
         pass
     
     def addCluster(self, cluster):
-        pass
+        self.clusters.append(cluster)
     
     def addServer(self, cluster, name, ip, port):
-        pass
+        cluster.addServer(Server(name, ip, port))
+        self.save()

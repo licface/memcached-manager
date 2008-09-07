@@ -3,6 +3,7 @@ from PyQt4 import QtCore
 from ui_MainWindow import Ui_MainWindow
 from ServerActions import Dialogs
 import sys
+from Servers import ServerTreeModel
 
 class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -13,16 +14,14 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.dialog = Dialogs.AddServer()
         self.connect(self.dialog, QtCore.SIGNAL('saved'), self.addServer)
         
-        self.serverTreeItems = []
+        self.serverTree.setModel(ServerTreeModel())
         
         
     def displayAddServer(self):
         self.dialog.show()
         
-    def addServer(self, ip, port, name):
-        print ip
-        print port
-        print name
+    def addServer(self, cluster, ip, port, name):
+        pass
         #self.serverTreeItems.append(QListViewItem(self.serverTree, ))
         
 

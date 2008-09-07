@@ -14,23 +14,17 @@ class AddServer(QtGui.QDialog, Ui_addServerDialog):
         self.settings = Settings()
         clusters = self.settings.servers.getClusters()
         for cluster in clusters:
-            self.cbCluster.insertItem(cluster.name, cluster.key)
+            self.cbCluster.addItem(cluster.name)
         
     def save(self):
+        cluster = self.settings.servers.getCluster(self.cbCluster.currentText())
         ip = self.txtServerIP.text()
         port = self.txtServerPort.text()
         name = self.txtServerName.text()
         
+        self.settings.servers.addServer(cluster, name, ip, port)
         
-        
-        #pos = str(len(self.config['servers']))
-        #self.config['servers'][pos] = {}
-        #self.config['servers'][pos]['name'] = name
-        #self.config['servers'][pos]['ip_address'] = ip
-        #self.config['servers'][pos]['port'] = port
-        #self.config.write()
-        
-        self.emit(QtCore.SIGNAL('saved'), ip, port, name)
+        self.emit(QtCore.SIGNAL('saved'), cluster, ip, port, name)
         
     def clearFields(self):
         self.txtServerIP.setText('')
