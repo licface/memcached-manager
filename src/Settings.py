@@ -14,12 +14,19 @@ class Settings:
         
         if self.servers is None:
             self.servers = ServerSettings()
+            
+    def save(self):
+        self.settings.save()
+        self.servers.save()
 
 class GlobalSettings:
     __settings = {}
     
     def __init__(self):
         self.__dict__ = self.__settings
+        
+    def save(self):
+        pass
 
 class ServerSettings:
     __settings = {}
@@ -79,6 +86,13 @@ class ServerSettings:
         for cluster in self.clusters:
             if cluster.name == name:
                 return cluster
+        return None
+            
+    def getClusterByMenuItem(self, action):
+        for cluster in self.settings.servers.getClusters():
+            if cluster.menuItems['actions']['delete'] == action:
+                return cluster
+        return None
     
     def getServers(self, cluster):
         pass
@@ -86,9 +100,20 @@ class ServerSettings:
     def getAllServers(self):
         pass
     
+    def getLength(self):
+        return len(self.clusters)
+    
     def addCluster(self, cluster):
         self.clusters.append(cluster)
+        self.save()
+        
+    def deleteCluster(self, cluster):
+        index = self.clusters.index(cluster)
+        cluster.delete()
+        self.clusters.pop(index)
     
     def addServer(self, cluster, name, ip, port):
-        cluster.addServer(Server(name, ip, port))
+        server = Server(name, ip, port)
+        cluster.addServer(server)
         self.save()
+        return server
