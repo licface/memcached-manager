@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Sat Sep  6 13:38:39 2008
+# Created: Sun Sep  7 16:21:45 2008
 #      by: PyQt4 UI code generator 4.3.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -16,7 +16,7 @@ class Ui_MainWindow(object):
         MainWindow.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
 
         self.centralwidget = QtGui.QWidget(MainWindow)
-        self.centralwidget.setGeometry(QtCore.QRect(170,26,422,375))
+        self.centralwidget.setGeometry(QtCore.QRect(0,26,592,375))
         self.centralwidget.setObjectName("centralwidget")
 
         self.hboxlayout = QtGui.QHBoxLayout(self.centralwidget)
@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
         self.tbMain.setObjectName("tbMain")
 
         self.MTasks = QtGui.QWidget()
-        self.MTasks.setGeometry(QtCore.QRect(0,0,402,259))
+        self.MTasks.setGeometry(QtCore.QRect(0,0,572,259))
         self.MTasks.setObjectName("MTasks")
 
         self.vboxlayout = QtGui.QVBoxLayout(self.MTasks)
@@ -70,7 +70,7 @@ class Ui_MainWindow(object):
         self.tbMain.addItem(self.MTasks,"")
 
         self.SlabsKeys = QtGui.QWidget()
-        self.SlabsKeys.setGeometry(QtCore.QRect(0,0,402,259))
+        self.SlabsKeys.setGeometry(QtCore.QRect(0,0,572,259))
         self.SlabsKeys.setObjectName("SlabsKeys")
         self.tbMain.addItem(self.SlabsKeys,"")
 
@@ -96,27 +96,6 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
-        self.serverDock = QtGui.QDockWidget(MainWindow)
-        self.serverDock.setGeometry(QtCore.QRect(0,26,164,375))
-        self.serverDock.setObjectName("serverDock")
-
-        self.dockWidgetContents_2 = QtGui.QWidget(self.serverDock)
-        self.dockWidgetContents_2.setGeometry(QtCore.QRect(0,23,164,352))
-        self.dockWidgetContents_2.setObjectName("dockWidgetContents_2")
-
-        self.hboxlayout1 = QtGui.QHBoxLayout(self.dockWidgetContents_2)
-        self.hboxlayout1.setObjectName("hboxlayout1")
-
-        self.serverTree = QtGui.QTreeView(self.dockWidgetContents_2)
-        self.serverTree.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
-        self.serverTree.setFrameShape(QtGui.QFrame.StyledPanel)
-        self.serverTree.setFrameShadow(QtGui.QFrame.Sunken)
-        self.serverTree.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
-        self.serverTree.setObjectName("serverTree")
-        self.hboxlayout1.addWidget(self.serverTree)
-        self.serverDock.setWidget(self.dockWidgetContents_2)
-        MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(1),self.serverDock)
-
         self.actionAddServer = QtGui.QAction(MainWindow)
         self.actionAddServer.setObjectName("actionAddServer")
 
@@ -125,9 +104,17 @@ class Ui_MainWindow(object):
 
         self.actionQuit = QtGui.QAction(MainWindow)
         self.actionQuit.setObjectName("actionQuit")
+
+        self.actionAddCluster = QtGui.QAction(MainWindow)
+        self.actionAddCluster.setObjectName("actionAddCluster")
+
+        self.actionTest_Sub_Item = QtGui.QAction(MainWindow)
+        self.actionTest_Sub_Item.setObjectName("actionTest_Sub_Item")
         self.menuFile.addAction(self.actionSave)
         self.menuFile.addAction(self.actionQuit)
         self.menu_Servers.addAction(self.actionAddServer)
+        self.menu_Servers.addAction(self.actionAddCluster)
+        self.menu_Servers.addSeparator()
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menu_Servers.menuAction())
 
@@ -149,8 +136,9 @@ class Ui_MainWindow(object):
         self.tbMain.setItemText(self.tbMain.indexOf(self.Stats), QtGui.QApplication.translate("MainWindow", "Stats", None, QtGui.QApplication.UnicodeUTF8))
         self.menuFile.setTitle(QtGui.QApplication.translate("MainWindow", "&File", None, QtGui.QApplication.UnicodeUTF8))
         self.menu_Servers.setTitle(QtGui.QApplication.translate("MainWindow", "&Servers", None, QtGui.QApplication.UnicodeUTF8))
-        self.serverDock.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Servers", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAddServer.setText(QtGui.QApplication.translate("MainWindow", "&Add Server", None, QtGui.QApplication.UnicodeUTF8))
         self.actionSave.setText(QtGui.QApplication.translate("MainWindow", "Sa&ve", None, QtGui.QApplication.UnicodeUTF8))
         self.actionQuit.setText(QtGui.QApplication.translate("MainWindow", "&Quit", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionAddCluster.setText(QtGui.QApplication.translate("MainWindow", "Add &Cluster", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionTest_Sub_Item.setText(QtGui.QApplication.translate("MainWindow", "Test Sub Item", None, QtGui.QApplication.UnicodeUTF8))
 
