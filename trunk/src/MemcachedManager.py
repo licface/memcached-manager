@@ -38,6 +38,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def addCluster(self, cluster):
         items = cluster.menuItems
         items['menu'] = self.menu_Servers.addMenu(cluster.name)
+        items['actions']['set'] = QtGui.QAction(self)
+        items['actions']['set'].setText('Make Active')
+        items['menu'].addAction(items['actions']['set'])
         items['actions']['delete'] = QtGui.QAction(self)
         items['actions']['delete'].setText('Delete')
         items['menu'].addAction(items['actions']['delete'])
@@ -47,6 +50,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         items['actions']['add'].setText('Add Server')
         items['servers'].addAction(items['actions']['add'])
         items['servers'].addSeparator()
+        
         self.connect(items['actions']['add'], QtCore.SIGNAL("triggered()"), self.displayAddServer)
         self.connect(items['actions']['delete'], QtCore.SIGNAL("triggered()"), self.deleteCluster)
         
@@ -68,7 +72,12 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         items['actions']['delete'] = QtGui.QAction(self)
         items['actions']['delete'].setText('Delete')
         items['menu'].addAction(items['actions']['delete'])
+        self.connect(items['actions']['delete'], QtCore.SIGNAL("triggered()"), self.deleteServer)
         
+    def deleteServer(self):
+        action = self.sender()
+        server = self.settings.servers.getServerByMenuItem(action)
+        server.delete()
         
 
         

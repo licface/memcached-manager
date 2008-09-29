@@ -9,7 +9,8 @@ class Cluster:
                  'servers':None, 
                  'actions':{
                             'delete':None, 
-                            'add':None
+                            'add':None,
+                            'set':None
                             }
                  }
         self.key = md5.new(self.name).hexdigest()
@@ -19,6 +20,10 @@ class Cluster:
         
     def addServer(self, server):
         self.servers.append(server)
+        server.setCluster(self)
+        
+    def deleteServer(self, server):
+        self.servers.remove(server)
         
     def getServers(self):
         return self.servers
