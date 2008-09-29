@@ -89,16 +89,26 @@ class ServerSettings:
         return None
             
     def getClusterByMenuItem(self, action):
-        for cluster in self.settings.servers.getClusters():
+        for cluster in self.clusters:
             if cluster.menuItems['actions']['delete'] == action:
                 return cluster
         return None
     
+    def getServerByMenuItem(self, action):
+        for cluster in self.clusters:
+            for server in cluster.getServers():
+                if server.menuItems['actions']['delete'] == action:
+                    return server
+        return None
+    
     def getServers(self, cluster):
-        pass
+        return cluster.getServers()
     
     def getAllServers(self):
-        pass
+        servers = []
+        for cluster in self.clusters:
+            servers.extend(cluster.getServers())
+        return servers
     
     def getLength(self):
         return len(self.clusters)
