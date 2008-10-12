@@ -20,6 +20,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.addServerDialog.connect(self.addClusterDialog, QtCore.SIGNAL('saved'), self.addServerDialog.addCluster)
         self.connect(self.actionSave, QtCore.SIGNAL('triggered()'), self.save)
         
+        #Management Task Actions
+        self.connect(self.btnCacheKeys, QtCore.SIGNAL("clicked()"), self.deleteKeys)
+        
         self.currentCluster = None
         
         for cluster in self.settings.servers.getClusters():
@@ -87,6 +90,16 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         action = self.sender()
         server = self.settings.servers.getServerByMenuItem(action)
         server.delete()
+        
+    def deleteKeys(self):
+        print 'Deleting Keys'
+        value = self.txtCacheKeys.text()
+        if self.currentCluster is not None:
+            self.currentCluster.deleteKey(value)
+            QtGui.QMessageBox.information(self, "Key(s) Deleted", "Your key(s) have been deleted")
+        else:
+            QtGui.QMessageBox.critical(self, "Not Cluster Selected", "You do not have an Active Cluster")
+            
         
 
         
