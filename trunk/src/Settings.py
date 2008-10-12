@@ -92,6 +92,8 @@ class ServerSettings:
         for cluster in self.clusters:
             if cluster.menuItems['actions']['delete'] == action:
                 return cluster
+            elif cluster.menuItems['actions']['set'] == action:
+                return cluster
         return None
     
     def getServerByMenuItem(self, action):

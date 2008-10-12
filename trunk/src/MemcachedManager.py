@@ -20,6 +20,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.addServerDialog.connect(self.addClusterDialog, QtCore.SIGNAL('saved'), self.addServerDialog.addCluster)
         self.connect(self.actionSave, QtCore.SIGNAL('triggered()'), self.save)
         
+        self.currentCluster = None
+        
         for cluster in self.settings.servers.getClusters():
             self.addCluster(cluster)
     
@@ -53,6 +55,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         
         self.connect(items['actions']['add'], QtCore.SIGNAL("triggered()"), self.displayAddServer)
         self.connect(items['actions']['delete'], QtCore.SIGNAL("triggered()"), self.deleteCluster)
+        self.connect(items['actions']['set'], QtCore.SIGNAL("triggered()"), self.setCluster)
         
         cluster.setMenuItems(items)
         
@@ -64,6 +67,12 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         cluster = self.settings.servers.getClusterByMenuItem(action)
         if cluster is not None:
             self.settings.servers.deleteCluster(cluster)
+            
+    def setCluster(self):
+        action = self.sender()
+        self.currentCluster = self.settings.servers.getClusterByMenuItem(action)
+        if self.currentCluster is not None:
+            self.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow ("+ str(self.currentCluster.name) +")", None, QtGui.QApplication.UnicodeUTF8))
             
         
     def addServer(self, cluster, server):
