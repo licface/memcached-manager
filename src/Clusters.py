@@ -1,5 +1,7 @@
 import md5
 import memcached.memcache
+from PyQt4.QtGui import QTreeWidgetItem
+from PyQt4.QtCore import QStringList
 
 class Cluster:
     def __init__(self, name):
@@ -14,9 +16,17 @@ class Cluster:
                             'set':None
                             }
                  }
+        
+        self.treeItem = None
+        
         self.key = md5.new(self.name).hexdigest()
         
         self.memcached = memcached.memcache.Client(self.getServerMemcachedUrls(), debug=0)
+        
+    def initTreeView(self, parent):
+        self.treeItem = QTreeWidgetItem(parent, QStringList(self.name))
+        for server in self.getServers():
+            server.initTreeView()
         
     def setMenuItems(self, items):
         self.menuItems = items
@@ -24,6 +34,8 @@ class Cluster:
     def addServer(self, server):
         self.servers.append(server)
         server.setCluster(self)
+        if self.treeItem is not None:
+            server.initTreeView()
         
     def deleteServer(self, server):
         self.servers.remove(server)

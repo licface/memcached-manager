@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Sun Sep  7 16:21:45 2008
+# Created: Sun Oct 12 14:38:07 2008
 #      by: PyQt4 UI code generator 4.3.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,22 +12,34 @@ from PyQt4 import QtCore, QtGui
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(QtCore.QSize(QtCore.QRect(0,0,592,424).size()).expandedTo(MainWindow.minimumSizeHint()))
+        MainWindow.resize(QtCore.QSize(QtCore.QRect(0,0,499,317).size()).expandedTo(MainWindow.minimumSizeHint()))
         MainWindow.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
 
         self.centralwidget = QtGui.QWidget(MainWindow)
-        self.centralwidget.setGeometry(QtCore.QRect(0,26,592,375))
+        self.centralwidget.setGeometry(QtCore.QRect(0,26,499,268))
         self.centralwidget.setObjectName("centralwidget")
 
         self.hboxlayout = QtGui.QHBoxLayout(self.centralwidget)
         self.hboxlayout.setObjectName("hboxlayout")
 
-        self.tbMain = QtGui.QToolBox(self.centralwidget)
-        self.tbMain.setFrameShape(QtGui.QFrame.Panel)
-        self.tbMain.setObjectName("tbMain")
+        self.treeCluster = QtGui.QTreeWidget(self.centralwidget)
+
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.treeCluster.sizePolicy().hasHeightForWidth())
+        self.treeCluster.setSizePolicy(sizePolicy)
+        self.treeCluster.setMinimumSize(QtCore.QSize(150,0))
+        self.treeCluster.setMaximumSize(QtCore.QSize(200,16777215))
+        self.treeCluster.setObjectName("treeCluster")
+        self.hboxlayout.addWidget(self.treeCluster)
+
+        self.tabsMain = QtGui.QTabWidget(self.centralwidget)
+        self.tabsMain.setMinimumSize(QtCore.QSize(325,0))
+        self.tabsMain.setObjectName("tabsMain")
 
         self.MTasks = QtGui.QWidget()
-        self.MTasks.setGeometry(QtCore.QRect(0,0,572,259))
+        self.MTasks.setGeometry(QtCore.QRect(0,0,321,222))
         self.MTasks.setObjectName("MTasks")
 
         self.vboxlayout = QtGui.QVBoxLayout(self.MTasks)
@@ -62,26 +74,22 @@ class Ui_MainWindow(object):
         self.btnFlushCache = QtGui.QPushButton(self.gbTasks)
         self.btnFlushCache.setObjectName("btnFlushCache")
         self.gridlayout1.addWidget(self.btnFlushCache,0,0,1,1)
-
-        self.btnRestart = QtGui.QPushButton(self.gbTasks)
-        self.btnRestart.setObjectName("btnRestart")
-        self.gridlayout1.addWidget(self.btnRestart,0,1,1,1)
         self.vboxlayout.addWidget(self.gbTasks)
-        self.tbMain.addItem(self.MTasks,"")
+        self.tabsMain.addTab(self.MTasks,"")
 
-        self.SlabsKeys = QtGui.QWidget()
-        self.SlabsKeys.setGeometry(QtCore.QRect(0,0,572,259))
-        self.SlabsKeys.setObjectName("SlabsKeys")
-        self.tbMain.addItem(self.SlabsKeys,"")
+        self.SKInfo = QtGui.QWidget()
+        self.SKInfo.setGeometry(QtCore.QRect(0,0,321,222))
+        self.SKInfo.setObjectName("SKInfo")
+        self.tabsMain.addTab(self.SKInfo,"")
 
         self.Stats = QtGui.QWidget()
         self.Stats.setObjectName("Stats")
-        self.tbMain.addItem(self.Stats,"")
-        self.hboxlayout.addWidget(self.tbMain)
+        self.tabsMain.addTab(self.Stats,"")
+        self.hboxlayout.addWidget(self.tabsMain)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0,0,592,26))
+        self.menubar.setGeometry(QtCore.QRect(0,0,499,26))
         self.menubar.setObjectName("menubar")
 
         self.menuFile = QtGui.QMenu(self.menubar)
@@ -92,7 +100,7 @@ class Ui_MainWindow(object):
         MainWindow.setMenuBar(self.menubar)
 
         self.statusbar = QtGui.QStatusBar(MainWindow)
-        self.statusbar.setGeometry(QtCore.QRect(0,401,592,23))
+        self.statusbar.setGeometry(QtCore.QRect(0,294,499,23))
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
@@ -119,21 +127,25 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menu_Servers.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tbMain.setCurrentIndex(0)
+        self.tabsMain.setCurrentIndex(0)
         QtCore.QObject.connect(self.actionQuit,QtCore.SIGNAL("activated()"),MainWindow.close)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
+        self.treeCluster.headerItem().setText(0,QtGui.QApplication.translate("MainWindow", "Clusters", None, QtGui.QApplication.UnicodeUTF8))
         self.gbClearKey.setTitle(QtGui.QApplication.translate("MainWindow", "Delete Key(s)", None, QtGui.QApplication.UnicodeUTF8))
         self.lblCacheKeys.setText(QtGui.QApplication.translate("MainWindow", "Cache Key(s)", None, QtGui.QApplication.UnicodeUTF8))
+        self.txtCacheKeys.setToolTip(QtGui.QApplication.translate("MainWindow", "Seperate Keys with \';\'", None, QtGui.QApplication.UnicodeUTF8))
         self.btnCacheKeys.setText(QtGui.QApplication.translate("MainWindow", "Delete Key(s)", None, QtGui.QApplication.UnicodeUTF8))
         self.gbTasks.setTitle(QtGui.QApplication.translate("MainWindow", "Server Admin Tasks", None, QtGui.QApplication.UnicodeUTF8))
-        self.btnFlushCache.setText(QtGui.QApplication.translate("MainWindow", "Flush All Cache Keys", None, QtGui.QApplication.UnicodeUTF8))
-        self.btnRestart.setText(QtGui.QApplication.translate("MainWindow", "Restart Server", None, QtGui.QApplication.UnicodeUTF8))
-        self.tbMain.setItemText(self.tbMain.indexOf(self.MTasks), QtGui.QApplication.translate("MainWindow", "Managment Tasks", None, QtGui.QApplication.UnicodeUTF8))
-        self.tbMain.setItemText(self.tbMain.indexOf(self.SlabsKeys), QtGui.QApplication.translate("MainWindow", "Slabs && Keys", None, QtGui.QApplication.UnicodeUTF8))
-        self.tbMain.setItemText(self.tbMain.indexOf(self.Stats), QtGui.QApplication.translate("MainWindow", "Stats", None, QtGui.QApplication.UnicodeUTF8))
+        self.btnFlushCache.setToolTip(QtGui.QApplication.translate("MainWindow", "Flush Keys from All Servers in Cluster", None, QtGui.QApplication.UnicodeUTF8))
+        self.btnFlushCache.setText(QtGui.QApplication.translate("MainWindow", "Flush Cache Keys", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabsMain.setTabText(self.tabsMain.indexOf(self.MTasks), QtGui.QApplication.translate("MainWindow", "Management Tasks", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabsMain.setTabToolTip(self.tabsMain.indexOf(self.MTasks),QtGui.QApplication.translate("MainWindow", "Cluster Management Tasks", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabsMain.setTabText(self.tabsMain.indexOf(self.SKInfo), QtGui.QApplication.translate("MainWindow", "Slab && Key Info", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabsMain.setTabToolTip(self.tabsMain.indexOf(self.SKInfo),QtGui.QApplication.translate("MainWindow", "Slabs, Keys, & Values", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabsMain.setTabText(self.tabsMain.indexOf(self.Stats), QtGui.QApplication.translate("MainWindow", "Statistics", None, QtGui.QApplication.UnicodeUTF8))
         self.menuFile.setTitle(QtGui.QApplication.translate("MainWindow", "&File", None, QtGui.QApplication.UnicodeUTF8))
         self.menu_Servers.setTitle(QtGui.QApplication.translate("MainWindow", "&Servers", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAddServer.setText(QtGui.QApplication.translate("MainWindow", "&Add Server", None, QtGui.QApplication.UnicodeUTF8))
