@@ -1,4 +1,5 @@
 import md5
+import memcached.memcache
 
 class Cluster:
     def __init__(self, name):
@@ -15,6 +16,8 @@ class Cluster:
                  }
         self.key = md5.new(self.name).hexdigest()
         
+        self.memcached = memcached.memcache.Client(self.getServerMemcachedUrls(), debug=0)
+        
     def setMenuItems(self, items):
         self.menuItems = items
         
@@ -27,6 +30,13 @@ class Cluster:
         
     def getServers(self):
         return self.servers
+    
+    def getServerMemcachedUrls(self):
+        servers = []
+        for server in self.servers:
+            servers.append(str(server.ip) +":"+ str(server.port))
+            
+        return servers
         
     def save(self):
         save = {'name':self.name, 'servers':[]}
@@ -42,3 +52,7 @@ class Cluster:
             
         if self.menuItems['menu'] is not None:
             self.menuItems['menu'].parent().removeAction(self.menuItems['menu'].menuAction())
+            
+    def deleteKey(self, key):
+        keys = key.split(';')
+        self.memcached.delete_multi(keys)
