@@ -1,1 +1,11 @@
 #labels Featured,Phase-Design
+= Screenshots V0.1=
+
+== Main Window ==
+http://lh5.ggpht.com/nerdynick/SPJ2VkzwEbI/AAAAAAAAAFQ/-Yfym19iFxc/Screenshot-MainWindow.png
+
+== Add Server ==
+http://lh4.ggpht.com/nerdynick/SPJ2V7x6pNI/AAAAAAAAAFY/eQFsv5F4I_w/Screenshot-Add%20Server.png
+
+== Add Cluster ==
+http://lh3.ggpht.com/nerdynick/SPJ2V3cJD_I/AAAAAAAAAFg/rjedaawIaS8/Screenshot-Add%20Cluster.png
