@@ -23,6 +23,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         
         #Management Task Actions
         self.connect(self.btnCacheKeys, QtCore.SIGNAL("clicked()"), self.deleteKeys)
+        self.connect(self.btnFlushCache, QtCore.SIGNAL("clicked()"), self.flushKeys)
         
         self.currentCluster = None
         
@@ -102,6 +103,14 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             QtGui.QMessageBox.information(self, "Key(s) Deleted", "Your key(s) have been deleted")
         else:
             QtGui.QMessageBox.critical(self, "Not Cluster Selected", "You do not have an Active Cluster")
+            
+    def flushKeys(self):
+        if self.currentCluster is not None:
+            self.currentCluster.flushKeys(value)
+            QtGui.QMessageBox.information(self, "Cache Keys Flushed", "Your keys have been flushed")
+        else:
+            QtGui.QMessageBox.critical(self, "Not Cluster Selected", "You do not have an Active Cluster")
+        
             
         
 

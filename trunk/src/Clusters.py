@@ -65,6 +65,11 @@ class Cluster:
         if self.menuItems['menu'] is not None:
             self.menuItems['menu'].parent().removeAction(self.menuItems['menu'].menuAction())
             
+    #Memcached Management Functions
+            
     def deleteKey(self, key):
         keys = key.split(';')
         self.memcached.delete_multi(keys)
+        
+    def flushKeys(self):
+        self.memcached.flush_all()
