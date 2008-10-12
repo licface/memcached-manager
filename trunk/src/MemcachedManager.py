@@ -9,6 +9,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def __init__(self):
         QtGui.QMainWindow.__init__(self)
         self.setupUi(self)
+        
         self.addServerDialog = Dialogs.AddServer()
         self.addClusterDialog = Dialogs.AddCluster()
         self.settings = Settings()
@@ -64,6 +65,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         
         for server in cluster.getServers():
             self.addServer(cluster, server)
+        
+        cluster.initTreeView(self.treeCluster)
             
     def deleteCluster(self):
         action = self.sender()
