@@ -18,9 +18,7 @@ class Cluster:
                  }
         
         self.treeItem = None
-        
         self.key = md5.new(self.name).hexdigest()
-        
         self.memcached = None
         
     def initTreeView(self, parent):
@@ -36,9 +34,12 @@ class Cluster:
         server.setCluster(self)
         if self.treeItem is not None:
             server.initTreeView()
+            
+        self.resetMemcacheClient()
         
     def deleteServer(self, server):
         self.servers.remove(server)
+        self.resetMemcacheClient()
         
     def getServers(self):
         return self.servers
@@ -47,7 +48,6 @@ class Cluster:
         servers = []
         for server in self.servers:
             servers.append(str(server.ip) +":"+ str(server.port))
-            
         return servers
         
     def save(self):
@@ -58,6 +58,9 @@ class Cluster:
         return save
     
     def delete(self):
+        if self.memcached is not None:
+            self.memcached.disconnect_all()
+            
         for server in self.servers:
             server.delete()
         self.servers = []
@@ -68,6 +71,11 @@ class Cluster:
     def makeActive(self):
         if self.memcached is None:
             self.memcached = memcached.memcache.Client(self.getServerMemcachedUrls(), debug=0)
+            
+    def resetMemcacheClient(self):
+        if self.memcached is not None:
+            self.memcached.disconnect_all()
+            self.memcached.set_servers(self.getServerMemcachedUrls())
             
     #Memcached Management Functions
             
