@@ -21,7 +21,7 @@ class Cluster:
         
         self.key = md5.new(self.name).hexdigest()
         
-        self.memcached = memcached.memcache.Client(self.getServerMemcachedUrls(), debug=0)
+        self.memcached = None
         
     def initTreeView(self, parent):
         self.treeItem = QTreeWidgetItem(parent, QStringList(self.name))
@@ -64,6 +64,10 @@ class Cluster:
             
         if self.menuItems['menu'] is not None:
             self.menuItems['menu'].parent().removeAction(self.menuItems['menu'].menuAction())
+            
+    def makeActive(self):
+        if self.memcached is None:
+            self.memcached = memcached.memcache.Client(self.getServerMemcachedUrls(), debug=0)
             
     #Memcached Management Functions
             
