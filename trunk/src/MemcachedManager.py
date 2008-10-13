@@ -79,6 +79,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         action = self.sender()
         self.currentCluster = self.settings.servers.getClusterByMenuItem(action)
         if self.currentCluster is not None:
+            self.currentCluster.makeActive()
             self.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow ("+ str(self.currentCluster.name) +")", None, QtGui.QApplication.UnicodeUTF8))
             
         
@@ -96,7 +97,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         server.delete()
         
     def deleteKeys(self):
-        print 'Deleting Keys'
         value = self.txtCacheKeys.text()
         if self.currentCluster is not None:
             self.currentCluster.deleteKey(value)
@@ -106,7 +106,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             
     def flushKeys(self):
         if self.currentCluster is not None:
-            self.currentCluster.flushKeys(value)
+            self.currentCluster.flushKeys()
             QtGui.QMessageBox.information(self, "Cache Keys Flushed", "Your keys have been flushed")
         else:
             QtGui.QMessageBox.critical(self, "Not Cluster Selected", "You do not have an Active Cluster")
