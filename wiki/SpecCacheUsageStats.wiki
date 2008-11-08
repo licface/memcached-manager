@@ -1,0 +1,20 @@
+#labels Phase-Design,Phase-Requirements
+= Introduction =
+
+Cache Usage Statistics - Graphing & Totals
+
+
+= Details =
+ * Totals
+  * Request Rate
+  * Set Rate
+  * Hit Rate
+  * Miss Rate
+  * Total Items
+  * Free vs. Used Space per Server
+  * Free vs. Used Space Total
+ * Graphs
+  * Free vs. Used Space per Server
+  * Free vs. Used Space Total
+  * Hit vs. Miss Rate
+  
