@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>499</width>
-    <height>317</height>
+    <width>618</width>
+    <height>457</height>
    </rect>
   </property>
   <property name="contextMenuPolicy" >
@@ -20,8 +20,8 @@
     <rect>
      <x>0</x>
      <y>26</y>
-     <width>499</width>
-     <height>268</height>
+     <width>618</width>
+     <height>408</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout" >
@@ -67,15 +67,15 @@
        <string/>
       </property>
       <property name="currentIndex" >
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="MTasks" >
        <property name="geometry" >
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>321</width>
-         <height>222</height>
+         <width>390</width>
+         <height>362</height>
         </rect>
        </property>
        <attribute name="title" >
@@ -144,8 +144,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>321</width>
-         <height>222</height>
+         <width>390</width>
+         <height>362</height>
         </rect>
        </property>
        <attribute name="title" >
@@ -160,13 +160,293 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>321</width>
-         <height>222</height>
+         <width>390</width>
+         <height>362</height>
         </rect>
        </property>
        <attribute name="title" >
         <string>Statistics</string>
        </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_2" >
+        <item>
+         <widget class="QTabWidget" name="tabsStats" >
+          <property name="currentIndex" >
+           <number>1</number>
+          </property>
+          <widget class="QWidget" name="tab" >
+           <property name="geometry" >
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>368</width>
+             <height>316</height>
+            </rect>
+           </property>
+           <attribute name="title" >
+            <string>Cache Info</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_3" >
+            <item>
+             <widget class="QGroupBox" name="gbTotals" >
+              <property name="title" >
+               <string>Totals</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_3" >
+               <item row="0" column="0" >
+                <widget class="QLabel" name="lblCurrentItemsTxt" >
+                 <property name="text" >
+                  <string>Number of Items:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1" >
+                <widget class="QLabel" name="lblCurrentItems" >
+                 <property name="text" >
+                  <string>n/a</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0" >
+                <widget class="QLabel" name="lblHitsTxt" >
+                 <property name="text" >
+                  <string>Hits:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1" >
+                <widget class="QLabel" name="lblHits" >
+                 <property name="text" >
+                  <string>n/a</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0" >
+                <widget class="QLabel" name="lblMissesTxt" >
+                 <property name="text" >
+                  <string>Misses:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1" >
+                <widget class="QLabel" name="lblMisses" >
+                 <property name="text" >
+                  <string>n/a</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0" >
+                <widget class="QLabel" name="lblFreeTxt" >
+                 <property name="text" >
+                  <string>Free Space:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1" >
+                <widget class="QLabel" name="lblFree" >
+                 <property name="text" >
+                  <string>n/a</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0" >
+                <widget class="QLabel" name="lblUsedTxt" >
+                 <property name="text" >
+                  <string>Used Space:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1" >
+                <widget class="QLabel" name="lblUsed" >
+                 <property name="text" >
+                  <string>n/a</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="gbRates" >
+              <property name="title" >
+               <string>Cache Rates</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_4" >
+               <item row="0" column="0" >
+                <widget class="QLabel" name="lblRequestRateTxt" >
+                 <property name="text" >
+                  <string>Request Rate:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1" >
+                <widget class="QLabel" name="lblRequestRate" >
+                 <property name="text" >
+                  <string>n/a</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0" >
+                <widget class="QLabel" name="lblHitRateTxt" >
+                 <property name="text" >
+                  <string>Hit Rate:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1" >
+                <widget class="QLabel" name="lblHitRate" >
+                 <property name="text" >
+                  <string>n/a</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0" >
+                <widget class="QLabel" name="lblMissRateTxt" >
+                 <property name="text" >
+                  <string>Miss Rate:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1" >
+                <widget class="QLabel" name="lblMissRate" >
+                 <property name="text" >
+                  <string>n/a</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0" >
+                <widget class="QLabel" name="lblSetRateTxt" >
+                 <property name="text" >
+                  <string>Set Rate:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1" >
+                <widget class="QLabel" name="lblSetRate" >
+                 <property name="text" >
+                  <string>n/a</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_2" >
+           <property name="geometry" >
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>368</width>
+             <height>316</height>
+            </rect>
+           </property>
+           <attribute name="title" >
+            <string>Diagrams</string>
+           </attribute>
+           <layout class="QHBoxLayout" name="horizontalLayout_3" >
+            <item>
+             <widget class="QScrollArea" name="scrollArea" >
+              <property name="widgetResizable" >
+               <bool>true</bool>
+              </property>
+              <widget class="QWidget" name="scrollAreaWidgetContents" >
+               <property name="geometry" >
+                <rect>
+                 <x>0</x>
+                 <y>0</y>
+                 <width>331</width>
+                 <height>492</height>
+                </rect>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout" >
+                <item>
+                 <widget class="QLabel" name="lblCacheUsage" >
+                  <property name="text" >
+                   <string>Cache Usage</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QGraphicsView" name="graphCacheUsage" >
+                  <property name="sizePolicy" >
+                   <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize" >
+                   <size>
+                    <width>250</width>
+                    <height>210</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize" >
+                   <size>
+                    <width>250</width>
+                    <height>210</height>
+                   </size>
+                  </property>
+                  <property name="baseSize" >
+                   <size>
+                    <width>250</width>
+                    <height>210</height>
+                   </size>
+                  </property>
+                  <property name="frameShape" >
+                   <enum>QFrame::NoFrame</enum>
+                  </property>
+                  <property name="frameShadow" >
+                   <enum>QFrame::Sunken</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="lblHitsMisses" >
+                  <property name="text" >
+                   <string>Hits and Misses</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QGraphicsView" name="graphHitMiss" >
+                  <property name="sizePolicy" >
+                   <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize" >
+                   <size>
+                    <width>250</width>
+                    <height>210</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize" >
+                   <size>
+                    <width>250</width>
+                    <height>210</height>
+                   </size>
+                  </property>
+                  <property name="frameShape" >
+                   <enum>QFrame::NoFrame</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_3" >
+           <attribute name="title" >
+            <string>Server Information</string>
+           </attribute>
+          </widget>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -177,7 +457,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>499</width>
+     <width>618</width>
      <height>26</height>
     </rect>
    </property>
@@ -203,8 +483,8 @@
    <property name="geometry" >
     <rect>
      <x>0</x>
-     <y>294</y>
-     <width>499</width>
+     <y>434</y>
+     <width>618</width>
      <height>23</height>
     </rect>
    </property>

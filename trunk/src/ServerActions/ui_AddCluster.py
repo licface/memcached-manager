@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'AddCluster.ui'
 #
-# Created: Sun Oct 12 14:38:07 2008
-#      by: PyQt4 UI code generator 4.3.3
+# Created: Sat Nov  8 22:14:51 2008
+#      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,37 +12,30 @@ from PyQt4 import QtCore, QtGui
 class Ui_AddClusterDialog(object):
     def setupUi(self, AddClusterDialog):
         AddClusterDialog.setObjectName("AddClusterDialog")
-        AddClusterDialog.resize(QtCore.QSize(QtCore.QRect(0,0,257,84).size()).expandedTo(AddClusterDialog.minimumSizeHint()))
-
-        self.vboxlayout = QtGui.QVBoxLayout(AddClusterDialog)
-        self.vboxlayout.setObjectName("vboxlayout")
-
-        self.gridlayout = QtGui.QGridLayout()
-        self.gridlayout.setObjectName("gridlayout")
-
+        AddClusterDialog.resize(257, 84)
+        self.verticalLayout = QtGui.QVBoxLayout(AddClusterDialog)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.gridLayout = QtGui.QGridLayout()
+        self.gridLayout.setObjectName("gridLayout")
         self.lblCluster = QtGui.QLabel(AddClusterDialog)
         self.lblCluster.setObjectName("lblCluster")
-        self.gridlayout.addWidget(self.lblCluster,0,0,1,1)
-
+        self.gridLayout.addWidget(self.lblCluster, 0, 0, 1, 1)
         self.txtClusterName = QtGui.QLineEdit(AddClusterDialog)
         self.txtClusterName.setObjectName("txtClusterName")
-        self.gridlayout.addWidget(self.txtClusterName,0,1,1,1)
-        self.vboxlayout.addLayout(self.gridlayout)
-
-        self.hboxlayout = QtGui.QHBoxLayout()
-        self.hboxlayout.setObjectName("hboxlayout")
-
+        self.gridLayout.addWidget(self.txtClusterName, 0, 1, 1, 1)
+        self.verticalLayout.addLayout(self.gridLayout)
+        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
         self.btnCancel = QtGui.QPushButton(AddClusterDialog)
         self.btnCancel.setObjectName("btnCancel")
-        self.hboxlayout.addWidget(self.btnCancel)
-
+        self.horizontalLayout.addWidget(self.btnCancel)
         self.btnSave = QtGui.QPushButton(AddClusterDialog)
         self.btnSave.setObjectName("btnSave")
-        self.hboxlayout.addWidget(self.btnSave)
-        self.vboxlayout.addLayout(self.hboxlayout)
+        self.horizontalLayout.addWidget(self.btnSave)
+        self.verticalLayout.addLayout(self.horizontalLayout)
 
         self.retranslateUi(AddClusterDialog)
-        QtCore.QObject.connect(self.btnCancel,QtCore.SIGNAL("clicked()"),AddClusterDialog.close)
+        QtCore.QObject.connect(self.btnCancel, QtCore.SIGNAL("clicked()"), AddClusterDialog.close)
         QtCore.QMetaObject.connectSlotsByName(AddClusterDialog)
 
     def retranslateUi(self, AddClusterDialog):

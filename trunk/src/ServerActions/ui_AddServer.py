@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'AddServer.ui'
 #
-# Created: Sun Oct 12 14:38:07 2008
-#      by: PyQt4 UI code generator 4.3.3
+# Created: Sat Nov  8 22:14:51 2008
+#      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,65 +12,52 @@ from PyQt4 import QtCore, QtGui
 class Ui_addServerDialog(object):
     def setupUi(self, addServerDialog):
         addServerDialog.setObjectName("addServerDialog")
-        addServerDialog.resize(QtCore.QSize(QtCore.QRect(0,0,286,185).size()).expandedTo(addServerDialog.minimumSizeHint()))
-
-        self.gridlayout = QtGui.QGridLayout(addServerDialog)
-        self.gridlayout.setObjectName("gridlayout")
-
-        self.gridlayout1 = QtGui.QGridLayout()
-        self.gridlayout1.setObjectName("gridlayout1")
-
+        addServerDialog.resize(286, 185)
+        self.gridLayout_2 = QtGui.QGridLayout(addServerDialog)
+        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.gridLayout = QtGui.QGridLayout()
+        self.gridLayout.setObjectName("gridLayout")
         self.lblServerIP = QtGui.QLabel(addServerDialog)
         self.lblServerIP.setObjectName("lblServerIP")
-        self.gridlayout1.addWidget(self.lblServerIP,1,0,1,1)
-
+        self.gridLayout.addWidget(self.lblServerIP, 1, 0, 1, 1)
         self.txtServerIP = QtGui.QLineEdit(addServerDialog)
         self.txtServerIP.setWindowModality(QtCore.Qt.NonModal)
         self.txtServerIP.setMaxLength(15)
         self.txtServerIP.setObjectName("txtServerIP")
-        self.gridlayout1.addWidget(self.txtServerIP,1,1,1,1)
-
+        self.gridLayout.addWidget(self.txtServerIP, 1, 1, 1, 1)
         self.lblServerPort = QtGui.QLabel(addServerDialog)
         self.lblServerPort.setObjectName("lblServerPort")
-        self.gridlayout1.addWidget(self.lblServerPort,2,0,1,1)
-
+        self.gridLayout.addWidget(self.lblServerPort, 2, 0, 1, 1)
         self.txtServerPort = QtGui.QLineEdit(addServerDialog)
         self.txtServerPort.setObjectName("txtServerPort")
-        self.gridlayout1.addWidget(self.txtServerPort,2,1,1,1)
-
+        self.gridLayout.addWidget(self.txtServerPort, 2, 1, 1, 1)
         self.lblServerName = QtGui.QLabel(addServerDialog)
         self.lblServerName.setObjectName("lblServerName")
-        self.gridlayout1.addWidget(self.lblServerName,3,0,1,1)
-
+        self.gridLayout.addWidget(self.lblServerName, 3, 0, 1, 1)
         self.txtServerName = QtGui.QLineEdit(addServerDialog)
         self.txtServerName.setObjectName("txtServerName")
-        self.gridlayout1.addWidget(self.txtServerName,3,1,1,1)
-
+        self.gridLayout.addWidget(self.txtServerName, 3, 1, 1, 1)
         self.cbCluster = QtGui.QComboBox(addServerDialog)
         self.cbCluster.setObjectName("cbCluster")
-        self.gridlayout1.addWidget(self.cbCluster,0,1,1,1)
-
+        self.gridLayout.addWidget(self.cbCluster, 0, 1, 1, 1)
         self.lblCluster = QtGui.QLabel(addServerDialog)
         self.lblCluster.setObjectName("lblCluster")
-        self.gridlayout1.addWidget(self.lblCluster,0,0,1,1)
-        self.gridlayout.addLayout(self.gridlayout1,0,0,1,1)
-
-        self.hboxlayout = QtGui.QHBoxLayout()
-        self.hboxlayout.setObjectName("hboxlayout")
-
+        self.gridLayout.addWidget(self.lblCluster, 0, 0, 1, 1)
+        self.gridLayout_2.addLayout(self.gridLayout, 0, 0, 1, 1)
+        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
         self.btnCancel = QtGui.QPushButton(addServerDialog)
         self.btnCancel.setObjectName("btnCancel")
-        self.hboxlayout.addWidget(self.btnCancel)
-
+        self.horizontalLayout.addWidget(self.btnCancel)
         self.btnSave = QtGui.QPushButton(addServerDialog)
         self.btnSave.setDefault(True)
         self.btnSave.setFlat(False)
         self.btnSave.setObjectName("btnSave")
-        self.hboxlayout.addWidget(self.btnSave)
-        self.gridlayout.addLayout(self.hboxlayout,1,0,1,1)
+        self.horizontalLayout.addWidget(self.btnSave)
+        self.gridLayout_2.addLayout(self.horizontalLayout, 1, 0, 1, 1)
 
         self.retranslateUi(addServerDialog)
-        QtCore.QObject.connect(self.btnCancel,QtCore.SIGNAL("clicked()"),addServerDialog.close)
+        QtCore.QObject.connect(self.btnCancel, QtCore.SIGNAL("clicked()"), addServerDialog.close)
         QtCore.QMetaObject.connectSlotsByName(addServerDialog)
 
     def retranslateUi(self, addServerDialog):
