@@ -8,4 +8,4 @@ Memcached Manager is a very simple yet powerful memcached server/cluster manager
 
  * [Screenshots Screenshots]
  * [FeatureList Feature List]
- * [Spec Specs & Future Plans]
+ * [Blueprints Blueprint Details]
