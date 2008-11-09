@@ -1,0 +1,40 @@
+#labels Featured
+= Feature List =
+
+This is the complete feature list as it stands
+
+== Features Planned for V0.1 ==
+ * Management Tasks
+  * Delete Key(s) - 1 or more at a time - Finished
+  * Flush Keys across whole cluster - Finished
+  * Group Memcached Servers into a Cluster - Finished
+ * Slabs and Key Info
+  * View slabs on each server
+   * View keys in each slab
+    * View data for each key 
+ * Statistics
+  * Cache Info
+   * Total Number of Items
+   * Total Hits
+   * Total Misses
+   * Total Free Space
+   * Total Used Space
+   * Request Rate
+   * Hit Rate
+   * Miss Rate
+   * Set Rate
+  * Diagrams
+   * Cache Usage Total and Per Server
+   * Hits vs. Misses
+  * Server Information
+   * Server Name
+   * Start Time
+   * Uptime
+   * Server Version
+   * Used Cache Size
+   * Total Cache Size
+  * Live Traffic Diagrams and Stats - Still working on what stats can be tracked
+   * Number of Connections over time
+
+== Features Planned for V0.2 ==
+ * Proxy'd Server Connections 
