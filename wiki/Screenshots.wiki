@@ -2,7 +2,13 @@
 = Screenshots V0.1=
 
 == Main Window ==
+=== Management Tab ===
 http://lh5.ggpht.com/nerdynick/SPJ2VkzwEbI/AAAAAAAAAFQ/-Yfym19iFxc/Screenshot-MainWindow.png
+=== Statistics Tabs ==
+Stats Cache Info Tab
+http://lh5.ggpht.com/_MvJxpVDN8xE/SRZ0NyPvkoI/AAAAAAAAAGQ/gQ8oOn88HWU/MainWindow-Stats_Cache_Info.png
+Stats Graphs Tab (Imagen a Graph where the white squares are)
+http://lh4.ggpht.com/_MvJxpVDN8xE/SRZ0Nzm6C2I/AAAAAAAAAGY/0x8xcxGZQe0/MainWindow-Stats_Graphs.png
 
 == Add Server ==
 http://lh4.ggpht.com/nerdynick/SPJ2V7x6pNI/AAAAAAAAAFY/eQFsv5F4I_w/Screenshot-Add%20Server.png
