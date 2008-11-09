@@ -1,0 +1,11 @@
+#labels Featured
+= Memcached Manager Docs =
+
+Memcached Manager is a very simple yet powerful memcached server/cluster manager. It allows you to delete & flush keys, view stats, see the raw data on the server, and more. 
+
+
+= Quick Links =
+
+ * [Screenshots Screenshots]
+ * [FeatureList Feature List]
+ * [Spec Specs & Future Plans]
