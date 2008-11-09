@@ -1,4 +1,3 @@
-#labels Featured
 = Memcached Manager =
 
 Memcached Manager is a very simple yet powerful memcached server/cluster manager. It allows you to delete & flush keys, view stats, see the raw data on the server, and more. 
