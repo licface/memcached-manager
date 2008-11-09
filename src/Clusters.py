@@ -1,5 +1,6 @@
 import md5
 import memcached.memcache
+import memcached.Stats
 from PyQt4.QtGui import QTreeWidgetItem
 from PyQt4.QtCore import QStringList
 
@@ -85,3 +86,6 @@ class Cluster:
         
     def flushKeys(self):
         self.memcached.flush_all()
+        
+    def getStats(self):
+        return memcached.Stats.MemcachedStats(self.memcached.get_stats())
