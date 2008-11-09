@@ -1,6 +1,6 @@
 import memcache
 
-mc = memcache.Client(['127.0.0.1:11211'], debug=0)
+mc = memcache.Client(['127.0.0.1:11211','127.0.0.1:11212'], debug=0)
 result = mc.set("Test_Key_1", "Test_Key_1_Value")
 print "Set: Test_Key_1 - ", result
 

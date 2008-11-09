@@ -20,6 +20,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.connect(self.addClusterDialog, QtCore.SIGNAL('saved'), self.addCluster)
         self.addServerDialog.connect(self.addClusterDialog, QtCore.SIGNAL('saved'), self.addServerDialog.addCluster)
         self.connect(self.actionSave, QtCore.SIGNAL('triggered()'), self.save)
+        self.connect(self.tabsMain, QtCore.SIGNAL('currentChanged(QWidget*)'), self.mainTabChanged)
         
         #Management Task Actions
         self.connect(self.btnCacheKeys, QtCore.SIGNAL("clicked()"), self.deleteKeys)
@@ -108,6 +109,33 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         if self.currentCluster is not None:
             self.currentCluster.flushKeys()
             QtGui.QMessageBox.information(self, "Cache Keys Flushed", "Your keys have been flushed")
+        else:
+            QtGui.QMessageBox.critical(self, "Not Cluster Selected", "You do not have an Active Cluster")
+            
+    def mainTabChanged(self, tab):
+        if tab.objectName() == 'Stats':
+            self.refreshStats()
+            
+    def refreshStats(self):
+        if self.currentCluster is not None:
+            stats = self.currentCluster.getStats()
+            
+            #Update Cache Info Tab
+            self.lblItems.setText(str(stats.getTotalItems()))
+            self.lblCurrentItems.setText(str(stats.getItems()))
+            self.lblConnections.setText(str(stats.getTotalConnections()))
+            self.lblCurrentConnections.setText(str(stats.getConnections()))
+            self.lblHits.setText(str(stats.getHits()))
+            self.lblMisses.setText(str(stats.getMisses()))
+            self.lblGets.setText(str(stats.getGets()))
+            self.lblSets.setText(str(stats.getSets()))
+            self.lblSpace.setText(str(stats.getTotalSpace()))
+            self.lblFree.setText(str(stats.getFreeSpace()))
+            self.lblUsed.setText(str(stats.getUsedSpace()))
+            self.lblRequestRate.setText("%.2f cache requests/second"% (stats.getRequestRate(),))
+            self.lblHitRate.setText("%.2f cache requests/second"% (stats.getHitRate(),))
+            self.lblMissRate.setText("%.2f cache requests/second"% (stats.getMissRate(),))
+            self.lblSetRate.setText("%.2f cache requests/second"% (stats.getSetRate(),))
         else:
             QtGui.QMessageBox.critical(self, "Not Cluster Selected", "You do not have an Active Cluster")
         
