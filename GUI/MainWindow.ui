@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>618</width>
-    <height>410</height>
+    <height>474</height>
    </rect>
   </property>
   <property name="contextMenuPolicy" >
@@ -135,7 +135,7 @@
        <attribute name="title" >
         <string>Statistics</string>
        </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_2" >
+       <layout class="QVBoxLayout" name="verticalLayout_4" >
         <item>
          <widget class="QTabWidget" name="tabsStats" >
           <property name="currentIndex" >
@@ -161,7 +161,7 @@
                <property name="geometry" >
                 <rect>
                  <x>0</x>
-                 <y>-201</y>
+                 <y>0</y>
                  <width>335</width>
                  <height>452</height>
                 </rect>
@@ -422,81 +422,22 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>335</width>
-                 <height>492</height>
+                 <width>350</width>
+                 <height>279</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout" >
                 <item>
-                 <widget class="QLabel" name="lblCacheUsage" >
+                 <widget class="QLabel" name="lblCacheUsageGraph" >
                   <property name="text" >
-                   <string>Cache Usage</string>
+                   <string>n/a</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QGraphicsView" name="graphCacheUsage" >
-                  <property name="sizePolicy" >
-                   <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize" >
-                   <size>
-                    <width>250</width>
-                    <height>210</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize" >
-                   <size>
-                    <width>250</width>
-                    <height>210</height>
-                   </size>
-                  </property>
-                  <property name="baseSize" >
-                   <size>
-                    <width>250</width>
-                    <height>210</height>
-                   </size>
-                  </property>
-                  <property name="frameShape" >
-                   <enum>QFrame::NoFrame</enum>
-                  </property>
-                  <property name="frameShadow" >
-                   <enum>QFrame::Sunken</enum>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="lblHitsMisses" >
+                 <widget class="QLabel" name="lblHitsMissesGraph" >
                   <property name="text" >
-                   <string>Hits and Misses</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QGraphicsView" name="graphHitMiss" >
-                  <property name="sizePolicy" >
-                   <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize" >
-                   <size>
-                    <width>250</width>
-                    <height>210</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize" >
-                   <size>
-                    <width>250</width>
-                    <height>210</height>
-                   </size>
-                  </property>
-                  <property name="frameShape" >
-                   <enum>QFrame::NoFrame</enum>
+                   <string>n/a</string>
                   </property>
                  </widget>
                 </item>
@@ -512,6 +453,24 @@
            </attribute>
           </widget>
          </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2" >
+          <item>
+           <widget class="QPushButton" name="btnRefresh" >
+            <property name="text" >
+             <string>Refresh Stats</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnWatch" >
+            <property name="text" >
+             <string>Watch Live Stats</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
