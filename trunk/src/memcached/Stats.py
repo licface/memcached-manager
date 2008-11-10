@@ -96,6 +96,9 @@ class MemcachedStats(object):
         for server in self.servers:
             rate += server.getSetRate()
         return rate/len(self.servers)
+    
+    def getServers(self):
+        return self.servers
         
 class StatsServer(object):
     def __init__(self, stats):
@@ -126,7 +129,8 @@ class StatsServer(object):
         self.Timestamp = int(stats[1]['time'])
         self.PointerSize = int(stats[1]['pointer_size'])
         self.GetHits = int(stats[1]['get_hits'])
-    
+    def getName(self):
+        return self.Name
     def getTotalItems(self):
         return self.TotalItems
     def getItems(self):

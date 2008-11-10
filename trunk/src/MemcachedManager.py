@@ -5,6 +5,9 @@ from ServerActions import Dialogs
 import sys
 from Settings import Settings
 
+from matplotlib import pyplot
+
+
 class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def __init__(self):
         QtGui.QMainWindow.__init__(self)
@@ -21,6 +24,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.addServerDialog.connect(self.addClusterDialog, QtCore.SIGNAL('saved'), self.addServerDialog.addCluster)
         self.connect(self.actionSave, QtCore.SIGNAL('triggered()'), self.save)
         self.connect(self.tabsMain, QtCore.SIGNAL('currentChanged(QWidget*)'), self.mainTabChanged)
+        self.connect(self.btnRefresh, QtCore.SIGNAL('clicked()'), self.refreshStats)
+        
         
         #Management Task Actions
         self.connect(self.btnCacheKeys, QtCore.SIGNAL("clicked()"), self.deleteKeys)
@@ -136,6 +141,47 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self.lblHitRate.setText("%.2f cache requests/second"% (stats.getHitRate(),))
             self.lblMissRate.setText("%.2f cache requests/second"% (stats.getMissRate(),))
             self.lblSetRate.setText("%.2f cache requests/second"% (stats.getSetRate(),))
+            
+            #Update Diagrams Tab
+            #TODO: Use Temp Folder for Image storage or Figure out how to use binary string
+            figure = pyplot.figure(figsize=(3,3))
+            totalSpace = stats.getTotalSpace()
+            freeSpace = stats.getFreeSpace()
+            values = []
+            labels = []
+            colors = []
+            for server in stats.getServers():
+                colors.extend(('r','b'))
+                labels.extend(("Free", "Used"))
+                if(server.getFreeSpace() > 0):
+                    freePerc = (float(server.getFreeSpace())/totalSpace)*100
+                else:
+                    freePerc = 0
+                    
+                if(server.getUsedSpace() > 0):
+                    usedPerc = (float(server.getUsedSpace())/totalSpace)*100
+                else:
+                    usedPerc = 0
+                    
+                values.extend((freePerc, usedPerc))
+            
+            pie = pyplot.pie(values, labels=labels, shadow=True, autopct="%1.1f%%", colors=colors)
+            pyplot.title('Cache Usage')
+            figure.savefig('CacheUsage.png')
+            self.lblCacheUsageGraph.setPixmap(QtGui.QPixmap('CacheUsage.png'))
+            
+            figure = pyplot.figure(figsize=(3,3))
+            hits = float(stats.getHits())/stats.getGets()*100
+            misses = float(stats.getMisses())/stats.getGets()*100
+            bar = pyplot.bar((0.25,1), (hits, misses), 0.5, color='r')
+            pyplot.title('Hits vs. Misses')
+            pyplot.gca().set_xticklabels(('Hits', 'Misses'))
+            pyplot.gca().set_xticks((0.5,1.25))
+            pyplot.gca().text(bar[0].get_x()+bar[0].get_width()/2.0, 1.0*bar[0].get_height(), "%1.2f%%"%(hits,), ha='center', va='bottom')
+            pyplot.gca().text(bar[1].get_x()+bar[1].get_width()/2.0, 1.0*bar[1].get_height(), "%1.2f%%"%(misses,), ha='center', va='bottom')
+            
+            figure.savefig('HitsMisses.png')
+            self.lblHitsMissesGraph.setPixmap(QtGui.QPixmap('HitsMisses.png'))
         else:
             QtGui.QMessageBox.critical(self, "Not Cluster Selected", "You do not have an Active Cluster")
         
