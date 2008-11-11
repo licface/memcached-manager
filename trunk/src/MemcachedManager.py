@@ -86,6 +86,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.currentCluster = self.settings.servers.getClusterByMenuItem(action)
         if self.currentCluster is not None:
             self.currentCluster.makeActive()
+            self.checkServerStatus()
             self.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow ("+ str(self.currentCluster.name) +")", None, QtGui.QApplication.UnicodeUTF8))
             
         
@@ -105,6 +106,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def deleteKeys(self):
         value = self.txtCacheKeys.text()
         if self.currentCluster is not None:
+            self.checkServerStatus()
             self.currentCluster.deleteKey(value)
             QtGui.QMessageBox.information(self, "Key(s) Deleted", "Your key(s) have been deleted")
         else:
@@ -112,6 +114,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             
     def flushKeys(self):
         if self.currentCluster is not None:
+            self.checkServerStatus()
             self.currentCluster.flushKeys()
             QtGui.QMessageBox.information(self, "Cache Keys Flushed", "Your keys have been flushed")
         else:
@@ -122,8 +125,11 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self.refreshStats()
             
     def refreshStats(self):
+        self.pbStats.setValue(0)
         if self.currentCluster is not None:
+            self.checkServerStatus()
             stats = self.currentCluster.getStats()
+            self.pbStats.setValue(1)
             
             #Update Cache Info Tab
             self.lblItems.setText(str(stats.getTotalItems()))
@@ -141,6 +147,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self.lblHitRate.setText("%.2f cache requests/second"% (stats.getHitRate(),))
             self.lblMissRate.setText("%.2f cache requests/second"% (stats.getMissRate(),))
             self.lblSetRate.setText("%.2f cache requests/second"% (stats.getSetRate(),))
+            
+            self.pbStats.setValue(50)
             
             #Update Diagrams Tab
             #TODO: Use Temp Folder for Image storage or Figure out how to use binary string
@@ -170,9 +178,16 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             figure.savefig('CacheUsage.png')
             self.lblCacheUsageGraph.setPixmap(QtGui.QPixmap('CacheUsage.png'))
             
+            self.pbStats.setValue(75)
+            
             figure = pyplot.figure(figsize=(3,3))
-            hits = float(stats.getHits())/stats.getGets()*100
-            misses = float(stats.getMisses())/stats.getGets()*100
+            if stats.getGets() > 0:
+                hits = float(stats.getHits())/stats.getGets()*100
+                misses = float(stats.getMisses())/stats.getGets()*100
+            else:
+                hits = 0
+                misses = 0
+                
             bar = pyplot.bar((0.25,1), (hits, misses), 0.5, color='r')
             pyplot.title('Hits vs. Misses')
             pyplot.gca().set_xticklabels(('Hits', 'Misses'))
@@ -182,11 +197,17 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             
             figure.savefig('HitsMisses.png')
             self.lblHitsMissesGraph.setPixmap(QtGui.QPixmap('HitsMisses.png'))
+            
+            self.pbStats.setValue(100)
         else:
             QtGui.QMessageBox.critical(self, "Not Cluster Selected", "You do not have an Active Cluster")
-        
             
-        
+    def checkServerStatus(self):
+        if self.currentCluster is not None:
+            for server in self.currentCluster.memcached.servers:
+                if server._check_dead() == 0:
+                    if server.connect() == 0:
+                        QtGui.QMessageBox.critical(self, "Server Disconnect", "Memcached Server "+ server.host +" Failed to Connect")
 
         
 if __name__ == '__main__':
