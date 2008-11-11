@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Mon Nov 10 00:18:57 2008
+# Created: Mon Nov 10 19:29:33 2008
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -196,7 +196,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtGui.QWidget(self.scrollArea)
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 350, 279))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 96, 60))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout = QtGui.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -222,6 +222,11 @@ class Ui_MainWindow(object):
         self.btnWatch.setObjectName("btnWatch")
         self.horizontalLayout_2.addWidget(self.btnWatch)
         self.verticalLayout_4.addLayout(self.horizontalLayout_2)
+        self.pbStats = QtGui.QProgressBar(self.Stats)
+        self.pbStats.setProperty("value", QtCore.QVariant(0))
+        self.pbStats.setAlignment(QtCore.Qt.AlignCenter)
+        self.pbStats.setObjectName("pbStats")
+        self.verticalLayout_4.addWidget(self.pbStats)
         self.tabsMain.addTab(self.Stats, "")
         self.horizontalLayout.addWidget(self.tabsMain)
         MainWindow.setCentralWidget(self.centralwidget)
