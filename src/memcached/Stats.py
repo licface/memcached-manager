@@ -55,6 +55,44 @@ class MemcachedStats(object):
             sets += server.getSets()
         return sets
     
+    def calcSpaceBreakdown(self, space):
+        if space > 0:
+            bytes = space % 1024
+            space = int(space/1024)
+            kbytes = space % 1024
+            space = int(space/1024)
+            mbytes = space % 1024
+            space = int(space/1024)
+            gbytes = space % 1024
+            space = int(space/1024)
+            tbytes = space % 1024
+            space = int(space/1024)
+            pbytes = space % 1024
+            return {'b': bytes, 'k': kbytes, 'm': mbytes, 'g': gbytes, 't': tbytes, 'p': pbytes}
+        else:
+            return {'b': 0, 'k': 0, 'm': 0, 'g': 0, 't': 0, 'p': 0}
+        
+    def getSpaceString(self, space):
+        total = self.calcSpaceBreakdown(space)
+        tStr = ''
+        if total['p'] != 0:
+            tStr += str(total['p']) +'PB '
+        if total['t'] != 0:
+            tStr += str(total['t']) +'TB '
+        if total['g'] != 0:
+            tStr += str(total['g']) +'GB '
+        if total['m'] != 0:
+            tStr += str(total['m']) +'MB '
+        if total['k'] != 0:
+            tStr += str(total['k']) +'KB '
+        if total['b'] != 0:
+            tStr += str(total['b']) +'B '
+            
+        if tStr == '':
+            tStr = '0B'
+            
+        return tStr
+    
     def getTotalSpace(self):
         space = 0
         for server in self.servers:
