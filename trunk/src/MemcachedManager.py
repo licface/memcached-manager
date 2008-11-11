@@ -140,9 +140,16 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self.lblMisses.setText(str(stats.getMisses()))
             self.lblGets.setText(str(stats.getGets()))
             self.lblSets.setText(str(stats.getSets()))
-            self.lblSpace.setText(str(stats.getTotalSpace()))
-            self.lblFree.setText(str(stats.getFreeSpace()))
-            self.lblUsed.setText(str(stats.getUsedSpace()))
+            
+            tSpace = stats.getSpaceString(stats.getTotalSpace())
+            self.lblSpace.setText(tSpace)
+            
+            fSpace = stats.getSpaceString(stats.getFreeSpace())
+            self.lblFree.setText(fSpace)
+            
+            uSpace = stats.getSpaceString(stats.getUsedSpace())
+            self.lblUsed.setText(uSpace)
+            
             self.lblRequestRate.setText("%.2f cache requests/second"% (stats.getRequestRate(),))
             self.lblHitRate.setText("%.2f cache requests/second"% (stats.getHitRate(),))
             self.lblMissRate.setText("%.2f cache requests/second"% (stats.getMissRate(),))
@@ -152,14 +159,14 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             
             #Update Diagrams Tab
             #TODO: Use Temp Folder for Image storage or Figure out how to use binary string
-            figure = pyplot.figure(figsize=(3,3))
+            figure = pyplot.figure(figsize=(3,3), facecolor='#D4CCBA', edgecolor='#AB9675', dpi=100)
             totalSpace = stats.getTotalSpace()
             freeSpace = stats.getFreeSpace()
             values = []
             labels = []
             colors = []
             for server in stats.getServers():
-                colors.extend(('r','b'))
+                colors.extend(('#FFE0C9','#CF8442'))
                 labels.extend(("Free", "Used"))
                 if(server.getFreeSpace() > 0):
                     freePerc = (float(server.getFreeSpace())/totalSpace)*100
@@ -173,14 +180,15 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                     
                 values.extend((freePerc, usedPerc))
             
-            pie = pyplot.pie(values, labels=labels, shadow=True, autopct="%1.1f%%", colors=colors)
+            pyplot.pie(values, labels=labels, shadow=True, autopct="%1.1f%%", colors=colors)
+            
             pyplot.title('Cache Usage')
             figure.savefig('CacheUsage.png')
             self.lblCacheUsageGraph.setPixmap(QtGui.QPixmap('CacheUsage.png'))
             
             self.pbStats.setValue(75)
             
-            figure = pyplot.figure(figsize=(3,3))
+            figure = pyplot.figure(figsize=(3,3), facecolor='#D4CCBA', edgecolor='#AB9675')
             if stats.getGets() > 0:
                 hits = float(stats.getHits())/stats.getGets()*100
                 misses = float(stats.getMisses())/stats.getGets()*100
@@ -188,7 +196,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 hits = 0
                 misses = 0
                 
-            bar = pyplot.bar((0.25,1), (hits, misses), 0.5, color='r')
+            bar = pyplot.bar((0.25,1), (hits, misses), 0.5, color='#CF8442')
             pyplot.title('Hits vs. Misses')
             pyplot.gca().set_xticklabels(('Hits', 'Misses'))
             pyplot.gca().set_xticks((0.5,1.25))
