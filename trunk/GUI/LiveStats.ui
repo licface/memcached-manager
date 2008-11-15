@@ -1,0 +1,128 @@
+<ui version="4.0" >
+ <class>liveStatsDialog</class>
+ <widget class="QDialog" name="liveStatsDialog" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>650</width>
+    <height>453</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Live Stats</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" >
+   <item>
+    <widget class="QScrollArea" name="scrollArea" >
+     <property name="widgetResizable" >
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>628</width>
+        <height>395</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_4" >
+       <item>
+        <widget class="QGroupBox" name="gbConnections" >
+         <property name="title" >
+          <string>Active Connections</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3" >
+          <item>
+           <widget class="QLabel" name="lblConnectionsGraph" >
+            <property name="text" >
+             <string>Active Connections Graph</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="gbGetsSets" >
+         <property name="title" >
+          <string>Gets &amp;&amp; Sets</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_5" >
+          <item>
+           <widget class="QLabel" name="lblGetsGraph" >
+            <property name="text" >
+             <string>Gets &amp; Sets Graph</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="gbHitsMisses" >
+         <property name="title" >
+          <string>Hits vs. Misses</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_7" >
+          <item>
+           <widget class="QLabel" name="lblHitsMissesGraph" >
+            <property name="text" >
+             <string>Hits vs. Misses Graph</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="gbMemoryUsage" >
+         <property name="title" >
+          <string>Memory Usage</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2" >
+          <item>
+           <widget class="QLabel" name="lblMemoryUsage" >
+            <property name="text" >
+             <string>Memory Usage Graph</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout" >
+     <item>
+      <widget class="QLabel" name="lblIntervalTxt" >
+       <property name="text" >
+        <string>Refresh Interval:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="txtInterval" >
+       <property name="text" >
+        <string>30</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnStartStop" >
+       <property name="text" >
+        <string>Start/Stop</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
