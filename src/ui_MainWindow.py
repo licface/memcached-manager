@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Mon Nov 10 19:29:33 2008
+# Created: Fri Nov 14 23:37:40 2008
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -79,7 +79,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
         self.scrollAreaWidgetContents_2 = QtGui.QWidget(self.scrollArea_2)
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 335, 452))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, -229, 335, 476))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
         self.verticalLayout_3 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
@@ -179,10 +179,16 @@ class Ui_MainWindow(object):
         self.gridLayout_4.addWidget(self.lblMissRate, 2, 1, 1, 1)
         self.lblSetRateTxt = QtGui.QLabel(self.gbRates)
         self.lblSetRateTxt.setObjectName("lblSetRateTxt")
-        self.gridLayout_4.addWidget(self.lblSetRateTxt, 3, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.lblSetRateTxt, 4, 0, 1, 1)
+        self.lblGetRateTxt = QtGui.QLabel(self.gbRates)
+        self.lblGetRateTxt.setObjectName("lblGetRateTxt")
+        self.gridLayout_4.addWidget(self.lblGetRateTxt, 3, 0, 1, 1)
         self.lblSetRate = QtGui.QLabel(self.gbRates)
         self.lblSetRate.setObjectName("lblSetRate")
-        self.gridLayout_4.addWidget(self.lblSetRate, 3, 1, 1, 1)
+        self.gridLayout_4.addWidget(self.lblSetRate, 4, 1, 1, 1)
+        self.lblGetRate = QtGui.QLabel(self.gbRates)
+        self.lblGetRate.setObjectName("lblGetRate")
+        self.gridLayout_4.addWidget(self.lblGetRate, 3, 1, 1, 1)
         self.verticalLayout_3.addWidget(self.gbRates)
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_2)
         self.horizontalLayout_4.addWidget(self.scrollArea_2)
@@ -196,7 +202,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtGui.QWidget(self.scrollArea)
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 96, 60))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 350, 247))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout = QtGui.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -206,6 +212,9 @@ class Ui_MainWindow(object):
         self.lblHitsMissesGraph = QtGui.QLabel(self.scrollAreaWidgetContents)
         self.lblHitsMissesGraph.setObjectName("lblHitsMissesGraph")
         self.verticalLayout.addWidget(self.lblHitsMissesGraph)
+        self.lblGetSetGraph = QtGui.QLabel(self.scrollAreaWidgetContents)
+        self.lblGetSetGraph.setObjectName("lblGetSetGraph")
+        self.verticalLayout.addWidget(self.lblGetSetGraph)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.horizontalLayout_3.addWidget(self.scrollArea)
         self.tabsStats.addTab(self.Diagrams, "")
@@ -266,7 +275,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
+        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Memcached Manager", None, QtGui.QApplication.UnicodeUTF8))
         self.treeCluster.headerItem().setText(0, QtGui.QApplication.translate("MainWindow", "Clusters", None, QtGui.QApplication.UnicodeUTF8))
         self.gbClearKey.setTitle(QtGui.QApplication.translate("MainWindow", "Delete Key(s)", None, QtGui.QApplication.UnicodeUTF8))
         self.lblCacheKeys.setText(QtGui.QApplication.translate("MainWindow", "Cache Key(s)", None, QtGui.QApplication.UnicodeUTF8))
@@ -310,15 +319,19 @@ class Ui_MainWindow(object):
         self.lblMissRateTxt.setText(QtGui.QApplication.translate("MainWindow", "Miss Rate:", None, QtGui.QApplication.UnicodeUTF8))
         self.lblMissRate.setText(QtGui.QApplication.translate("MainWindow", "n/a", None, QtGui.QApplication.UnicodeUTF8))
         self.lblSetRateTxt.setText(QtGui.QApplication.translate("MainWindow", "Set Rate:", None, QtGui.QApplication.UnicodeUTF8))
+        self.lblGetRateTxt.setText(QtGui.QApplication.translate("MainWindow", "Get Rate:", None, QtGui.QApplication.UnicodeUTF8))
         self.lblSetRate.setText(QtGui.QApplication.translate("MainWindow", "n/a", None, QtGui.QApplication.UnicodeUTF8))
+        self.lblGetRate.setText(QtGui.QApplication.translate("MainWindow", "n/a", None, QtGui.QApplication.UnicodeUTF8))
         self.tabsStats.setTabText(self.tabsStats.indexOf(self.CacheInfo), QtGui.QApplication.translate("MainWindow", "Cache Info", None, QtGui.QApplication.UnicodeUTF8))
-        self.lblCacheUsageGraph.setText(QtGui.QApplication.translate("MainWindow", "n/a", None, QtGui.QApplication.UnicodeUTF8))
-        self.lblHitsMissesGraph.setText(QtGui.QApplication.translate("MainWindow", "n/a", None, QtGui.QApplication.UnicodeUTF8))
+        self.lblCacheUsageGraph.setText(QtGui.QApplication.translate("MainWindow", "Cache Usage", None, QtGui.QApplication.UnicodeUTF8))
+        self.lblHitsMissesGraph.setText(QtGui.QApplication.translate("MainWindow", "Hits & Misses Graph", None, QtGui.QApplication.UnicodeUTF8))
+        self.lblGetSetGraph.setText(QtGui.QApplication.translate("MainWindow", "Gets & Set Graph", None, QtGui.QApplication.UnicodeUTF8))
         self.tabsStats.setTabText(self.tabsStats.indexOf(self.Diagrams), QtGui.QApplication.translate("MainWindow", "Diagrams", None, QtGui.QApplication.UnicodeUTF8))
         self.tabsStats.setTabText(self.tabsStats.indexOf(self.ServerInfo), QtGui.QApplication.translate("MainWindow", "Server Information", None, QtGui.QApplication.UnicodeUTF8))
         self.btnRefresh.setText(QtGui.QApplication.translate("MainWindow", "Refresh Stats", None, QtGui.QApplication.UnicodeUTF8))
         self.btnWatch.setText(QtGui.QApplication.translate("MainWindow", "Watch Live Stats", None, QtGui.QApplication.UnicodeUTF8))
         self.tabsMain.setTabText(self.tabsMain.indexOf(self.Stats), QtGui.QApplication.translate("MainWindow", "Statistics", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabsMain.setTabToolTip(self.tabsMain.indexOf(self.Stats), QtGui.QApplication.translate("MainWindow", "Memcached Server Stats", None, QtGui.QApplication.UnicodeUTF8))
         self.menuFile.setTitle(QtGui.QApplication.translate("MainWindow", "&File", None, QtGui.QApplication.UnicodeUTF8))
         self.menu_Servers.setTitle(QtGui.QApplication.translate("MainWindow", "&Servers", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAddServer.setText(QtGui.QApplication.translate("MainWindow", "&Add Server", None, QtGui.QApplication.UnicodeUTF8))

@@ -1,7 +1,12 @@
+"""
+@author: Nick Verbeck <nerdynick@gmail.com>
+"""
+
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 from ui_MainWindow import Ui_MainWindow
 from ServerActions import Dialogs
+from LiveStats import LiveStatsDialog
 import sys
 from Settings import Settings
 
@@ -15,6 +20,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         
         self.addServerDialog = Dialogs.AddServer()
         self.addClusterDialog = Dialogs.AddCluster()
+        self.liveStatsDialog = LiveStatsDialog.Dialog()
         self.settings = Settings()
         
         self.connect(self.actionAddServer, QtCore.SIGNAL("triggered()"), self.displayAddServer)
@@ -30,6 +36,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         #Management Task Actions
         self.connect(self.btnCacheKeys, QtCore.SIGNAL("clicked()"), self.deleteKeys)
         self.connect(self.btnFlushCache, QtCore.SIGNAL("clicked()"), self.flushKeys)
+        
+        #Stats Actions
+        self.connect(self.btnWatch, QtCore.SIGNAL("clicked()"), self.watchLiveStats)
         
         self.currentCluster = None
         
@@ -87,7 +96,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         if self.currentCluster is not None:
             self.currentCluster.makeActive()
             self.checkServerStatus()
-            self.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow ("+ str(self.currentCluster.name) +")", None, QtGui.QApplication.UnicodeUTF8))
+            self.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Memcached Manager ("+ str(self.currentCluster.name) +")", None, QtGui.QApplication.UnicodeUTF8))
             
         
     def addServer(self, cluster, server):
@@ -154,8 +163,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self.lblHitRate.setText("%.2f cache requests/second"% (stats.getHitRate(),))
             self.lblMissRate.setText("%.2f cache requests/second"% (stats.getMissRate(),))
             self.lblSetRate.setText("%.2f cache requests/second"% (stats.getSetRate(),))
+            self.lblGetRate.setText("%.2f cache requests/second"% (stats.getGetRate(),))
             
-            self.pbStats.setValue(50)
+            self.pbStats.setValue(25)
             
             #Update Diagrams Tab
             #TODO: Use Temp Folder for Image storage or Figure out how to use binary string
@@ -186,12 +196,12 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             figure.savefig('CacheUsage.png')
             self.lblCacheUsageGraph.setPixmap(QtGui.QPixmap('CacheUsage.png'))
             
-            self.pbStats.setValue(75)
+            self.pbStats.setValue(50)
             
             figure = pyplot.figure(figsize=(3,3), facecolor='#D4CCBA', edgecolor='#AB9675')
-            if stats.getGets() > 0:
-                hits = float(stats.getHits())/stats.getGets()*100
-                misses = float(stats.getMisses())/stats.getGets()*100
+            if (stats.getHits() + stats.getMisses()) > 0:
+                hits = float(stats.getHits())/(stats.getHits() + stats.getMisses())*100
+                misses = float(stats.getMisses())/(stats.getHits() + stats.getMisses())*100
             else:
                 hits = 0
                 misses = 0
@@ -206,6 +216,26 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             figure.savefig('HitsMisses.png')
             self.lblHitsMissesGraph.setPixmap(QtGui.QPixmap('HitsMisses.png'))
             
+            self.pbStats.setValue(75)
+            
+            figure = pyplot.figure(figsize=(3,3), facecolor='#D4CCBA', edgecolor='#AB9675')
+            if (stats.getGets() + stats.getSets()) > 0:
+                gets = float(stats.getGets())/(stats.getGets() + stats.getSets())*100
+                sets = float(stats.getSets())/(stats.getGets() + stats.getSets())*100
+            else:
+                gets = 0
+                sets = 0
+                
+            bar = pyplot.bar((0.25,1), (gets, sets), 0.5, color='#CF8442')
+            pyplot.title('Gets & Sets')
+            pyplot.gca().set_xticklabels(('Gets', 'Sets'))
+            pyplot.gca().set_xticks((0.5,1.25))
+            pyplot.gca().text(bar[0].get_x()+bar[0].get_width()/2.0, 1.0*bar[0].get_height(), "%1.2f%%"%(gets,), ha='center', va='bottom')
+            pyplot.gca().text(bar[1].get_x()+bar[1].get_width()/2.0, 1.0*bar[1].get_height(), "%1.2f%%"%(sets,), ha='center', va='bottom')
+            
+            figure.savefig('GetsSets.png')
+            self.lblGetSetGraph.setPixmap(QtGui.QPixmap('GetsSets.png'))
+            
             self.pbStats.setValue(100)
         else:
             QtGui.QMessageBox.critical(self, "Not Cluster Selected", "You do not have an Active Cluster")
@@ -216,6 +246,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 if server._check_dead() == 0:
                     if server.connect() == 0:
                         QtGui.QMessageBox.critical(self, "Server Disconnect", "Memcached Server "+ server.host +" Failed to Connect")
+                        
+    def watchLiveStats(self):
+        self.liveStatsDialog.show()
 
         
 if __name__ == '__main__':

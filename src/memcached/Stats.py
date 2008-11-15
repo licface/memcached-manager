@@ -135,6 +135,12 @@ class MemcachedStats(object):
             rate += server.getSetRate()
         return rate/len(self.servers)
     
+    def getGetRate(self):
+        rate = 0
+        for server in self.servers:
+            rate += server.getGetRate()
+        return rate/len(self.servers)
+    
     def getServers(self):
         return self.servers
         
@@ -192,13 +198,15 @@ class StatsServer(object):
     def getUsedSpace(self):
         return self.Bytes
     def getRequestRate(self):
-        return float(self.getGets())/float(self.getUptimeUnix())*100
+        return (float(self.getSets()) + float(self.getGets()))/float(self.getUptimeUnix())*100
     def getHitRate(self):
         return float(self.getHits())/float(self.getUptimeUnix())*100
     def getMissRate(self):
         return float(self.getMisses())/float(self.getUptimeUnix())*100
     def getSetRate(self):
         return float(self.getSets())/float(self.getUptimeUnix())*100
+    def getGetRate(self):
+        return float(self.getGets())/float(self.getUptimeUnix())*100
     def getTime(self):
         return self.Time
     def getTimeUnix(self):

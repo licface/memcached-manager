@@ -25,6 +25,7 @@ class AddServer(QtGui.QDialog, Ui_addServerDialog):
         server = self.settings.servers.addServer(cluster, name, ip, port)
         
         self.emit(QtCore.SIGNAL('saved'), cluster, server)
+        self.clearFields()
         
     def clearFields(self):
         self.txtServerIP.setText('')
@@ -54,6 +55,7 @@ class AddCluster(QtGui.QDialog, Ui_AddClusterDialog):
         self.settings.servers.addCluster(cluster)
         
         self.emit(QtCore.SIGNAL('saved'), cluster)
+        self.clearFields()
         
     def clearFields(self):
         self.txtClusterName.setText('')
