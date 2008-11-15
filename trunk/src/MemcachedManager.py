@@ -25,8 +25,11 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         
         self.connect(self.actionAddServer, QtCore.SIGNAL("triggered()"), self.displayAddServer)
         self.connect(self.actionAddCluster, QtCore.SIGNAL("triggered()"), self.displayAddCluster)
+        self.connect(self.btnAddServer, QtCore.SIGNAL("clicked()"), self.displayAddServer)
+        self.connect(self.btnAddCluster, QtCore.SIGNAL("clicked()"), self.displayAddCluster)
         self.connect(self.addServerDialog, QtCore.SIGNAL('saved'), self.addServer)
         self.connect(self.addClusterDialog, QtCore.SIGNAL('saved'), self.addCluster)
+        
         self.addServerDialog.connect(self.addClusterDialog, QtCore.SIGNAL('saved'), self.addServerDialog.addCluster)
         self.connect(self.actionSave, QtCore.SIGNAL('triggered()'), self.save)
         self.connect(self.tabsMain, QtCore.SIGNAL('currentChanged(QWidget*)'), self.mainTabChanged)
@@ -169,6 +172,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             
             #Update Diagrams Tab
             #TODO: Use Temp Folder for Image storage or Figure out how to use binary string
+            
+            #Cache Usage Graph
             figure = pyplot.figure(figsize=(3,3), facecolor='#D4CCBA', edgecolor='#AB9675', dpi=100)
             totalSpace = stats.getTotalSpace()
             freeSpace = stats.getFreeSpace()
@@ -198,6 +203,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             
             self.pbStats.setValue(50)
             
+            #Hits vs. Misses Graph
             figure = pyplot.figure(figsize=(3,3), facecolor='#D4CCBA', edgecolor='#AB9675')
             if (stats.getHits() + stats.getMisses()) > 0:
                 hits = float(stats.getHits())/(stats.getHits() + stats.getMisses())*100
@@ -218,6 +224,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             
             self.pbStats.setValue(75)
             
+            #Gets & Sets Graph
             figure = pyplot.figure(figsize=(3,3), facecolor='#D4CCBA', edgecolor='#AB9675')
             if (stats.getGets() + stats.getSets()) > 0:
                 gets = float(stats.getGets())/(stats.getGets() + stats.getSets())*100
@@ -243,9 +250,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def checkServerStatus(self):
         if self.currentCluster is not None:
             for server in self.currentCluster.memcached.servers:
-                if server._check_dead() == 0:
-                    if server.connect() == 0:
-                        QtGui.QMessageBox.critical(self, "Server Disconnect", "Memcached Server "+ server.host +" Failed to Connect")
+                if not server.connect():
+                    QtGui.QMessageBox.critical(self, "Server Disconnect", "Memcached Server "+ server.host +" Failed to Connect")
                         
     def watchLiveStats(self):
         self.liveStatsDialog.show()

@@ -76,7 +76,9 @@ class Cluster:
     def resetMemcacheClient(self):
         if self.memcached is not None:
             self.memcached.disconnect_all()
-            self.memcached.set_servers(self.getServerMemcachedUrls())
+            #self.memcached.set_servers(self.getServerMemcachedUrls())
+            for s in self.memcached.servers:
+                s.connect()
             
     #Memcached Management Functions
             

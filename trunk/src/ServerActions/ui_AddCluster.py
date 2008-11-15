@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'AddCluster.ui'
 #
-# Created: Fri Nov 14 23:37:41 2008
+# Created: Sat Nov 15 00:15:07 2008
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!

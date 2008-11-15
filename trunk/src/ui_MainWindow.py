@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Fri Nov 14 23:37:40 2008
+# Created: Sat Nov 15 00:15:06 2008
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,12 +12,14 @@ from PyQt4 import QtCore, QtGui
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(618, 474)
+        MainWindow.resize(587, 510)
         MainWindow.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.horizontalLayout = QtGui.QHBoxLayout(self.centralwidget)
-        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.horizontalLayout_5 = QtGui.QHBoxLayout(self.centralwidget)
+        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+        self.verticalLayout_5 = QtGui.QVBoxLayout()
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.treeCluster = QtGui.QTreeWidget(self.centralwidget)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.MinimumExpanding, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -28,7 +30,17 @@ class Ui_MainWindow(object):
         self.treeCluster.setMaximumSize(QtCore.QSize(200, 16777215))
         self.treeCluster.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
         self.treeCluster.setObjectName("treeCluster")
-        self.horizontalLayout.addWidget(self.treeCluster)
+        self.verticalLayout_5.addWidget(self.treeCluster)
+        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.btnAddServer = QtGui.QPushButton(self.centralwidget)
+        self.btnAddServer.setObjectName("btnAddServer")
+        self.horizontalLayout.addWidget(self.btnAddServer)
+        self.btnAddCluster = QtGui.QPushButton(self.centralwidget)
+        self.btnAddCluster.setObjectName("btnAddCluster")
+        self.horizontalLayout.addWidget(self.btnAddCluster)
+        self.verticalLayout_5.addLayout(self.horizontalLayout)
+        self.horizontalLayout_5.addLayout(self.verticalLayout_5)
         self.tabsMain = QtGui.QTabWidget(self.centralwidget)
         self.tabsMain.setMinimumSize(QtCore.QSize(325, 0))
         self.tabsMain.setObjectName("tabsMain")
@@ -79,7 +91,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
         self.scrollAreaWidgetContents_2 = QtGui.QWidget(self.scrollArea_2)
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, -229, 335, 476))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 266, 476))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
         self.verticalLayout_3 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
@@ -202,7 +214,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtGui.QWidget(self.scrollArea)
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 350, 247))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 281, 283))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout = QtGui.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -237,10 +249,10 @@ class Ui_MainWindow(object):
         self.pbStats.setObjectName("pbStats")
         self.verticalLayout_4.addWidget(self.pbStats)
         self.tabsMain.addTab(self.Stats, "")
-        self.horizontalLayout.addWidget(self.tabsMain)
+        self.horizontalLayout_5.addWidget(self.tabsMain)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 618, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 587, 26))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtGui.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
@@ -277,6 +289,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Memcached Manager", None, QtGui.QApplication.UnicodeUTF8))
         self.treeCluster.headerItem().setText(0, QtGui.QApplication.translate("MainWindow", "Clusters", None, QtGui.QApplication.UnicodeUTF8))
+        self.btnAddServer.setText(QtGui.QApplication.translate("MainWindow", "Add Server", None, QtGui.QApplication.UnicodeUTF8))
+        self.btnAddCluster.setText(QtGui.QApplication.translate("MainWindow", "Add Cluster", None, QtGui.QApplication.UnicodeUTF8))
         self.gbClearKey.setTitle(QtGui.QApplication.translate("MainWindow", "Delete Key(s)", None, QtGui.QApplication.UnicodeUTF8))
         self.lblCacheKeys.setText(QtGui.QApplication.translate("MainWindow", "Cache Key(s)", None, QtGui.QApplication.UnicodeUTF8))
         self.txtCacheKeys.setToolTip(QtGui.QApplication.translate("MainWindow", "Seperate Keys with \';\'", None, QtGui.QApplication.UnicodeUTF8))
