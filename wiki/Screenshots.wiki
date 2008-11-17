@@ -2,18 +2,23 @@
 = Screenshots V0.1=
 
 == Main Window ==
+
+[http://picasaweb.google.com/nerdynick/MemcachedManagerScreenshots Picasa Screenshot Album]
+
 === Management Tab ===
 http://lh5.ggpht.com/nerdynick/SPJ2VkzwEbI/AAAAAAAAAFQ/-Yfym19iFxc/Screenshot-MainWindow.png
 === Statistics Tabs ==
-Stats Cache Info Tab
+Cache Info
 
-http://lh5.ggpht.com/_MvJxpVDN8xE/SRZ0NyPvkoI/AAAAAAAAAGQ/gQ8oOn88HWU/MainWindow-Stats_Cache_Info.png
 http://lh3.ggpht.com/_MvJxpVDN8xE/SRdv_GFLokI/AAAAAAAAAGg/w-Vy3rKJ2f4/MainWindow-Stats-Cache_Info-2.png
 
-Stats Diagram Tab
+Diagrams
 
-http://lh4.ggpht.com/_MvJxpVDN8xE/SRZ0Nzm6C2I/AAAAAAAAAGY/0x8xcxGZQe0/MainWindow-Stats_Graphs.png
 http://lh6.ggpht.com/_MvJxpVDN8xE/SRfhviYU7HI/AAAAAAAAAGo/VckgZljZt28/s576/MainWindow-Stats-Diagrams.png
+
+Server Info
+
+http://lh5.ggpht.com/_MvJxpVDN8xE/SSDtd9wlV_I/AAAAAAAAAGw/Usd1c0WZo1Y/s576/Memcached_Manager-Stats-Server_Information.png
 
 == Add Server ==
 http://lh4.ggpht.com/nerdynick/SPJ2V7x6pNI/AAAAAAAAAFY/eQFsv5F4I_w/Screenshot-Add%20Server.png
