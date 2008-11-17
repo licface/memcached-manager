@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>587</width>
-    <height>510</height>
+    <width>655</width>
+    <height>590</height>
    </rect>
   </property>
   <property name="contextMenuPolicy" >
@@ -174,7 +174,7 @@
             <item>
              <widget class="QScrollArea" name="scrollArea_2" >
               <property name="frameShape" >
-               <enum>QFrame::NoFrame</enum>
+               <enum>QFrame::StyledPanel</enum>
               </property>
               <property name="frameShadow" >
                <enum>QFrame::Sunken</enum>
@@ -187,7 +187,7 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>266</width>
+                 <width>262</width>
                  <height>476</height>
                 </rect>
                </property>
@@ -356,29 +356,6 @@
                     </widget>
                    </item>
                   </layout>
-                  <zorder>lblCurrentItemsTxt</zorder>
-                  <zorder>lblCurrentItems</zorder>
-                  <zorder>lblHitsTxt</zorder>
-                  <zorder>lblHits</zorder>
-                  <zorder>lblMissesTxt</zorder>
-                  <zorder>lblMisses</zorder>
-                  <zorder>lblFreeTxt</zorder>
-                  <zorder>lblFree</zorder>
-                  <zorder>lblUsedTxt</zorder>
-                  <zorder>lblUsed</zorder>
-                  <zorder>lblItemsTxt</zorder>
-                  <zorder>lblItems</zorder>
-                  <zorder>lblConnectionsTxt</zorder>
-                  <zorder>lblConnections</zorder>
-                  <zorder>lblCurrentConnectionsTxt</zorder>
-                  <zorder>lblCurrentConnections</zorder>
-                  <zorder>lblGetsTxt</zorder>
-                  <zorder>lblGets</zorder>
-                  <zorder>lblSetsTxt</zorder>
-                  <zorder>lblSets</zorder>
-                  <zorder>lblSpaceTxt</zorder>
-                  <zorder>lblSpace</zorder>
-                  <zorder>gbRates</zorder>
                  </widget>
                 </item>
                 <item>
@@ -474,7 +451,7 @@
             <item>
              <widget class="QScrollArea" name="scrollArea" >
               <property name="frameShape" >
-               <enum>QFrame::NoFrame</enum>
+               <enum>QFrame::StyledPanel</enum>
               </property>
               <property name="widgetResizable" >
                <bool>true</bool>
@@ -484,8 +461,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>281</width>
-                 <height>283</height>
+                 <width>128</width>
+                 <height>84</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout" >
@@ -520,6 +497,260 @@
            <attribute name="title" >
             <string>Server Information</string>
            </attribute>
+           <layout class="QHBoxLayout" name="horizontalLayout_6" >
+            <item>
+             <widget class="QScrollArea" name="saServerInfo" >
+              <property name="widgetResizable" >
+               <bool>true</bool>
+              </property>
+              <widget class="QWidget" name="scrollAreaWidgetContents_3" >
+               <property name="geometry" >
+                <rect>
+                 <x>0</x>
+                 <y>0</y>
+                 <width>262</width>
+                 <height>436</height>
+                </rect>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_6" >
+                <item>
+                 <widget class="QGroupBox" name="gbServerX" >
+                  <property name="title" >
+                   <string>Server X</string>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_5" >
+                   <item row="0" column="0" >
+                    <widget class="QLabel" name="lblServerXTotalItemsTxt" >
+                     <property name="text" >
+                      <string>Total Items:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1" >
+                    <widget class="QLabel" name="lblServerXTotalItems" >
+                     <property name="text" >
+                      <string>n/a</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0" >
+                    <widget class="QLabel" name="lblServerXItemsTxt" >
+                     <property name="text" >
+                      <string>Current Items:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="1" >
+                    <widget class="QLabel" name="lblServerXItems" >
+                     <property name="text" >
+                      <string>n/a</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0" >
+                    <widget class="QLabel" name="lblServerXTotalConnectionsTxt" >
+                     <property name="text" >
+                      <string>Total Connections:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="1" >
+                    <widget class="QLabel" name="lblServerXTotalConnections" >
+                     <property name="text" >
+                      <string>n/a</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="0" >
+                    <widget class="QLabel" name="lblServerXConnectionsTxt" >
+                     <property name="text" >
+                      <string>Connections:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="1" >
+                    <widget class="QLabel" name="lblServerXConnections" >
+                     <property name="text" >
+                      <string>n/a</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="0" >
+                    <widget class="QLabel" name="lblServerXHitsTxt" >
+                     <property name="text" >
+                      <string>Hits:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="1" >
+                    <widget class="QLabel" name="lblServerXHits" >
+                     <property name="text" >
+                      <string>n/a</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="5" column="0" >
+                    <widget class="QLabel" name="lblServerXMissesTxt" >
+                     <property name="text" >
+                      <string>Misses:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="5" column="1" >
+                    <widget class="QLabel" name="lblServerXMisses" >
+                     <property name="text" >
+                      <string>n/a</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="6" column="0" >
+                    <widget class="QLabel" name="lblServerXGetsTxt" >
+                     <property name="text" >
+                      <string>Gets:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="6" column="1" >
+                    <widget class="QLabel" name="lblServerXGets" >
+                     <property name="text" >
+                      <string>n/a</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="7" column="0" >
+                    <widget class="QLabel" name="lblServerXSetsTxt" >
+                     <property name="text" >
+                      <string>Sets:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="7" column="1" >
+                    <widget class="QLabel" name="lblServerXSets" >
+                     <property name="text" >
+                      <string>n/a</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="8" column="0" >
+                    <widget class="QLabel" name="lblServerXTotalSpaceTxt" >
+                     <property name="text" >
+                      <string>Total Space:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="8" column="1" >
+                    <widget class="QLabel" name="lblServerXTotalSpace" >
+                     <property name="text" >
+                      <string>n/a</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="9" column="0" >
+                    <widget class="QLabel" name="lblServerXFreeSpaceTxt" >
+                     <property name="text" >
+                      <string>Free Space:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="9" column="1" >
+                    <widget class="QLabel" name="lblServerXFreeSpace" >
+                     <property name="text" >
+                      <string>n/a</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="10" column="0" >
+                    <widget class="QLabel" name="lblServerXUsedSpaceTxt" >
+                     <property name="text" >
+                      <string>Used Space:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="11" column="0" >
+                    <widget class="QLabel" name="lblServerXRequestRateTxt" >
+                     <property name="text" >
+                      <string>Request Rate:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="10" column="1" >
+                    <widget class="QLabel" name="lblServerXUsedSpace" >
+                     <property name="text" >
+                      <string>n/a</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="11" column="1" >
+                    <widget class="QLabel" name="lblServerXRequestRate" >
+                     <property name="text" >
+                      <string>n/a</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="12" column="0" >
+                    <widget class="QLabel" name="lblServerXHitRateTxt" >
+                     <property name="text" >
+                      <string>Hit Rate:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="13" column="0" >
+                    <widget class="QLabel" name="lblServerXMissRateTxt" >
+                     <property name="text" >
+                      <string>Miss Rate:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="15" column="0" >
+                    <widget class="QLabel" name="lblServerXSetRateTxt" >
+                     <property name="text" >
+                      <string>Set Rate:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="14" column="0" >
+                    <widget class="QLabel" name="lblServerXGetRateTxt" >
+                     <property name="text" >
+                      <string>Get Rate:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="12" column="1" >
+                    <widget class="QLabel" name="lblServerXHitRate" >
+                     <property name="text" >
+                      <string>n/a</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="13" column="1" >
+                    <widget class="QLabel" name="lblServerXMissRate" >
+                     <property name="text" >
+                      <string>n/a</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="14" column="1" >
+                    <widget class="QLabel" name="lblServerXGetRate" >
+                     <property name="text" >
+                      <string>n/a</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="15" column="1" >
+                    <widget class="QLabel" name="lblServerXSetRate" >
+                     <property name="text" >
+                      <string>n/a</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </widget>
         </item>
@@ -562,7 +793,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>587</width>
+     <width>655</width>
      <height>26</height>
     </rect>
    </property>
