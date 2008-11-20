@@ -285,7 +285,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 #Create Group Box
                 gbServerX = QtGui.QGroupBox(self.scrollAreaWidgetContents_3)
                 gbServerX.setObjectName("gbServer"+ hostStr)
-                gbServerX.setTitle(str(s.getName()))
+                gbServerX.setTitle(str(s.getName())+ " - V"+ str(s.getVersion()))
                 
                 #Create Group Box Layout
                 gridLayout_5 = QtGui.QGridLayout(gbServerX)

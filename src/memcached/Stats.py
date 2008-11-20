@@ -173,6 +173,8 @@ class StatsServer(object):
         self.Timestamp = int(stats[1]['time'])
         self.PointerSize = int(stats[1]['pointer_size'])
         self.GetHits = int(stats[1]['get_hits'])
+    def getVersion(self):
+        return self.Version
     def getName(self):
         return self.Name
     def getTotalItems(self):
