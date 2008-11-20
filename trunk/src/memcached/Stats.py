@@ -115,27 +115,57 @@ class MemcachedStats(object):
         rate = 0
         for server in self.servers:
             rate += server.getRequestRate()
-        return rate/len(self.servers)
+        return rate
     
     def getHitRate(self):
         rate = 0
         for server in self.servers:
             rate += server.getHitRate()
-        return rate/len(self.servers)
+        return rate
     
     def getMissRate(self):
         rate = 0
         for server in self.servers:
             rate += server.getMissRate()
-        return rate/len(self.servers)
+        return rate
     
     def getSetRate(self):
         rate = 0
         for server in self.servers:
             rate += server.getSetRate()
-        return rate/len(self.servers)
+        return rate
     
     def getGetRate(self):
+        rate = 0
+        for server in self.servers:
+            rate += server.getGetRate()
+        return rate
+    
+    def getRequestRateAvg(self):
+        rate = 0
+        for server in self.servers:
+            rate += server.getRequestRate()
+        return rate/len(self.servers)
+    
+    def getHitRateAvg(self):
+        rate = 0
+        for server in self.servers:
+            rate += server.getHitRate()
+        return rate/len(self.servers)
+    
+    def getMissRateAvg(self):
+        rate = 0
+        for server in self.servers:
+            rate += server.getMissRate()
+        return rate/len(self.servers)
+    
+    def getSetRateAvg(self):
+        rate = 0
+        for server in self.servers:
+            rate += server.getSetRate()
+        return rate/len(self.servers)
+    
+    def getGetRateAvg(self):
         rate = 0
         for server in self.servers:
             rate += server.getGetRate()
@@ -200,15 +230,15 @@ class StatsServer(object):
     def getUsedSpace(self):
         return self.Bytes
     def getRequestRate(self):
-        return (float(self.getSets()) + float(self.getGets()))/float(self.getUptimeUnix())*100
+        return (float(self.getSets()) + float(self.getGets()))/float(self.getUptimeUnix())
     def getHitRate(self):
-        return float(self.getHits())/float(self.getUptimeUnix())*100
+        return float(self.getHits())/float(self.getUptimeUnix())
     def getMissRate(self):
-        return float(self.getMisses())/float(self.getUptimeUnix())*100
+        return float(self.getMisses())/float(self.getUptimeUnix())
     def getSetRate(self):
-        return float(self.getSets())/float(self.getUptimeUnix())*100
+        return float(self.getSets())/float(self.getUptimeUnix())
     def getGetRate(self):
-        return float(self.getGets())/float(self.getUptimeUnix())*100
+        return float(self.getGets())/float(self.getUptimeUnix())
     def getTime(self):
         return self.Time
     def getTimeUnix(self):
