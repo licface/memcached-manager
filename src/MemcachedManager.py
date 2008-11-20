@@ -97,8 +97,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         action = self.sender()
         self.currentCluster = self.settings.servers.getClusterByMenuItem(action)
         if self.currentCluster is not None:
-            self.currentCluster.makeActive()
-            self.checkServerStatus()
             self.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Memcached Manager ("+ str(self.currentCluster.name) +")", None, QtGui.QApplication.UnicodeUTF8))
             
         
@@ -118,7 +116,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def deleteKeys(self):
         value = self.txtCacheKeys.text()
         if self.currentCluster is not None:
-            self.checkServerStatus()
             self.currentCluster.deleteKey(value)
             QtGui.QMessageBox.information(self, "Key(s) Deleted", "Your key(s) have been deleted")
         else:
@@ -126,7 +123,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             
     def flushKeys(self):
         if self.currentCluster is not None:
-            self.checkServerStatus()
             self.currentCluster.flushKeys()
             QtGui.QMessageBox.information(self, "Cache Keys Flushed", "Your keys have been flushed")
         else:
@@ -139,7 +135,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def refreshStats(self):
         self.pbStats.setValue(0)
         if self.currentCluster is not None:
-            self.checkServerStatus()
             stats = self.currentCluster.getStats()
             self.pbStats.setValue(1)
             
@@ -439,12 +434,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self.horizontalLayout_6.addWidget(self.saServerInfo)
         else:
             QtGui.QMessageBox.critical(self, "Not Cluster Selected", "You do not have an Active Cluster")
-            
-    def checkServerStatus(self):
-        if self.currentCluster is not None:
-            for server in self.currentCluster.memcached.servers:
-                if not server.connect():
-                    QtGui.QMessageBox.critical(self, "Server Disconnect", "Memcached Server "+ server.host +" Failed to Connect")
                         
     def watchLiveStats(self):
         self.liveStatsDialog.show()

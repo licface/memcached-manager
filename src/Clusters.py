@@ -20,7 +20,6 @@ class Cluster:
         
         self.treeItem = None
         self.key = md5.new(self.name).hexdigest()
-        self.memcached = None
         
     def initTreeView(self, parent):
         self.treeItem = QTreeWidgetItem(parent, QStringList(self.name))
@@ -35,8 +34,6 @@ class Cluster:
         server.setCluster(self)
         if self.treeItem is not None:
             server.initTreeView()
-            
-        self.resetMemcacheClient()
         
     def deleteServer(self, server):
         self.servers.remove(server)
@@ -68,26 +65,18 @@ class Cluster:
             
         if self.menuItems['menu'] is not None:
             self.menuItems['menu'].parent().removeAction(self.menuItems['menu'].menuAction())
-            
-    def makeActive(self):
-        if self.memcached is None:
-            self.memcached = memcached.memcache.Client(self.getServerMemcachedUrls(), debug=0)
-            
-    def resetMemcacheClient(self):
-        if self.memcached is not None:
-            self.memcached.disconnect_all()
-            #self.memcached.set_servers(self.getServerMemcachedUrls())
-            for s in self.memcached.servers:
-                s.connect()
+                
+    def getMemcached(self):
+        return memcached.memcache.Client(self.getServerMemcachedUrls(), debug=0)
             
     #Memcached Management Functions
             
     def deleteKey(self, key):
         keys = key.split(';')
-        self.memcached.delete_multi(keys)
+        self.getMemcached().delete_multi(keys)
         
     def flushKeys(self):
-        self.memcached.flush_all()
+        self.getMemcached().flush_all()
         
     def getStats(self):
-        return memcached.Stats.MemcachedStats(self.memcached.get_stats())
+        return memcached.Stats.MemcachedStats(self.getMemcached().get_stats())
