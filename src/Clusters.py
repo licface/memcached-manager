@@ -37,7 +37,6 @@ class Cluster:
         
     def deleteServer(self, server):
         self.servers.remove(server)
-        self.resetMemcacheClient()
         
     def getServers(self):
         return self.servers
@@ -55,10 +54,7 @@ class Cluster:
             
         return save
     
-    def delete(self):
-        if self.memcached is not None:
-            self.memcached.disconnect_all()
-            
+    def delete(self):            
         for server in self.servers:
             server.delete()
         self.servers = []

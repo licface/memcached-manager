@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'AddServer.ui'
 #
-# Created: Sun Nov 16 15:14:16 2008
+# Created: Thu Nov 20 01:18:55 2008
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
