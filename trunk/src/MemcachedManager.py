@@ -180,16 +180,16 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self.lblUsed.setText(uSpace)
             
             self.lblRequestRate.setText("%.2f cache requests/second"% (stats.getRequestRate(),))
-            self.lblHitRate.setText("%.2f cache requests/second"% (stats.getRequestRate(),))
-            self.lblMissRate.setText("%.2f cache requests/second"% (stats.getRequestRate(),))
-            self.lblSetRate.setText("%.2f cache requests/second"% (stats.getRequestRate(),))
-            self.lblGetRate.setText("%.2f cache requests/second"% (stats.getRequestRate(),))
+            self.lblHitRate.setText("%.2f cache requests/second"% (stats.getHitRate(),))
+            self.lblMissRate.setText("%.2f cache requests/second"% (stats.getMissRate(),))
+            self.lblSetRate.setText("%.2f cache requests/second"% (stats.getSetRate(),))
+            self.lblGetRate.setText("%.2f cache requests/second"% (stats.getGetRate(),))
             
             self.lblRequestRateAvg.setText("%.2f cache requests/second"% (stats.getRequestRateAvg(),))
-            self.lblHitRateAvg.setText("%.2f cache requests/second"% (stats.getRequestRateAvg(),))
-            self.lblMissRateAvg.setText("%.2f cache requests/second"% (stats.getRequestRateAvg(),))
-            self.lblSetRateAvg.setText("%.2f cache requests/second"% (stats.getRequestRateAvg(),))
-            self.lblGetRateAvg.setText("%.2f cache requests/second"% (stats.getRequestRateAvg(),))
+            self.lblHitRateAvg.setText("%.2f cache requests/second"% (stats.getHitRateAvg(),))
+            self.lblMissRateAvg.setText("%.2f cache requests/second"% (stats.getMissRateAvg(),))
+            self.lblSetRateAvg.setText("%.2f cache requests/second"% (stats.getSetRateAvg(),))
+            self.lblGetRateAvg.setText("%.2f cache requests/second"% (stats.getGetRateAvg(),))
             
             self.pbStats.setValue(25)
             
