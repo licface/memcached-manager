@@ -1,0 +1,29 @@
+#labels Featured,Phase-Deploy
+= Pre-Reqs. =
+
+  * [http://wiki.python.org/moin/PyQt PyQT4]
+  * [http://matplotlib.sourceforge.net/ Matplotlib]
+   * [http://numpy.scipy.org/ Numpy]
+
+= How to Install =
+
+You must have installed all the Pre-Reqs. before continuing on.
+
+== SVN (Source Control) ==
+
+This is currently the only way to try out Memcached-Manager. It should be pretty simple for anyone with a bit of programming experience.
+
+{{{
+# SVN Checkout
+svn checkout http://memcached-manager.googlecode.com/svn/trunk/src/ memcached-manager
+
+# Change Directory into the newly checkout code
+cd memcached-manager
+
+# Execute MemcachedManager
+python MemcachedManager.py
+}}}
+
+== Download ==
+
+Currently their is no downloads available. Their should soon me Tar.gz & Deb packages to download and install. If you are an RPM fan and would like to build a package for that, it would be much appreciated.
