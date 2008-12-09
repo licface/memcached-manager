@@ -5,6 +5,7 @@ Memcached Manager is a very simple yet powerful memcached server/cluster manager
 
 == Quick Links ==
 
+ * [InstallingMemcachedManager Install]
  * [Screenshots Screenshots]
  * [FeatureList Feature List]
  * [Blueprints Blueprint Details]
