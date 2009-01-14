@@ -11,7 +11,8 @@ class Server:
         self.tree = None
         
     def initTreeView(self):
-        self.tree = QTreeWidgetItem(self.cluster.treeItem, QStringList(str(self.name) +" ( "+ str(self.ip) +" )"))
+        self.tree = QTreeWidgetItem(self.cluster.treeItem, 
+								QStringList(str(self.name) +" ( "+ str(self.ip) +":"+ str(self.port) +" )"))
         
     def save(self):
         return {'name':self.name, 'ip':self.ip, 'port':self.port}
