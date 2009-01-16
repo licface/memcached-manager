@@ -125,13 +125,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 			self.makeClusterActive(cluster)
 			
 	def setClusterByTree(self, treeItem, column, *args, **kargs):
-		print treeItem
-		print column
-		print args
-		print kargs
 		for cluster in self.settings.servers.getClusters():
-			cluster.treeItem = treeItem
-			self.makeClusterActive(cluster)
+			if cluster.treeItem == treeItem:
+				self.makeClusterActive(cluster)
 			
 	def makeClusterActive(self, cluster):
 		self.currentCluster = cluster
