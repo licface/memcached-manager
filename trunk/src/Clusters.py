@@ -65,7 +65,7 @@ class Cluster:
 			self.menuItems['menu'].parent().removeAction(self.menuItems['menu'].menuAction())
 			
 		if self.treeItemParent is not None and self.treeItem is not None:
-			self.treeItemParent.removeItemWidget(self.treeItem)
+			self.treeItemParent.removeItemWidget(self.treeItem, 0)
 				
 	def getMemcached(self):
 		return memcached.memcache.Client(self.getServerMemcachedUrls(), debug=0)
