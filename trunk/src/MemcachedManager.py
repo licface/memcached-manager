@@ -57,6 +57,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.connect(self.tabsMain, QtCore.SIGNAL('currentChanged(QWidget*)'), self.mainTabChanged)
 		self.connect(self.btnRefresh, QtCore.SIGNAL('clicked()'), self.refreshStats)
 		
+		self.connect(self.treeCluster, QtCore.SIGNAL('itemDoubleClicked(QTreeWidgetItem*, int)'), self.setClusterByTree)
+		
 		
 		#Management Task Actions
 		self.connect(self.btnCacheKeys, QtCore.SIGNAL("clicked()"), self.deleteKeys)
@@ -108,7 +110,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 			self.addServer(cluster, server)
 		
 		cluster.initTreeView(self.treeCluster)
-		self.connect(cluster.treeItem, QtCore.SIGNAL("itemDoubleClicked()"), self.makeClusterActive(cluster))
 		
 			
 	def deleteCluster(self):
@@ -121,6 +122,15 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		action = self.sender()
 		cluster = self.settings.servers.getClusterByMenuItem(action)
 		if cluster is not None:
+			self.makeClusterActive(cluster)
+			
+	def setClusterByTree(self, treeItem, column, *args, **kargs):
+		print treeItem
+		print column
+		print args
+		print kargs
+		for cluster in self.settings.servers.getClusters():
+			cluster.treeItem = treeItem
 			self.makeClusterActive(cluster)
 			
 	def makeClusterActive(self, cluster):
