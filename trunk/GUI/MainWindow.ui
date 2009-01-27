@@ -81,7 +81,7 @@
        <string/>
       </property>
       <property name="currentIndex" >
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="MTasks" >
        <attribute name="title" >
@@ -186,7 +186,7 @@
                <property name="geometry" >
                 <rect>
                  <x>0</x>
-                 <y>-237</y>
+                 <y>0</y>
                  <width>262</width>
                  <height>596</height>
                 </rect>
@@ -531,8 +531,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>1458</width>
-                 <height>398</height>
+                 <width>128</width>
+                 <height>84</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout" >
@@ -578,7 +578,7 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>1443</width>
+                 <width>165</width>
                  <height>436</height>
                 </rect>
                </property>
