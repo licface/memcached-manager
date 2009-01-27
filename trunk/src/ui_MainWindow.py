@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Mon Jan 26 23:17:34 2009
+# Created: Mon Jan 26 23:36:03 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -65,6 +65,8 @@ class Ui_MainWindow(object):
         self.btnCacheKeys = QtGui.QPushButton(self.gbClearKey)
         self.btnCacheKeys.setObjectName("btnCacheKeys")
         self.verticalLayout_7.addWidget(self.btnCacheKeys)
+        spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        self.verticalLayout_7.addItem(spacerItem)
         self.btnFlushCache = QtGui.QPushButton(self.gbClearKey)
         self.btnFlushCache.setObjectName("btnFlushCache")
         self.verticalLayout_7.addWidget(self.btnFlushCache)
