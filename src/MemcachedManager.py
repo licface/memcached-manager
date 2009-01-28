@@ -57,7 +57,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.connect(self.tabsMain, QtCore.SIGNAL('currentChanged(QWidget*)'), self.mainTabChanged)
 		self.connect(self.btnRefresh, QtCore.SIGNAL('clicked()'), self.refreshStats)
 		
+		self.treeCluster.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
 		self.connect(self.treeCluster, QtCore.SIGNAL('itemDoubleClicked(QTreeWidgetItem*, int)'), self.setClusterByTree)
+		self.connect(self.treeCluster, QtCore.SIGNAL('customContextMenuRequested(QPoint)'), self.displayTreeContextMenu)
 		
 		
 		#Management Task Actions
@@ -72,20 +74,23 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		for cluster in self.settings.servers.getClusters():
 			self.addCluster(cluster)
 			
-		"""
-		self.treeCMServer = QtGui.QPopupMenu()
+		
+		self.treeCMServer = QtGui.QMenu()
 		self.treeCMServerActions = {"deleteServer": QtGui.QAction(self)}
 		self.treeCMServerActions['deleteServer'].setText("Delete Server")
-		self.treeCMServerActions['deleteServer'].addTo(self.treeCMServer)
-		
-		self.treeCMCluster = QtGui.QPopupMenu()
+		self.treeCMServer.addAction(self.treeCMServerActions['deleteServer'])
+
+
+		self.treeCMCluster = QtGui.QMenu()
 		self.treeCMClusterActions = {"deleteCluster": QtGui.QAction(self), "makeActive": QtGui.QAction(self)}
 		self.treeCMClusterActions['deleteCluster'].setText("Delete Cluster")
-		self.treeCMClusterActions['deleteCluster'].addTo(self.treeCMServer)
+		self.treeCMCluster.addAction(self.treeCMClusterActions['deleteCluster'])
 		self.treeCMClusterActions['makeActive'].setText("Make Active")
-		self.treeCMClusterActions['makeActive'].addTo(self.treeCMServer)
-		"""
-		
+		self.treeCMCluster.addAction(self.treeCMClusterActions['makeActive'])
+
+	def displayTreeContextMenu(self, point):
+                #self.treeCluster.indexAt(point)
+		self.treeCMServer.popup(QtGui.QCursor.pos())
 	
 	def displayAddCluster(self):
 		self.addServerDialog.hide()
