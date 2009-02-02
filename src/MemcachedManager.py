@@ -89,7 +89,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.treeCMCluster.addAction(self.treeCMClusterActions['makeActive'])
 
 	def displayTreeContextMenu(self, point):
-                #self.treeCluster.indexAt(point)
+				#self.treeCluster.indexAt(point)
 		self.treeCMServer.popup(QtGui.QCursor.pos())
 	
 	def displayAddCluster(self):
@@ -109,14 +109,26 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		items['menu'] = self.menu_Servers.addMenu(cluster.name)
 		items['actions']['set'] = QtGui.QAction(self)
 		items['actions']['set'].setText('Make Active')
+		ActiveIcon = QtGui.QIcon()
+		ActiveIcon.addPixmap(QtGui.QPixmap("Icons/Active.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+		items['actions']['set'].setIcon(ActiveIcon)
+		
 		items['menu'].addAction(items['actions']['set'])
 		items['actions']['delete'] = QtGui.QAction(self)
 		items['actions']['delete'].setText('Delete')
+		RemoveIcon = QtGui.QIcon()
+		RemoveIcon.addPixmap(QtGui.QPixmap("Icons/Remove.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+		items['actions']['delete'].setIcon(RemoveIcon)
+		
 		items['menu'].addAction(items['actions']['delete'])
 		items['menu'].addSeparator()
 		items['servers'] = items['menu'].addMenu('Servers')
 		items['actions']['add'] = QtGui.QAction(self)
 		items['actions']['add'].setText('Add Server')
+		AddIcon = QtGui.QIcon()
+		AddIcon.addPixmap(QtGui.QPixmap("Icons/Add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+		items['actions']['add'].setIcon(AddIcon)
+		
 		items['servers'].addAction(items['actions']['add'])
 		items['servers'].addSeparator()
 		
@@ -157,6 +169,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		items['menu'] = cluster.menuItems['servers'].addMenu(server.name)
 		items['actions']['delete'] = QtGui.QAction(self)
 		items['actions']['delete'].setText('Delete')
+		RemoveIcon = QtGui.QIcon()
+		RemoveIcon.addPixmap(QtGui.QPixmap("Icons/Remove.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+		items['actions']['delete'].setIcon(RemoveIcon)
 		items['menu'].addAction(items['actions']['delete'])
 		self.connect(items['actions']['delete'], QtCore.SIGNAL("triggered()"), self.deleteServer)
 		

@@ -15,6 +15,10 @@
   <property name="windowTitle" >
    <string>Memcached Manager</string>
   </property>
+  <property name="windowIcon" >
+   <iconset>
+    <normaloff>Icons/Globe.png</normaloff>Icons/Globe.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget" >
    <layout class="QHBoxLayout" name="horizontalLayout_5" >
     <item>
@@ -126,19 +130,6 @@
             </widget>
            </item>
            <item>
-            <spacer name="verticalSpacer" >
-             <property name="orientation" >
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0" >
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
             <widget class="QPushButton" name="btnFlushCache" >
              <property name="toolTip" >
               <string>Flush Keys from All Servers in Cluster</string>
@@ -176,21 +167,21 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="1" >
-              <widget class="QLabel" name="lblRegExWarning" >
-               <property name="text" >
-                <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+            </layout>
+           </item>
+           <item>
+            <widget class="QLabel" name="lblRegExWarning" >
+             <property name="text" >
+              <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 &lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
 p, li { white-space: pre-wrap; }
 &lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;">
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-size:8pt; font-weight:600;">Note&lt;/span>&lt;span style=" font-size:8pt;">: RegEx searching requires that all keys be returned from all servers in the cluster before the search can be preformed. With larger clusters this can take some time.&lt;/span>&lt;/p>&lt;/body>&lt;/html></string>
-               </property>
-               <property name="wordWrap" >
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-            </layout>
+             </property>
+             <property name="wordWrap" >
+              <bool>true</bool>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QPushButton" name="btnKeySearch" >
@@ -208,6 +199,19 @@ p, li { white-space: pre-wrap; }
            </item>
           </layout>
          </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer" >
+          <property name="orientation" >
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0" >
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </widget>
@@ -597,8 +601,8 @@ p, li { white-space: pre-wrap; }
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>1458</width>
-                 <height>398</height>
+                 <width>128</width>
+                 <height>84</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout" >
@@ -644,7 +648,7 @@ p, li { white-space: pre-wrap; }
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>1443</width>
+                 <width>165</width>
                  <height>436</height>
                 </rect>
                </property>
@@ -953,6 +957,10 @@ p, li { white-space: pre-wrap; }
   </widget>
   <widget class="QStatusBar" name="statusbar" />
   <action name="actionAddServer" >
+   <property name="icon" >
+    <iconset>
+     <normaloff>Icons/Add.png</normaloff>Icons/Add.png</iconset>
+   </property>
    <property name="text" >
     <string>&amp;Add Server</string>
    </property>
@@ -968,6 +976,10 @@ p, li { white-space: pre-wrap; }
    </property>
   </action>
   <action name="actionAddCluster" >
+   <property name="icon" >
+    <iconset>
+     <normaloff>Icons/Add.png</normaloff>Icons/Add.png</iconset>
+   </property>
    <property name="text" >
     <string>Add &amp;Cluster</string>
    </property>
