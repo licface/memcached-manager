@@ -208,7 +208,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.pbStats.setValue(0)
 		if self.currentCluster is not None:
 			stats = self.currentCluster.getStats()
-			self.pbStats.setValue(1)
+			self.pbStats.setValue(10)
 			
 			#Update Cache Info Tab
 			self.lblItems.setText(str(stats.getTotalItems()))
@@ -241,7 +241,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 			self.lblSetRateAvg.setText("%.2f cache requests/second"% (stats.getSetRateAvg(),))
 			self.lblGetRateAvg.setText("%.2f cache requests/second"% (stats.getGetRateAvg(),))
 			
-			self.pbStats.setValue(25)
+			self.pbStats.setValue(30)
 			
 			#Update Diagrams Tab
 			#TODO: Use Temp Folder for Image storage or Figure out how to use binary string
@@ -293,7 +293,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 			figure.savefig('CacheUsage.png')
 			self.lblCacheUsageGraph.setPixmap(QtGui.QPixmap('CacheUsage.png'))
 			
-			self.pbStats.setValue(50)
+			self.pbStats.setValue(60)
 			
 			#Hits vs. Misses Graph
 			figure = pyplot.figure(figsize=(3.5,3.5), facecolor='#D4CCBA', edgecolor='#AB9675')
@@ -314,7 +314,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 			figure.savefig('HitsMisses.png')
 			self.lblHitsMissesGraph.setPixmap(QtGui.QPixmap('HitsMisses.png'))
 			
-			self.pbStats.setValue(75)
+			self.pbStats.setValue(80)
 			
 			#Gets & Sets Graph
 			figure = pyplot.figure(figsize=(3.5,3.5), facecolor='#D4CCBA', edgecolor='#AB9675')
@@ -335,7 +335,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 			figure.savefig('GetsSets.png')
 			self.lblGetSetGraph.setPixmap(QtGui.QPixmap('GetsSets.png'))
 			
-			self.pbStats.setValue(100)
+			self.pbStats.setValue(90)
 			
 			#Destroy the Scroll Area
 			self.horizontalLayout_6.removeWidget(self.saServerInfo)
@@ -596,6 +596,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 				
 			self.saServerInfo.setWidget(self.scrollAreaWidgetContents_3)
 			self.horizontalLayout_6.addWidget(self.saServerInfo)
+			self.pbStats.setValue(100)
 		else:
 			QtGui.QMessageBox.critical(self, "Not Cluster Selected", "You do not have an Active Cluster")
 						
