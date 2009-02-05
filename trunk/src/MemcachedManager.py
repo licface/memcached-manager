@@ -254,15 +254,17 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 			labels = []
 			colors = []
 			allPossibleColor = [
-							('#FFE0C9','#CF8442'),
-							('#FFE5D1','#CF8748'),
-							('#FFEFE2','#FFB06A'),
-							('#69A8B2','#106D82'),
-							('#C9F8FF','#42B5CF'),
-							('#D1F9FF','#48B6CF'),
-							('#E2FBFF','#6AE3FF'),
-							('#B28A69','#824610'),
-							('#FFE1C9','#CF8542')
+							('#E82C0C','#9B2B18'),
+							('#1B52B5','#00389B'),
+							
+							('#B9F525','#84A82B'),
+							('#C24530','#A82611'),
+							
+							('#F5BD3E','#A88D51'),
+							('#A144C2','#8522A8'),
+							
+							('#5AFFB9','#68B292'),
+							('#CCA95C','#B28B36')
 							]
 			colorPos = 0
 			count = 0
