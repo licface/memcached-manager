@@ -247,7 +247,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 			#TODO: Use Temp Folder for Image storage or Figure out how to use binary string
 			
 			#Cache Usage Graph
-			figure = pyplot.figure(figsize=(3,3), facecolor='#D4CCBA', edgecolor='#AB9675', dpi=100)
+			figure = pyplot.figure(figsize=(3.5,3.5), facecolor='#D4CCBA', edgecolor='#AB9675', dpi=100)
 			totalSpace = stats.getTotalSpace()
 			freeSpace = stats.getFreeSpace()
 			values = []
@@ -255,10 +255,14 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 			colors = []
 			allPossibleColor = [
 							('#FFE0C9','#CF8442'),
-							('#B05A3A','#573328'),
-							('#524432','#383030'),
-							('#947A53','#302320'),
-							('#788564','#CC8D49')
+							('#FFE5D1','#CF8748'),
+							('#FFEFE2','#FFB06A'),
+							('#69A8B2','#106D82'),
+							('#C9F8FF','#42B5CF'),
+							('#D1F9FF','#48B6CF'),
+							('#E2FBFF','#6AE3FF'),
+							('#B28A69','#824610'),
+							('#FFE1C9','#CF8542')
 							]
 			colorPos = 0
 			count = 0
@@ -268,7 +272,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 				if colorPos >= len(allPossibleColor):
 					colorPos = 0
 				count += 1
-				labels.extend(("F-"+ str(count), "U-"+ str(count)))
+				labels.extend(("Free-"+ str(count), "Used-"+ str(count)))
 				if(server.getFreeSpace() > 0):
 					freePerc = (float(server.getFreeSpace())/totalSpace)*100
 				else:
@@ -290,7 +294,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 			self.pbStats.setValue(50)
 			
 			#Hits vs. Misses Graph
-			figure = pyplot.figure(figsize=(3,3), facecolor='#D4CCBA', edgecolor='#AB9675')
+			figure = pyplot.figure(figsize=(3.5,3.5), facecolor='#D4CCBA', edgecolor='#AB9675')
 			if (stats.getHits() + stats.getMisses()) > 0:
 				hits = float(stats.getHits())/(stats.getHits() + stats.getMisses())*100
 				misses = float(stats.getMisses())/(stats.getHits() + stats.getMisses())*100
@@ -311,7 +315,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 			self.pbStats.setValue(75)
 			
 			#Gets & Sets Graph
-			figure = pyplot.figure(figsize=(3,3), facecolor='#D4CCBA', edgecolor='#AB9675')
+			figure = pyplot.figure(figsize=(3.5,3.5), facecolor='#D4CCBA', edgecolor='#AB9675')
 			if (stats.getGets() + stats.getSets()) > 0:
 				gets = float(stats.getGets())/(stats.getGets() + stats.getSets())*100
 				sets = float(stats.getSets())/(stats.getGets() + stats.getSets())*100
