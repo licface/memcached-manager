@@ -261,12 +261,14 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 							('#788564','#CC8D49')
 							]
 			colorPos = 0
+			count = 0
 			for server in stats.getServers():
 				colors.extend(allPossibleColor[colorPos])
 				colorPos += 1
 				if colorPos >= len(allPossibleColor):
 					colorPos = 0
-				labels.extend(("Free", "Used"))
+				count += 1
+				labels.extend(("F-"+ str(count), "U-"+ str(count)))
 				if(server.getFreeSpace() > 0):
 					freePerc = (float(server.getFreeSpace())/totalSpace)*100
 				else:
