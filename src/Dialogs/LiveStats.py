@@ -1,6 +1,6 @@
 from PyQt4 import QtGui
 from PyQt4 import QtCore
-from LiveStats.ui_LiveStats import Ui_liveStatsDialog
+from Dialogs.ui_LiveStats import Ui_liveStatsDialog
 import time
 import threading
 

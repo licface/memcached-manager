@@ -1,10 +1,7 @@
 from PyQt4 import QtGui
 from PyQt4 import QtCore
-from ServerActions.ui_AddServer import Ui_addServerDialog
-from ServerActions.ui_AddCluster import Ui_AddClusterDialog
+from Dialogs.ui_AddServer import Ui_addServerDialog
 from Settings import Settings
-from Servers import Server
-from Clusters import Cluster
 
 class AddServer(QtGui.QDialog, Ui_addServerDialog):
     def __init__(self):
@@ -40,23 +37,3 @@ class AddServer(QtGui.QDialog, Ui_addServerDialog):
             
     def addCluster(self, cluster):
         self.cbCluster.addItem(cluster.name)
-        
-class AddCluster(QtGui.QDialog, Ui_AddClusterDialog):
-    def __init__(self):
-        QtGui.QDialog.__init__(self)
-        self.setupUi(self)
-        self.settings = Settings()
-        
-        self.connect(self.btnSave, QtCore.SIGNAL('clicked()'), self.save)
-        self.connect(self, QtCore.SIGNAL('finished(int)'), self.clearFields)
-        
-    def save(self):
-        cluster = Cluster(self.txtClusterName.text())
-        self.settings.servers.addCluster(cluster)
-        
-        self.emit(QtCore.SIGNAL('saved'), cluster)
-        self.clearFields()
-        
-    def clearFields(self):
-        self.txtClusterName.setText('')
-        

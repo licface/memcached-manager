@@ -27,9 +27,7 @@ from PyQt4 import QtGui
 from PyQt4 import QtCore
 from Tabs import ManagementTasks, Slabs, Stats
 from ui_MainWindow import Ui_MainWindow
-
-from ServerActions import Dialogs
-from LiveStats import LiveStatsDialog
+from Dialogs import AddServer, AddCluster
 import sys
 from Settings import Settings
 
@@ -41,9 +39,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.Slabs = Slabs.Slabs(self)
 		self.Stats = Stats.Stats(self)
 		
-		self.addServerDialog = Dialogs.AddServer()
-		self.addClusterDialog = Dialogs.AddCluster()
-		self.liveStatsDialog = LiveStatsDialog.Dialog()
+		self.addServerDialog = AddServer.AddServer()
+		self.addClusterDialog = AddCluster.AddCluster()
 		self.settings = Settings()
 		
 		self.connect(self.actionAddServer, QtCore.SIGNAL("triggered()"), self.displayAddServer)
