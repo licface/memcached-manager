@@ -2,6 +2,7 @@ from PyQt4 import QtCore
 from PyQt4 import QtGui
 from matplotlib import pyplot
 import datetime
+from Dialogs import LiveStats
 
 class Stats:
 	def __init__(self, mainWindow):
@@ -9,12 +10,13 @@ class Stats:
 		self.mainWindow.connect(self.mainWindow.btnWatch, QtCore.SIGNAL("clicked()"), self.watchLiveStats)
 		self.mainWindow.connect(self.mainWindow.btnRefresh, QtCore.SIGNAL('clicked()'), self._updateStats)
 		
+		self.liveStatsDialog = LiveStats.Dialog()
+		
 	def onFocus(self):
 		self._updateStats()
 		
 	def watchLiveStats(self):
-		#TODO: Remove Dialog from Main Window
-		self.mainWindow.liveStatsDialog.show()
+		self.liveStatsDialog.show()
 		
 	def _updateStats(self):
 		self.mainWindow.pbStats.setValue(0)
