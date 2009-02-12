@@ -25,7 +25,9 @@ You can read more documentation at U{http://code.google.com/p/memcached-manager/
 
 from PyQt4 import QtGui
 from PyQt4 import QtCore
+from Tabs import ManagementTasks
 from ui_MainWindow import Ui_MainWindow
+
 from ServerActions import Dialogs
 from LiveStats import LiveStatsDialog
 import sys
@@ -35,10 +37,15 @@ from Settings import Settings
 from matplotlib import pyplot
 
 
+
+
+
 class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	def __init__(self):
 		QtGui.QMainWindow.__init__(self)
 		self.setupUi(self)
+		
+		self.ManagementTasks = ManagementTasks.ManagementTasks(self)
 		
 		self.addServerDialog = Dialogs.AddServer()
 		self.addClusterDialog = Dialogs.AddCluster()
@@ -60,11 +67,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.treeCluster.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
 		self.connect(self.treeCluster, QtCore.SIGNAL('itemDoubleClicked(QTreeWidgetItem*, int)'), self.setClusterByTree)
 		self.connect(self.treeCluster, QtCore.SIGNAL('customContextMenuRequested(QPoint)'), self.displayTreeContextMenu)
-		
-		
-		#Management Task Actions
-		self.connect(self.btnCacheKeys, QtCore.SIGNAL("clicked()"), self.deleteKeys)
-		self.connect(self.btnFlushCache, QtCore.SIGNAL("clicked()"), self.flushKeys)
 		
 		#Stats Actions
 		self.connect(self.btnWatch, QtCore.SIGNAL("clicked()"), self.watchLiveStats)
@@ -179,21 +181,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		action = self.sender()
 		server = self.settings.servers.getServerByMenuItem(action)
 		server.delete()
-		
-	def deleteKeys(self):
-		value = self.txtCacheKeys.text()
-		if self.currentCluster is not None:
-			self.currentCluster.deleteKey(value)
-			QtGui.QMessageBox.information(self, "Key(s) Deleted", "Your key(s) have been deleted")
-		else:
-			QtGui.QMessageBox.critical(self, "Not Cluster Selected", "You do not have an Active Cluster")
-			
-	def flushKeys(self):
-		if self.currentCluster is not None:
-			self.currentCluster.flushKeys()
-			QtGui.QMessageBox.information(self, "Cache Keys Flushed", "Your keys have been flushed")
-		else:
-			QtGui.QMessageBox.critical(self, "Not Cluster Selected", "You do not have an Active Cluster")
 			
 	def mainTabChanged(self, tab):
 		if tab.objectName() == 'Stats':
