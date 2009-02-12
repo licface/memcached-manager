@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'LiveStats.ui'
 #
-# Created: Wed Feb 11 21:25:32 2009
+# Created: Thu Feb 12 15:24:17 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -19,7 +19,7 @@ class Ui_liveStatsDialog(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtGui.QWidget(self.scrollArea)
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 628, 395))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 628, 431))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_4 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
@@ -57,18 +57,6 @@ class Ui_liveStatsDialog(object):
         self.verticalLayout_4.addWidget(self.gbMemoryUsage)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout.addWidget(self.scrollArea)
-        self.horizontalLayout = QtGui.QHBoxLayout()
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.lblIntervalTxt = QtGui.QLabel(liveStatsDialog)
-        self.lblIntervalTxt.setObjectName("lblIntervalTxt")
-        self.horizontalLayout.addWidget(self.lblIntervalTxt)
-        self.txtInterval = QtGui.QLineEdit(liveStatsDialog)
-        self.txtInterval.setObjectName("txtInterval")
-        self.horizontalLayout.addWidget(self.txtInterval)
-        self.btnStartStop = QtGui.QPushButton(liveStatsDialog)
-        self.btnStartStop.setObjectName("btnStartStop")
-        self.horizontalLayout.addWidget(self.btnStartStop)
-        self.verticalLayout.addLayout(self.horizontalLayout)
 
         self.retranslateUi(liveStatsDialog)
         QtCore.QMetaObject.connectSlotsByName(liveStatsDialog)
@@ -83,7 +71,4 @@ class Ui_liveStatsDialog(object):
         self.lblHitsMissesGraph.setText(QtGui.QApplication.translate("liveStatsDialog", "Hits vs. Misses Graph", None, QtGui.QApplication.UnicodeUTF8))
         self.gbMemoryUsage.setTitle(QtGui.QApplication.translate("liveStatsDialog", "Memory Usage", None, QtGui.QApplication.UnicodeUTF8))
         self.lblMemoryUsage.setText(QtGui.QApplication.translate("liveStatsDialog", "Memory Usage Graph", None, QtGui.QApplication.UnicodeUTF8))
-        self.lblIntervalTxt.setText(QtGui.QApplication.translate("liveStatsDialog", "Refresh Interval:", None, QtGui.QApplication.UnicodeUTF8))
-        self.txtInterval.setText(QtGui.QApplication.translate("liveStatsDialog", "30", None, QtGui.QApplication.UnicodeUTF8))
-        self.btnStartStop.setText(QtGui.QApplication.translate("liveStatsDialog", "Start/Stop", None, QtGui.QApplication.UnicodeUTF8))
 
