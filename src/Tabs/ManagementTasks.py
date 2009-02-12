@@ -9,6 +9,9 @@ class ManagementTasks:
 		self.mainWindow.connect(self.mainWindow.btnFlushCache, QtCore.SIGNAL("clicked()"), self.flushServers)
 		self.mainWindow.connect(self.mainWindow.btnKeySearch, QtCore.SIGNAL("clicked()"), self.keySearch)
 		
+	def onFocus(self):
+		pass
+		
 	def deleteKeys(self):
 		value = self.mainWindow.txtCacheKeys.text()
 		if self.mainWindow.currentCluster is not None:

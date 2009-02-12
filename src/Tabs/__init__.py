@@ -1,1 +1,1 @@
-__all__ = ['ManagementTasks']
+__all__ = ['ManagementTasks', 'Slabs', 'Stats']
