@@ -24,9 +24,36 @@ class GlobalSettings:
     
     def __init__(self):
         self.__dict__ = self.__settings
+        self.loadConfig()
         
-    def save(self):
-        pass
+    def loadConfig(self):
+        if not self.__dict__.has_key('configPath') or self.configPath is None:
+            self.configPath = os.path.join(sys.path[0], 'preferences.ini')
+            
+        if not self.__dict__.has_key('config') or self.config is None:
+            if os.path.exists(self.configPath) is not True:
+                self.config = {
+							'Graphs': {
+									'HitMiss': '#CF8442',
+									'GetSet': '#CF8442',
+									'Pie': [
+										('#CF8442','#824C1D'),
+										('#CF612D','#823410'),
+										('#CF3615','#821D07'),
+										('#CF2937','#82000B'),
+										('#CFA14A','#825A10'),
+										('#CFB248','#82690F'),
+										('#CFC442','#82790B'),
+										('#C0CF46','#75820E')
+										]
+            						},
+							'Stats': {}
+							}
+            else:
+                self.config = pickle.load(open(self.configPath, 'rb'))
+        
+    def save(self):            
+        pickle.dump(self.config, open(self.configPath, 'wb'))
 
 class ServerSettings:
     __settings = {}
