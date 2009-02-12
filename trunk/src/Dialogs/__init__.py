@@ -1,1 +1,1 @@
-__all__ = ['LiveStats', 'AddCluster', 'AddServer']
+__all__ = ['LiveStats', 'AddCluster', 'AddServer', 'Preferences']

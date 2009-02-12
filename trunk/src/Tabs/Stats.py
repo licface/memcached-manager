@@ -3,6 +3,7 @@ from PyQt4 import QtGui
 from matplotlib import pyplot
 import datetime
 from Dialogs import LiveStats
+from Settings import Settings
 
 class Stats:
 	def __init__(self, mainWindow):
@@ -11,6 +12,7 @@ class Stats:
 		self.mainWindow.connect(self.mainWindow.btnRefresh, QtCore.SIGNAL('clicked()'), self._updateStats)
 		
 		self.liveStatsDialog = LiveStats.Dialog()
+		self.settings = Settings()
 		
 	def onFocus(self):
 		self._updateStats()
@@ -123,7 +125,7 @@ class Stats:
 			hits = 0
 			misses = 0
 			
-		bar = pyplot.bar((0.25,1), (hits, misses), 0.5, color='#CF8442')
+		bar = pyplot.bar((0.25,1), (hits, misses), 0.5, color=self.settings.settings.config['Graphs']['HitMiss'])
 		pyplot.title('Hits vs. Misses')
 		pyplot.gca().set_xticklabels(('Hits', 'Misses'))
 		pyplot.gca().set_xticks((0.5,1.25))
@@ -142,7 +144,7 @@ class Stats:
 			gets = 0
 			sets = 0
 			
-		bar = pyplot.bar((0.25,1), (gets, sets), 0.5, color='#CF8442')
+		bar = pyplot.bar((0.25,1), (gets, sets), 0.5, color=self.settings.settings.config['Graphs']['GetSet'])
 		pyplot.title('Gets & Sets')
 		pyplot.gca().set_xticklabels(('Gets', 'Sets'))
 		pyplot.gca().set_xticks((0.5,1.25))
@@ -154,7 +156,7 @@ class Stats:
 		
 	def _updateServerInfo(self, stats):
 		#Destroy the Scroll Area
-		self.mainWindow.horizontalLayout_6.removeWidget(self.saServerInfo)
+		self.mainWindow.horizontalLayout_6.removeWidget(self.mainWindow.saServerInfo)
 		QtCore.Qt.WA_DeleteOnClose
 		self.mainWindow.saServerInfo.setAttribute(QtCore.Qt.WA_DeleteOnClose)
 		self.mainWindow.saServerInfo.close()
@@ -174,7 +176,7 @@ class Stats:
 			hostStr = s.getName().replace(':', '').replace('.', '').replace('-', '')
 			itemCounter = 0
 			#Create Group Box
-			gbServerX = QtGui.QGroupBox(self.scrollAreaWidgetContents_3)
+			gbServerX = QtGui.QGroupBox(self.mainWindow.scrollAreaWidgetContents_3)
 			gbServerX.setObjectName("gbServer"+ hostStr)
 			gbServerX.setTitle(str(s.getName())+ " - V"+ str(s.getVersion()))
 			
@@ -410,5 +412,5 @@ class Stats:
 			
 			self.mainWindow.verticalLayout_6.addWidget(gbServerX)
 			
-		self.mainWindow.saServerInfo.setWidget(self.scrollAreaWidgetContents_3)
-		self.mainWindow.horizontalLayout_6.addWidget(self.saServerInfo)
+		self.mainWindow.saServerInfo.setWidget(self.mainWindow.scrollAreaWidgetContents_3)
+		self.mainWindow.horizontalLayout_6.addWidget(self.mainWindow.saServerInfo)

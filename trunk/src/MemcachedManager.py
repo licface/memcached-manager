@@ -27,7 +27,7 @@ from PyQt4 import QtGui
 from PyQt4 import QtCore
 from Tabs import ManagementTasks, Slabs, Stats
 from ui_MainWindow import Ui_MainWindow
-from Dialogs import AddServer, AddCluster
+from Dialogs import AddServer, AddCluster, Preferences
 import sys
 from Settings import Settings
 
@@ -41,6 +41,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		
 		self.addServerDialog = AddServer.AddServer()
 		self.addClusterDialog = AddCluster.AddCluster()
+		self.preferencesDialog = Preferences.Preferences()
 		self.settings = Settings()
 		
 		self.connect(self.actionAddServer, QtCore.SIGNAL("triggered()"), self.displayAddServer)
@@ -52,6 +53,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		
 		self.addServerDialog.connect(self.addClusterDialog, QtCore.SIGNAL('saved'), self.addServerDialog.addCluster)
 		self.connect(self.actionSave, QtCore.SIGNAL('triggered()'), self.save)
+		self.connect(self.actionPreferences, QtCore.SIGNAL('triggered()'), self.displayPreferences)
 		self.connect(self.tabsMain, QtCore.SIGNAL('currentChanged(QWidget*)'), self.mainTabChanged)
 		
 		self.treeCluster.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
@@ -97,6 +99,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.addClusterDialog.hide()
 		self.addServerDialog.show()
 		self.addServerDialog.updateClusters()
+		
+	def displayPreferences(self):
+		self.preferencesDialog.show()
 		
 	def save(self):
 		self.settings.save()
