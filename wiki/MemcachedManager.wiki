@@ -9,3 +9,7 @@ Memcached Manager is a very simple yet powerful memcached server/cluster manager
  * [Screenshots Screenshots]
  * [FeatureList Feature List]
  * [Blueprints Blueprint Details]
+
+== Ohloh Stats ==
+
+<wiki:gadget url="http://www.ohloh.net/p/46534/widgets/project_basic_stats.xml" height="220"  border="1" />
