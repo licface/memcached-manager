@@ -92,11 +92,11 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.treeCMServer.popup(QtGui.QCursor.pos())
 	
 	def displayAddCluster(self):
-		self.addServerDialog.hide()
+		self.addServerDialog.close()
 		self.addClusterDialog.show()
 		
 	def displayAddServer(self):
-		self.addClusterDialog.hide()
+		self.addClusterDialog.close()
 		self.addServerDialog.show()
 		self.addServerDialog.updateClusters()
 		

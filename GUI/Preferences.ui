@@ -33,7 +33,15 @@
           </widget>
          </item>
          <item>
-          <widget class="QTextEdit" name="txtPieColors" />
+          <widget class="QTextEdit" name="txtPieColors" >
+           <property name="html" >
+            <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;">
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;/p>&lt;/body>&lt;/html></string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -94,6 +102,42 @@
       <attribute name="title" >
        <string>Stats</string>
       </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4" >
+       <item>
+        <layout class="QGridLayout" name="gridLayout" >
+         <item row="0" column="0" >
+          <widget class="QLabel" name="lblRefreshLiveInterval" >
+           <property name="text" >
+            <string>Refresh Live Stats Interval:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" >
+          <widget class="QLineEdit" name="txtRefreshLiveStats" />
+         </item>
+         <item row="1" column="1" >
+          <widget class="QCheckBox" name="cbAutoRefresh" >
+           <property name="text" >
+            <string>Auto Refresh on Tab Focus</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2" >
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </widget>
     </widget>
    </item>
@@ -110,6 +154,9 @@
       <widget class="QPushButton" name="btnSave" >
        <property name="text" >
         <string>Save Settings</string>
+       </property>
+       <property name="default" >
+        <bool>true</bool>
        </property>
       </widget>
      </item>

@@ -47,7 +47,10 @@ class GlobalSettings:
 										('#C0CF46','#75820E')
 										]
             						},
-							'Stats': {}
+							'Stats': {
+									'RefreshInterval': 5,
+									'AutoRefresh': True
+									}
 							}
             else:
                 self.config = pickle.load(open(self.configPath, 'rb'))

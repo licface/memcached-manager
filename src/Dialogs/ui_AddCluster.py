@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'AddCluster.ui'
 #
-# Created: Wed Feb 11 21:25:32 2009
+# Created: Thu Feb 12 15:24:17 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -30,6 +30,7 @@ class Ui_AddClusterDialog(object):
         self.btnCancel.setObjectName("btnCancel")
         self.horizontalLayout.addWidget(self.btnCancel)
         self.btnSave = QtGui.QPushButton(AddClusterDialog)
+        self.btnSave.setDefault(True)
         self.btnSave.setObjectName("btnSave")
         self.horizontalLayout.addWidget(self.btnSave)
         self.verticalLayout.addLayout(self.horizontalLayout)

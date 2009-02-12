@@ -15,7 +15,8 @@ class Stats:
 		self.settings = Settings()
 		
 	def onFocus(self):
-		self._updateStats()
+		if self.settings.settings.config['Stats']['AutoRefresh'] is True:
+			self._updateStats()
 		
 	def watchLiveStats(self):
 		self.liveStatsDialog.show()

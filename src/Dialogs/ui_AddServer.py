@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'AddServer.ui'
 #
-# Created: Wed Feb 11 21:25:31 2009
+# Created: Thu Feb 12 15:24:17 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -21,8 +21,7 @@ class Ui_addServerDialog(object):
         self.lblServerIP.setObjectName("lblServerIP")
         self.gridLayout.addWidget(self.lblServerIP, 1, 0, 1, 1)
         self.txtServerIP = QtGui.QLineEdit(addServerDialog)
-        self.txtServerIP.setWindowModality(QtCore.Qt.NonModal)
-        self.txtServerIP.setMaxLength(15)
+        self.txtServerIP.setMaxLength(255)
         self.txtServerIP.setObjectName("txtServerIP")
         self.gridLayout.addWidget(self.txtServerIP, 1, 1, 1, 1)
         self.lblServerPort = QtGui.QLabel(addServerDialog)
