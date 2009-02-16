@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Preferences.ui'
 #
-# Created: Thu Feb 12 15:24:18 2009
+# Created: Sun Feb 15 17:33:01 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -82,7 +82,7 @@ class Ui_PrefWindow(object):
         self.verticalLayout.addLayout(self.horizontalLayout_2)
 
         self.retranslateUi(PrefWindow)
-        self.tbMain.setCurrentIndex(0)
+        self.tbMain.setCurrentIndex(1)
         QtCore.QObject.connect(self.btnCancel, QtCore.SIGNAL("clicked()"), PrefWindow.close)
         QtCore.QMetaObject.connectSlotsByName(PrefWindow)
 
