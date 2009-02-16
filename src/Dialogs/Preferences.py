@@ -30,6 +30,9 @@ class Preferences(QtGui.QDialog, Ui_PrefWindow):
 		self.connect(self.btnSave, QtCore.SIGNAL('clicked()'), self.save)
 		
 	def save(self):
+		"""
+		Saves all the current preferences to Settings
+		"""
 		self.settings.settings.config['Graphs']['GetSet'] = str(self.txtGetsSetsColor.text())
 		self.settings.settings.config['Graphs']['HitMiss'] = str(self.txtHitMissesColor.text())
 		

@@ -6,4 +6,7 @@ class Slabs:
 		self.mainWindow = mainWindow
 		
 	def onFocus(self):
+		"""
+		Event called by MemcachedManager when this tab gains focus
+		"""
 		pass

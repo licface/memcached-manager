@@ -15,13 +15,25 @@ class Stats:
 		self.settings = Settings()
 		
 	def onFocus(self):
+		"""
+		Event called when this tab gains focus
+		"""
 		if self.settings.settings.config['Stats']['AutoRefresh'] is True:
 			self._updateStats()
 		
 	def watchLiveStats(self):
+		"""
+		Display the Live Stats Dialog
+		"""
 		self.liveStatsDialog.show()
 		
 	def _updateStats(self):
+		"""
+		Main Stats update function for the Current Active Cluster.
+		
+		Fires off all the seperate events needed to update each 
+		stats tab and updates the prograss bar
+		"""
 		self.mainWindow.pbStats.setValue(0)
 		if self.mainWindow.currentCluster is not None:
 			stats = self.mainWindow.currentCluster.getStats()
@@ -40,6 +52,9 @@ class Stats:
 			QtGui.QMessageBox.critical(self.mainWindow, "No Cluster Selected", "You do not have an Active Cluster")
 		
 	def _updateCachInfo(self, stats):
+		"""
+		Updates the Cache Info Tab
+		"""
 		self.mainWindow.lblItems.setText(str(stats.getTotalItems()))
 		self.mainWindow.lblCurrentItems.setText(str(stats.getItems()))
 		self.mainWindow.lblConnections.setText(str(stats.getTotalConnections()))
@@ -71,6 +86,9 @@ class Stats:
 		self.mainWindow.lblGetRateAvg.setText("%.2f cache requests/second"% (stats.getGetRateAvg(),))
 		
 	def _updateDiagrams_CacheUsage(self, stats):
+		"""
+		Updates the Cache Usage Diagram
+		"""
 		figure = pyplot.figure(figsize=(3.5,3.5), facecolor='#D4CCBA', edgecolor='#AB9675', dpi=100)
 		totalSpace = stats.getTotalSpace()
 		freeSpace = stats.getFreeSpace()
@@ -118,6 +136,9 @@ class Stats:
 		self.mainWindow.lblCacheUsageGraph.setPixmap(QtGui.QPixmap('CacheUsage.png'))
 		
 	def _updateDiagrams_HitsMisses(self, stats):
+		"""
+		Updates the Hits & Misses Diagram
+		"""
 		figure = pyplot.figure(figsize=(3.5,3.5), facecolor='#D4CCBA', edgecolor='#AB9675')
 		if (stats.getHits() + stats.getMisses()) > 0:
 			hits = float(stats.getHits())/(stats.getHits() + stats.getMisses())*100
@@ -137,6 +158,9 @@ class Stats:
 		self.mainWindow.lblHitsMissesGraph.setPixmap(QtGui.QPixmap('HitsMisses.png'))
 		
 	def _updateDiagrams_GetsSets(self, stats):
+		"""
+		Updates the Gets & Sets Diagram
+		"""
 		figure = pyplot.figure(figsize=(3.5,3.5), facecolor='#D4CCBA', edgecolor='#AB9675')
 		if (stats.getGets() + stats.getSets()) > 0:
 			gets = float(stats.getGets())/(stats.getGets() + stats.getSets())*100
@@ -156,6 +180,9 @@ class Stats:
 		self.mainWindow.lblGetSetGraph.setPixmap(QtGui.QPixmap('GetsSets.png'))
 		
 	def _updateServerInfo(self, stats):
+		"""
+		Updates the Server Info Tab
+		"""
 		#Destroy the Scroll Area
 		self.mainWindow.horizontalLayout_6.removeWidget(self.mainWindow.saServerInfo)
 		QtCore.Qt.WA_DeleteOnClose
