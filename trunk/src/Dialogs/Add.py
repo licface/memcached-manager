@@ -15,6 +15,11 @@ class AddServersClusters(QtGui.QDialog, Ui_AddDialog):
 		self.connect(self.btnAddServer, QtCore.SIGNAL('clicked()'), self.saveServer)
 		
 	def saveCluster(self):
+		"""
+		Adds a new Cluster to the Settings. 
+		Emites savedCluster once done.
+		Saves settings to file as well.
+		"""
 		cluster = Cluster(self.txtClusterName.text())
 		self.settings.servers.addCluster(cluster)
 		self.cbClusters.addItem(self.txtClusterName.text())
@@ -24,6 +29,11 @@ class AddServersClusters(QtGui.QDialog, Ui_AddDialog):
 		self.emit(QtCore.SIGNAL('savedCluster'), cluster)
 	
 	def saveServer(self):
+		"""
+		Addes a new Server to the Settings.
+		Emites savedServer once done.
+		Saves settings to file as well.
+		"""
 		cluster = self.settings.servers.getCluster(self.cbClusters.currentText())
 		address = self.txtServerAddress.text()
 		port = self.txtServerPort.text()
@@ -39,6 +49,9 @@ class AddServersClusters(QtGui.QDialog, Ui_AddDialog):
 		self.emit(QtCore.SIGNAL('savedServer'), cluster, server)
 		
 	def updateClusters(self):
+		"""
+		Updates the Cluster Combo Box with the clusters from Settings
+		"""
 		self.cbClusters.clear()
 		clusters = self.settings.servers.getClusters()
 		for cluster in clusters:

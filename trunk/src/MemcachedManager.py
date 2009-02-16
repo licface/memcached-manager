@@ -76,6 +76,12 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.treeCMCluster.addAction(self.treeCMClusterActions['makeActive'])
 			
 	def mainTabChanged(self, tab):
+		"""
+		Signal Capture for when the Main set of tabs change.
+		
+		This is used to cann an onFocus even for each tab 
+		allowing them to update data if needed or preferances saying to. 
+		"""
 		if tab.objectName() == 'Stats':
 			self.Stats.onFocus()
 		elif tab.objectName() == 'SKInfo':
@@ -84,19 +90,36 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 			self.ManagementTasks.onFocus()
 
 	def displayTreeContextMenu(self, point):
+		"""
+		Starts of the context menu for the Tree
+		"""
 		#self.treeCluster.indexAt(point)
 		self.treeCMServer.popup(QtGui.QCursor.pos())
 	
 	def displayAdd(self):
+		"""
+		Displays the Add Server/Cluster Dialog when the Signal 
+		is emited from Buttons or Actions.
+		"""
 		self.addDialog.show()
 		
 	def displayPreferences(self):
+		"""
+		Displays the Preferences Dialog when the Signal is 
+		emited from Buttons or Actions.
+		"""
 		self.preferencesDialog.show()
 		
 	def save(self):
+		"""
+		Saves your Preferences and Servers/Clusters.
+		"""
 		self.settings.save()
 		
 	def addCluster(self, cluster):
+		"""
+		Adds a Cluster to the Tree View and Menu System.
+		"""
 		items = cluster.menuItems
 		items['menu'] = self.menu_Servers.addMenu(cluster.name)
 		items['actions']['set'] = QtGui.QAction(self)
@@ -136,6 +159,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		cluster.initTreeView(self.treeCluster)
 			
 	def deleteCluster(self):
+		"""
+		Deletes a Cluster and its Servers from the Tree View and Menu
+		"""
 		action = self.sender()
 		cluster = self.settings.servers.getClusterByMenuItem(action)
 		if cluster is not None:
@@ -145,21 +171,33 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.settings.servers.save()
 			
 	def setCluster(self):
+		"""
+		Sets the Current Active Cluster when a signal is emited from the Menu
+		"""
 		action = self.sender()
 		cluster = self.settings.servers.getClusterByMenuItem(action)
 		if cluster is not None:
 			self.makeClusterActive(cluster)
 			
 	def setClusterByTree(self, treeItem, column, *args, **kargs):
+		"""
+		Sets the Current Active Cluster when a signal is emited from the Tree View
+		"""
 		for cluster in self.settings.servers.getClusters():
 			if cluster.treeItem == treeItem:
 				self.makeClusterActive(cluster)
 			
 	def makeClusterActive(self, cluster):
+		"""
+		Sets the Current Active Cluster and updates the title of the window to reflex this.
+		"""
 		self.currentCluster = cluster
 		self.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Memcached Manager ("+ str(self.currentCluster.name) +")", None, QtGui.QApplication.UnicodeUTF8))
 		
 	def addServer(self, cluster, server):
+		"""
+		Adds a Server to a Cluster in the Tree View and Menu
+		"""
 		items = server.menuItems
 		items['menu'] = cluster.menuItems['servers'].addMenu(server.name)
 		items['actions']['delete'] = QtGui.QAction(self)
@@ -171,6 +209,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.connect(items['actions']['delete'], QtCore.SIGNAL("triggered()"), self.deleteServer)
 		
 	def deleteServer(self):
+		"""
+		Delete a Server from the Menu and Tree View
+		"""
 		action = self.sender()
 		server = self.settings.servers.getServerByMenuItem(action)
 		server.delete()

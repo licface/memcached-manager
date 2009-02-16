@@ -10,9 +10,15 @@ class ManagementTasks:
 		self.mainWindow.connect(self.mainWindow.btnKeySearch, QtCore.SIGNAL("clicked()"), self.keySearch)
 		
 	def onFocus(self):
+		"""
+		Event called by MemcachedManager when this tab gains focus
+		"""
 		pass
 		
 	def deleteKeys(self):
+		"""
+		Deletes a key(s) from the Current Active Cluster 
+		"""
 		value = self.mainWindow.txtCacheKeys.text()
 		if self.mainWindow.currentCluster is not None:
 			self.mainWindow.currentCluster.deleteKey(value)
@@ -21,6 +27,9 @@ class ManagementTasks:
 			QtGui.QMessageBox.critical(self.mainWindow, "Not Cluster Selected", "You do not have an Active Cluster")
 	
 	def flushServers(self):
+		"""
+		Flush all Keys from the Current Active Cluster
+		"""
 		if self.mainWindow.currentCluster is not None:
 			self.mainWindow.currentCluster.flushKeys()
 			QtGui.QMessageBox.information(self.mainWindow, "Cache Keys Flushed", "Your keys have been flushed")
@@ -28,6 +37,11 @@ class ManagementTasks:
 			QtGui.QMessageBox.critical(self.mainWindow, "Not Cluster Selected", "You do not have an Active Cluster")
 	
 	def keySearch(self):
+		"""
+		Preform a Key Search
+		
+		This is still under development
+		"""
 		#pBar = pbKeySearch
 		#RegEx = cbRegEx
 		#Text = txtSearchKey
