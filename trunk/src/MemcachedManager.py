@@ -141,6 +141,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		if cluster is not None:
 			self.settings.servers.deleteCluster(cluster)
 			
+		self.addDialog.updateClusters()
+		self.settings.servers.save()
+			
 	def setCluster(self):
 		action = self.sender()
 		cluster = self.settings.servers.getClusterByMenuItem(action)
@@ -171,6 +174,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		action = self.sender()
 		server = self.settings.servers.getServerByMenuItem(action)
 		server.delete()
+		self.settings.servers.save()
 		
 if __name__ == '__main__':
 	app = QtGui.QApplication(sys.argv)
