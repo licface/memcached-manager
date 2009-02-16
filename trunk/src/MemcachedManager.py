@@ -27,7 +27,7 @@ from PyQt4 import QtGui
 from PyQt4 import QtCore
 from Tabs import ManagementTasks, Slabs, Stats
 from ui_MainWindow import Ui_MainWindow
-from Dialogs import AddServer, AddCluster, Preferences
+from Dialogs import Preferences, Add
 import sys
 from Settings import Settings
 
@@ -39,19 +39,15 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.Slabs = Slabs.Slabs(self)
 		self.Stats = Stats.Stats(self)
 		
-		self.addServerDialog = AddServer.AddServer()
-		self.addClusterDialog = AddCluster.AddCluster()
+		self.addDialog = Add.AddServersClusters()
 		self.preferencesDialog = Preferences.Preferences()
 		self.settings = Settings()
 		
-		self.connect(self.actionAddServer, QtCore.SIGNAL("triggered()"), self.displayAddServer)
-		self.connect(self.actionAddCluster, QtCore.SIGNAL("triggered()"), self.displayAddCluster)
-		self.connect(self.btnAddServer, QtCore.SIGNAL("clicked()"), self.displayAddServer)
-		self.connect(self.btnAddCluster, QtCore.SIGNAL("clicked()"), self.displayAddCluster)
-		self.connect(self.addServerDialog, QtCore.SIGNAL('saved'), self.addServer)
-		self.connect(self.addClusterDialog, QtCore.SIGNAL('saved'), self.addCluster)
+		self.connect(self.actionAddClusterServer, QtCore.SIGNAL("triggered()"), self.displayAdd)
+		self.connect(self.btnAddClusterServer, QtCore.SIGNAL("clicked()"), self.displayAdd)
+		self.connect(self.addDialog, QtCore.SIGNAL('savedServer'), self.addServer)
+		self.connect(self.addDialog, QtCore.SIGNAL('savedCluster'), self.addCluster)
 		
-		self.addServerDialog.connect(self.addClusterDialog, QtCore.SIGNAL('saved'), self.addServerDialog.addCluster)
 		self.connect(self.actionSave, QtCore.SIGNAL('triggered()'), self.save)
 		self.connect(self.actionPreferences, QtCore.SIGNAL('triggered()'), self.displayPreferences)
 		self.connect(self.tabsMain, QtCore.SIGNAL('currentChanged(QWidget*)'), self.mainTabChanged)
@@ -91,14 +87,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		#self.treeCluster.indexAt(point)
 		self.treeCMServer.popup(QtGui.QCursor.pos())
 	
-	def displayAddCluster(self):
-		self.addServerDialog.close()
-		self.addClusterDialog.show()
-		
-	def displayAddServer(self):
-		self.addClusterDialog.close()
-		self.addServerDialog.show()
-		self.addServerDialog.updateClusters()
+	def displayAdd(self):
+		self.addDialog.show()
 		
 	def displayPreferences(self):
 		self.preferencesDialog.show()
@@ -134,7 +124,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		items['servers'].addAction(items['actions']['add'])
 		items['servers'].addSeparator()
 		
-		self.connect(items['actions']['add'], QtCore.SIGNAL("triggered()"), self.displayAddServer)
+		self.connect(items['actions']['add'], QtCore.SIGNAL("triggered()"), self.displayAdd)
 		self.connect(items['actions']['delete'], QtCore.SIGNAL("triggered()"), self.deleteCluster)
 		self.connect(items['actions']['set'], QtCore.SIGNAL("triggered()"), self.setCluster)
 		

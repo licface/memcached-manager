@@ -56,16 +56,9 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout" >
         <item>
-         <widget class="QPushButton" name="btnAddServer" >
+         <widget class="QPushButton" name="btnAddClusterServer" >
           <property name="text" >
-           <string>Add Server</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnAddCluster" >
-          <property name="text" >
-           <string>Add Cluster</string>
+           <string>Add Cluster and/or Server</string>
           </property>
          </widget>
         </item>
@@ -601,8 +594,8 @@ p, li { white-space: pre-wrap; }
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>277</width>
-                 <height>359</height>
+                 <width>128</width>
+                 <height>84</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout" >
@@ -950,21 +943,20 @@ p, li { white-space: pre-wrap; }
     <property name="title" >
      <string>&amp;Servers</string>
     </property>
-    <addaction name="actionAddServer" />
-    <addaction name="actionAddCluster" />
+    <addaction name="actionAddClusterServer" />
     <addaction name="separator" />
    </widget>
    <addaction name="menuFile" />
    <addaction name="menu_Servers" />
   </widget>
   <widget class="QStatusBar" name="statusbar" />
-  <action name="actionAddServer" >
+  <action name="actionAddClusterServer" >
    <property name="icon" >
     <iconset>
      <normaloff>Icons/Add.png</normaloff>Icons/Add.png</iconset>
    </property>
    <property name="text" >
-    <string>&amp;Add Server</string>
+    <string>&amp;Add Cluster and/or Server</string>
    </property>
   </action>
   <action name="actionSave" >

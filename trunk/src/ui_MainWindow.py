@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Thu Feb 12 15:24:17 2009
+# Created: Sun Feb 15 17:33:01 2009
 #      by: PyQt4 UI code generator 4.4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -36,12 +36,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.addWidget(self.treeCluster)
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.btnAddServer = QtGui.QPushButton(self.centralwidget)
-        self.btnAddServer.setObjectName("btnAddServer")
-        self.horizontalLayout.addWidget(self.btnAddServer)
-        self.btnAddCluster = QtGui.QPushButton(self.centralwidget)
-        self.btnAddCluster.setObjectName("btnAddCluster")
-        self.horizontalLayout.addWidget(self.btnAddCluster)
+        self.btnAddClusterServer = QtGui.QPushButton(self.centralwidget)
+        self.btnAddClusterServer.setObjectName("btnAddClusterServer")
+        self.horizontalLayout.addWidget(self.btnAddClusterServer)
         self.verticalLayout_5.addLayout(self.horizontalLayout)
         self.horizontalLayout_5.addLayout(self.verticalLayout_5)
         self.tabsMain = QtGui.QTabWidget(self.centralwidget)
@@ -275,7 +272,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtGui.QWidget(self.scrollArea)
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 277, 359))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 128, 84))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout = QtGui.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -436,11 +433,11 @@ class Ui_MainWindow(object):
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-        self.actionAddServer = QtGui.QAction(MainWindow)
+        self.actionAddClusterServer = QtGui.QAction(MainWindow)
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("Icons/Add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.actionAddServer.setIcon(icon1)
-        self.actionAddServer.setObjectName("actionAddServer")
+        self.actionAddClusterServer.setIcon(icon1)
+        self.actionAddClusterServer.setObjectName("actionAddClusterServer")
         self.actionSave = QtGui.QAction(MainWindow)
         self.actionSave.setObjectName("actionSave")
         self.actionQuit = QtGui.QAction(MainWindow)
@@ -456,8 +453,7 @@ class Ui_MainWindow(object):
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionSave)
         self.menuFile.addAction(self.actionQuit)
-        self.menu_Servers.addAction(self.actionAddServer)
-        self.menu_Servers.addAction(self.actionAddCluster)
+        self.menu_Servers.addAction(self.actionAddClusterServer)
         self.menu_Servers.addSeparator()
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menu_Servers.menuAction())
@@ -471,8 +467,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Memcached Manager", None, QtGui.QApplication.UnicodeUTF8))
         self.treeCluster.headerItem().setText(0, QtGui.QApplication.translate("MainWindow", "Clusters", None, QtGui.QApplication.UnicodeUTF8))
-        self.btnAddServer.setText(QtGui.QApplication.translate("MainWindow", "Add Server", None, QtGui.QApplication.UnicodeUTF8))
-        self.btnAddCluster.setText(QtGui.QApplication.translate("MainWindow", "Add Cluster", None, QtGui.QApplication.UnicodeUTF8))
+        self.btnAddClusterServer.setText(QtGui.QApplication.translate("MainWindow", "Add Cluster and/or Server", None, QtGui.QApplication.UnicodeUTF8))
         self.gbClearKey.setTitle(QtGui.QApplication.translate("MainWindow", "Manage Cache", None, QtGui.QApplication.UnicodeUTF8))
         self.lblCacheKeys.setText(QtGui.QApplication.translate("MainWindow", "Cache Key(s)", None, QtGui.QApplication.UnicodeUTF8))
         self.txtCacheKeys.setToolTip(QtGui.QApplication.translate("MainWindow", "Seperate Keys with \';\'", None, QtGui.QApplication.UnicodeUTF8))
@@ -581,7 +576,7 @@ class Ui_MainWindow(object):
         self.tabsMain.setTabToolTip(self.tabsMain.indexOf(self.Stats), QtGui.QApplication.translate("MainWindow", "Memcached Server Stats", None, QtGui.QApplication.UnicodeUTF8))
         self.menuFile.setTitle(QtGui.QApplication.translate("MainWindow", "&File", None, QtGui.QApplication.UnicodeUTF8))
         self.menu_Servers.setTitle(QtGui.QApplication.translate("MainWindow", "&Servers", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionAddServer.setText(QtGui.QApplication.translate("MainWindow", "&Add Server", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionAddClusterServer.setText(QtGui.QApplication.translate("MainWindow", "&Add Cluster and/or Server", None, QtGui.QApplication.UnicodeUTF8))
         self.actionSave.setText(QtGui.QApplication.translate("MainWindow", "Sa&ve", None, QtGui.QApplication.UnicodeUTF8))
         self.actionQuit.setText(QtGui.QApplication.translate("MainWindow", "&Quit", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAddCluster.setText(QtGui.QApplication.translate("MainWindow", "Add &Cluster", None, QtGui.QApplication.UnicodeUTF8))
