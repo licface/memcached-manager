@@ -19,6 +19,80 @@
    <iconset>
     <normaloff>Icons/Globe.png</normaloff>Icons/Globe.png</iconset>
   </property>
+  <property name="styleSheet" >
+   <string notr="true" >QLineEdit, QProgressBar, QPushButton, QGroupBox {
+	border-radius: 4px;
+	padding:2px;
+}
+QProgressBar {
+	border-color:#000;
+	text-align:center;
+}
+QPushButton {
+	background-color: rgb(77, 77, 77);
+	color:#fff;
+	border: 1px #fff solid;
+	border-style:outset;
+}
+QMainWindow {
+	background-color:#222;
+	color: #fff;
+}
+QLineEdit {
+	color: #fff;
+	background-color: #666;
+	border: 1px #BDBDBD solid;
+	border-style:outset;
+}
+QGroupBox {
+	border: 1px solid #bdbdbd;
+	margin-top:5px;
+}
+QGroupBox:title{
+	top:-7px;
+	left:15px;
+	color:#fff;
+}
+QTabBar::tab {
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+								stop: 0 #333333, stop: 1.0 #404040, stop: 1.0 #333333);
+	border: 2px #484848 solid;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	min-width: 8ex;
+	border-style:outset;
+	color:#fff;
+	padding-left: 4px;
+	padding-right: 4px;
+	margin-right: 2px;
+}
+QTabBar::tab:selected{
+	border-bottom-color: #333333;
+}
+QTabBar::tab:!selected{
+	margin-top: 2px;
+}
+QTabWidget::pane  {
+	border: 1px solid #484848;
+}
+QTabWidget QStackedWidget {
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+								stop: 0 #333333, stop: 1.0 #222222);
+}
+QTabWidget::tab-bar {
+	left: 5px;
+}
+QLabel, QCheckBox {
+	color: #fff;
+}
+QScrollArea QWidget#scrollAreaWidgetContents_2 {
+	background-color:  #C7C7C7;
+	color:  #ffffff;
+}
+QScrollArea QLabel{
+	color:#000;
+}</string>
+  </property>
   <widget class="QWidget" name="centralwidget" >
    <layout class="QHBoxLayout" name="horizontalLayout_5" >
     <item>
@@ -78,7 +152,7 @@
        <string/>
       </property>
       <property name="currentIndex" >
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="MTasks" >
        <attribute name="title" >
@@ -249,9 +323,9 @@ p, li { white-space: pre-wrap; }
                <property name="geometry" >
                 <rect>
                  <x>0</x>
-                 <y>0</y>
-                 <width>262</width>
-                 <height>596</height>
+                 <y>-136</y>
+                 <width>266</width>
+                 <height>574</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_3" >
@@ -362,7 +436,7 @@ p, li { white-space: pre-wrap; }
                    <item row="3" column="0" >
                     <widget class="QLabel" name="lblCurrentConnectionsTxt" >
                      <property name="frameShape" >
-                      <enum>QFrame::NoFrame</enum>
+                      <enum>QFrame::StyledPanel</enum>
                      </property>
                      <property name="text" >
                       <string>Current Connections:</string>
@@ -594,8 +668,8 @@ p, li { white-space: pre-wrap; }
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>128</width>
-                 <height>84</height>
+                 <width>1458</width>
+                 <height>398</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout" >
@@ -641,8 +715,8 @@ p, li { white-space: pre-wrap; }
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>165</width>
-                 <height>436</height>
+                 <width>1443</width>
+                 <height>425</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_6" >
