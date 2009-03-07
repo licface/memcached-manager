@@ -66,7 +66,7 @@
        <string/>
       </property>
       <property name="currentIndex" >
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="MTasks" >
        <attribute name="title" >
@@ -215,7 +215,7 @@ p, li { white-space: pre-wrap; }
         <item>
          <widget class="QTabWidget" name="tabsStats" >
           <property name="currentIndex" >
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="CacheInfo" >
            <attribute name="title" >
@@ -238,7 +238,7 @@ p, li { white-space: pre-wrap; }
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>428</width>
+                 <width>382</width>
                  <height>600</height>
                 </rect>
                </property>
