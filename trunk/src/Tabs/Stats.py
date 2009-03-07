@@ -2,6 +2,7 @@ from PyQt4 import QtCore
 from PyQt4 import QtGui
 from matplotlib import pyplot
 import datetime
+import os.path
 from Dialogs import LiveStats
 from Settings import Settings
 
@@ -120,8 +121,8 @@ class Stats:
 		pyplot.pie(values, labels=labels, shadow=True, autopct="%1.1f%%", colors=colors)
 		
 		pyplot.title('Cache Usage')
-		figure.savefig('CacheUsage.png')
-		self.mainWindow.lblCacheUsageGraph.setPixmap(QtGui.QPixmap('CacheUsage.png'))
+		figure.savefig(os.path.join(Settings.getSaveLocation(), 'CacheUsage.png'))
+		self.mainWindow.lblCacheUsageGraph.setPixmap(os.path.join(Settings.getSaveLocation(), 'CacheUsage.png'))
 		
 	def _updateDiagrams_HitsMisses(self, stats):
 		"""
@@ -142,8 +143,8 @@ class Stats:
 		pyplot.gca().text(bar[0].get_x()+bar[0].get_width()/2.0, 1.0*bar[0].get_height(), "%1.2f%%"%(hits,), ha='center', va='bottom')
 		pyplot.gca().text(bar[1].get_x()+bar[1].get_width()/2.0, 1.0*bar[1].get_height(), "%1.2f%%"%(misses,), ha='center', va='bottom')
 		
-		figure.savefig('HitsMisses.png')
-		self.mainWindow.lblHitsMissesGraph.setPixmap(QtGui.QPixmap('HitsMisses.png'))
+		figure.savefig(os.path.join(Settings.getSaveLocation(), 'HitsMisses.png'))
+		self.mainWindow.lblHitsMissesGraph.setPixmap(os.path.join(Settings.getSaveLocation(), 'HitsMisses.png'))
 		
 	def _updateDiagrams_GetsSets(self, stats):
 		"""
@@ -164,8 +165,8 @@ class Stats:
 		pyplot.gca().text(bar[0].get_x()+bar[0].get_width()/2.0, 1.0*bar[0].get_height(), "%1.2f%%"%(gets,), ha='center', va='bottom')
 		pyplot.gca().text(bar[1].get_x()+bar[1].get_width()/2.0, 1.0*bar[1].get_height(), "%1.2f%%"%(sets,), ha='center', va='bottom')
 		
-		figure.savefig('GetsSets.png')
-		self.mainWindow.lblGetSetGraph.setPixmap(QtGui.QPixmap('GetsSets.png'))
+		figure.savefig(os.path.join(Settings.getSaveLocation(), 'GetsSets.png'))
+		self.mainWindow.lblGetSetGraph.setPixmap(os.path.join(Settings.getSaveLocation(), 'GetsSets.png'))
 		
 	def _updateServerInfo(self, stats):
 		"""
