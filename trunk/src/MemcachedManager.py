@@ -44,8 +44,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.settings = Settings()
 		
 		self.connect(self.actionAddClusterServer, QtCore.SIGNAL("triggered()"), self.displayAdd)
-		self.connect(self.btnAddClusterServer, QtCore.SIGNAL("clicked()"), self.displayAdd)
-		self.connect(self.addDialog, QtCore.SIGNAL('savedServer'), self.addServer)
 		self.connect(self.addDialog, QtCore.SIGNAL('savedCluster'), self.addCluster)
 		
 		self.connect(self.actionSave, QtCore.SIGNAL('triggered()'), self.save)
@@ -93,6 +91,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		"""
 		Starts of the context menu for the Tree
 		"""
+		#TODO: Finish Tree Context Menu System
 		#self.treeCluster.indexAt(point)
 		self.treeCMServer.popup(QtGui.QCursor.pos())
 	
@@ -118,43 +117,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		
 	def addCluster(self, cluster):
 		"""
-		Adds a Cluster to the Tree View and Menu System.
+		Adds a Cluster to the Tree View.
 		"""
-		items = cluster.menuItems
-		items['menu'] = self.menu_Servers.addMenu(cluster.name)
-		items['actions']['set'] = QtGui.QAction(self)
-		items['actions']['set'].setText('Make Active')
-		ActiveIcon = QtGui.QIcon()
-		ActiveIcon.addPixmap(QtGui.QPixmap("Icons/Active.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-		items['actions']['set'].setIcon(ActiveIcon)
-		
-		items['menu'].addAction(items['actions']['set'])
-		items['actions']['delete'] = QtGui.QAction(self)
-		items['actions']['delete'].setText('Delete')
-		RemoveIcon = QtGui.QIcon()
-		RemoveIcon.addPixmap(QtGui.QPixmap("Icons/Remove.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-		items['actions']['delete'].setIcon(RemoveIcon)
-		
-		items['menu'].addAction(items['actions']['delete'])
-		items['menu'].addSeparator()
-		items['servers'] = items['menu'].addMenu('Servers')
-		items['actions']['add'] = QtGui.QAction(self)
-		items['actions']['add'].setText('Add Server')
-		AddIcon = QtGui.QIcon()
-		AddIcon.addPixmap(QtGui.QPixmap("Icons/Add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-		items['actions']['add'].setIcon(AddIcon)
-		
-		items['servers'].addAction(items['actions']['add'])
-		items['servers'].addSeparator()
-		
-		self.connect(items['actions']['add'], QtCore.SIGNAL("triggered()"), self.displayAdd)
-		self.connect(items['actions']['delete'], QtCore.SIGNAL("triggered()"), self.deleteCluster)
-		self.connect(items['actions']['set'], QtCore.SIGNAL("triggered()"), self.setCluster)
-		
-		cluster.setMenuItems(items)
-		
-		for server in cluster.getServers():
-			self.addServer(cluster, server)
 		
 		cluster.initTreeView(self.treeCluster)
 			
@@ -162,22 +126,13 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		"""
 		Deletes a Cluster and its Servers from the Tree View and Menu
 		"""
-		action = self.sender()
-		cluster = self.settings.servers.getClusterByMenuItem(action)
-		if cluster is not None:
-			self.settings.servers.deleteCluster(cluster)
+		#action = self.sender()
+		#cluster = self.settings.servers.getClusterByMenuItem(action)
+		#if cluster is not None:
+		#	self.settings.servers.deleteCluster(cluster)
 			
-		self.addDialog.updateClusters()
-		self.settings.servers.save()
-			
-	def setCluster(self):
-		"""
-		Sets the Current Active Cluster when a signal is emited from the Menu
-		"""
-		action = self.sender()
-		cluster = self.settings.servers.getClusterByMenuItem(action)
-		if cluster is not None:
-			self.makeClusterActive(cluster)
+		#self.addDialog.updateClusters()
+		#self.settings.servers.save()
 			
 	def setClusterByTree(self, treeItem, column, *args, **kargs):
 		"""
@@ -193,29 +148,15 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		"""
 		self.currentCluster = cluster
 		self.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Memcached Manager ("+ str(self.currentCluster.name) +")", None, QtGui.QApplication.UnicodeUTF8))
-		
-	def addServer(self, cluster, server):
-		"""
-		Adds a Server to a Cluster in the Tree View and Menu
-		"""
-		items = server.menuItems
-		items['menu'] = cluster.menuItems['servers'].addMenu(server.name)
-		items['actions']['delete'] = QtGui.QAction(self)
-		items['actions']['delete'].setText('Delete')
-		RemoveIcon = QtGui.QIcon()
-		RemoveIcon.addPixmap(QtGui.QPixmap("Icons/Remove.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-		items['actions']['delete'].setIcon(RemoveIcon)
-		items['menu'].addAction(items['actions']['delete'])
-		self.connect(items['actions']['delete'], QtCore.SIGNAL("triggered()"), self.deleteServer)
+
 		
 	def deleteServer(self):
 		"""
-		Delete a Server from the Menu and Tree View
+		Delete a Server from the Tree
 		"""
-		action = self.sender()
-		server = self.settings.servers.getServerByMenuItem(action)
-		server.delete()
-		self.settings.servers.save()
+		#action = self.sender()
+		#server.delete()
+		#self.settings.servers.save()
 		
 if __name__ == '__main__':
 	app = QtGui.QApplication(sys.argv)

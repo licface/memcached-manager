@@ -8,16 +8,6 @@ class Cluster:
 	def __init__(self, name):
 		self.servers = []
 		self.name = name
-		self.menuItems = {
-				 'menu':None, 
-				 'servers':None, 
-				 'actions':{
-							'delete':None, 
-							'add':None,
-							'set':None
-							}
-				 }
-		
 		self.treeItem = None
 		self.treeItemParent = None
 		self.key = md5.new(self.name).hexdigest()
@@ -27,9 +17,6 @@ class Cluster:
 		self.treeItem = QTreeWidgetItem(parent, QStringList(self.name))
 		for server in self.getServers():
 			server.initTreeView()
-		
-	def setMenuItems(self, items):
-		self.menuItems = items
 		
 	def addServer(self, server):
 		self.servers.append(server)
@@ -61,9 +48,6 @@ class Cluster:
 			server.delete()
 		self.servers = []
 			
-		if self.menuItems['menu'] is not None:
-			self.menuItems['menu'].parent().removeAction(self.menuItems['menu'].menuAction())
-			
 		if self.treeItemParent is not None and self.treeItem is not None:
 			self.treeItemParent.removeItemWidget(self.treeItem, 0)
 				
@@ -74,10 +58,17 @@ class Cluster:
 			
 	def deleteKey(self, key):
 		keys = key.split(';')
-		self.getMemcached().delete_multi(keys)
+		mc = self.getMemcached()
+		mc.delete_multi(keys)
+		mc.disconnect_all()
 		
 	def flushKeys(self):
-		self.getMemcached().flush_all()
+		mc = self.getMemcached()
+		mc.flush_all()
+		mc.disconnect_all()
 		
 	def getStats(self):
-		return memcached.Stats.MemcachedStats(self.getMemcached().get_stats())
+		mc = self.getMemcached()
+		stats = memcached.Stats.MemcachedStats(mc.get_stats())
+		mc.disconnect_all()
+		return stats

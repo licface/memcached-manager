@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Sun Feb 15 17:33:01 2009
-#      by: PyQt4 UI code generator 4.4.3
+# Created: Sat Mar  7 11:56:02 2009
+#      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -17,6 +17,78 @@ class Ui_MainWindow(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("Icons/Globe.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
+        MainWindow.setStyleSheet("""QLineEdit, QProgressBar, QPushButton, QGroupBox {
+    border-radius: 4px;
+    padding:2px;
+}
+QProgressBar {
+    border-color:#000;
+    text-align:center;
+}
+QPushButton {
+    background-color: rgb(77, 77, 77);
+    color:#fff;
+    border: 1px #fff solid;
+    border-style:outset;
+}
+QMainWindow {
+    background-color:#222;
+    color: #fff;
+}
+QLineEdit {
+    color: #fff;
+    background-color: #666;
+    border: 1px #BDBDBD solid;
+    border-style:outset;
+}
+QGroupBox {
+    border: 1px solid #bdbdbd;
+    margin-top:5px;
+}
+QGroupBox:title{
+    top:-7px;
+    left:15px;
+    color:#fff;
+}
+QTabBar::tab {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #333333, stop: 1.0 #404040, stop: 1.0 #333333);
+    border: 2px #484848 solid;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    min-width: 8ex;
+    border-style:outset;
+    color:#fff;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-right: 2px;
+}
+QTabBar::tab:selected{
+    border-bottom-color: #333333;
+}
+QTabBar::tab:!selected{
+    margin-top: 2px;
+}
+QTabWidget::pane  {
+    border: 1px solid #484848;
+}
+QTabWidget QStackedWidget {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #333333, stop: 1.0 #222222);
+}
+QTabWidget::tab-bar {
+    left: 5px;
+}
+QLabel, QCheckBox {
+    color: #fff;
+}
+QScrollArea QWidget#scrollAreaWidgetContents_2 {
+    background-color:  #C7C7C7;
+    color:  #ffffff;
+}
+QScrollArea QLabel{
+    color:#000;
+}""")
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayout_5 = QtGui.QHBoxLayout(self.centralwidget)
@@ -119,7 +191,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
         self.scrollAreaWidgetContents_2 = QtGui.QWidget(self.scrollArea_2)
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 262, 596))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, -136, 266, 574))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
         self.verticalLayout_3 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
@@ -170,7 +242,7 @@ class Ui_MainWindow(object):
         self.lblConnections.setObjectName("lblConnections")
         self.gridLayout_3.addWidget(self.lblConnections, 2, 1, 1, 1)
         self.lblCurrentConnectionsTxt = QtGui.QLabel(self.gbTotals)
-        self.lblCurrentConnectionsTxt.setFrameShape(QtGui.QFrame.NoFrame)
+        self.lblCurrentConnectionsTxt.setFrameShape(QtGui.QFrame.StyledPanel)
         self.lblCurrentConnectionsTxt.setObjectName("lblCurrentConnectionsTxt")
         self.gridLayout_3.addWidget(self.lblCurrentConnectionsTxt, 3, 0, 1, 1)
         self.lblCurrentConnections = QtGui.QLabel(self.gbTotals)
@@ -272,7 +344,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtGui.QWidget(self.scrollArea)
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 128, 84))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1458, 398))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout = QtGui.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -296,7 +368,7 @@ class Ui_MainWindow(object):
         self.saServerInfo.setWidgetResizable(True)
         self.saServerInfo.setObjectName("saServerInfo")
         self.scrollAreaWidgetContents_3 = QtGui.QWidget(self.saServerInfo)
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 165, 436))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 1443, 425))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
         self.verticalLayout_6 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
@@ -459,7 +531,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menu_Servers.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabsMain.setCurrentIndex(0)
+        self.tabsMain.setCurrentIndex(2)
         self.tabsStats.setCurrentIndex(0)
         QtCore.QObject.connect(self.actionQuit, QtCore.SIGNAL("activated()"), MainWindow.close)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
