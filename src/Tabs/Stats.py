@@ -95,19 +95,7 @@ class Stats:
 		values = []
 		labels = []
 		colors = []
-		allPossibleColor = [
-						('#CF8442','#824C1D'),
-						('#CF612D','#823410'),
-						
-						('#CF3615','#821D07'),
-						('#CF2937','#82000B'),
-						
-						('#CFA14A','#825A10'),
-						('#CFB248','#82690F'),
-						
-						('#CFC442','#82790B'),
-						('#C0CF46','#75820E')
-						]
+		allPossibleColor = self.settings.settings.config['Graphs']['Pie']
 		colorPos = 0
 		count = 0
 		for server in stats.getServers():

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'Preferences.ui'
+# Form implementation generated from reading ui file './Dialogs/Preferences.ui'
 #
-# Created: Sun Feb 15 17:33:01 2009
-#      by: PyQt4 UI code generator 4.4.3
+# Created: Sat Mar  7 11:56:02 2009
+#      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
 
