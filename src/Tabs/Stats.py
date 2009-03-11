@@ -4,7 +4,7 @@ from matplotlib import pyplot
 import datetime
 import os.path
 from Dialogs import LiveStats
-from Settings import Settings
+import Settings
 
 class Stats:
 	def __init__(self, mainWindow):
@@ -13,7 +13,7 @@ class Stats:
 		self.mainWindow.connect(self.mainWindow.btnRefresh, QtCore.SIGNAL('clicked()'), self._updateStats)
 		
 		self.liveStatsDialog = LiveStats.Dialog()
-		self.settings = Settings()
+		self.settings = Settings.Settings()
 		
 	def onFocus(self):
 		"""
@@ -121,8 +121,9 @@ class Stats:
 		pyplot.pie(values, labels=labels, shadow=True, autopct="%1.1f%%", colors=colors)
 		
 		pyplot.title('Cache Usage')
-		figure.savefig(os.path.join(Settings.getSaveLocation(), 'CacheUsage.png'))
-		self.mainWindow.lblCacheUsageGraph.setPixmap(os.path.join(Settings.getSaveLocation(), 'CacheUsage.png'))
+		path = os.path.join(Settings.getSaveLocation(), 'CacheUsage.png')
+		figure.savefig(path)
+		self.mainWindow.lblCacheUsageGraph.setPixmap(QtGui.QPixmap(path))
 		
 	def _updateDiagrams_HitsMisses(self, stats):
 		"""
@@ -142,9 +143,10 @@ class Stats:
 		pyplot.gca().set_xticks((0.5,1.25))
 		pyplot.gca().text(bar[0].get_x()+bar[0].get_width()/2.0, 1.0*bar[0].get_height(), "%1.2f%%"%(hits,), ha='center', va='bottom')
 		pyplot.gca().text(bar[1].get_x()+bar[1].get_width()/2.0, 1.0*bar[1].get_height(), "%1.2f%%"%(misses,), ha='center', va='bottom')
-		
-		figure.savefig(os.path.join(Settings.getSaveLocation(), 'HitsMisses.png'))
-		self.mainWindow.lblHitsMissesGraph.setPixmap(os.path.join(Settings.getSaveLocation(), 'HitsMisses.png'))
+
+		path = os.path.join(Settings.getSaveLocation(), 'HitsMisses.png')
+		figure.savefig(path)
+		self.mainWindow.lblHitsMissesGraph.setPixmap(QtGui.QPixmap(path))
 		
 	def _updateDiagrams_GetsSets(self, stats):
 		"""
@@ -164,9 +166,10 @@ class Stats:
 		pyplot.gca().set_xticks((0.5,1.25))
 		pyplot.gca().text(bar[0].get_x()+bar[0].get_width()/2.0, 1.0*bar[0].get_height(), "%1.2f%%"%(gets,), ha='center', va='bottom')
 		pyplot.gca().text(bar[1].get_x()+bar[1].get_width()/2.0, 1.0*bar[1].get_height(), "%1.2f%%"%(sets,), ha='center', va='bottom')
-		
-		figure.savefig(os.path.join(Settings.getSaveLocation(), 'GetsSets.png'))
-		self.mainWindow.lblGetSetGraph.setPixmap(os.path.join(Settings.getSaveLocation(), 'GetsSets.png'))
+
+		path = os.path.join(Settings.getSaveLocation(), 'GetsSets.png')
+		figure.savefig(path)
+		self.mainWindow.lblGetSetGraph.setPixmap(QtGui.QPixmap(path))
 		
 	def _updateServerInfo(self, stats):
 		"""

@@ -145,31 +145,46 @@ class MemcachedStats(object):
         rate = 0
         for server in self.servers:
             rate += server.getRequestRate()
-        return rate/len(self.servers)
+        if rate > 0:
+            return rate/len(self.servers)
+        else:
+            return 0
     
     def getHitRateAvg(self):
         rate = 0
         for server in self.servers:
             rate += server.getHitRate()
-        return rate/len(self.servers)
+        if rate > 0:
+            return rate/len(self.servers)
+        else:
+            return 0
     
     def getMissRateAvg(self):
         rate = 0
         for server in self.servers:
             rate += server.getMissRate()
-        return rate/len(self.servers)
+        if rate > 0:
+            return rate/len(self.servers)
+        else:
+            return 0
     
     def getSetRateAvg(self):
         rate = 0
         for server in self.servers:
             rate += server.getSetRate()
-        return rate/len(self.servers)
+        if rate > 0:
+            return rate/len(self.servers)
+        else:
+            return 0
     
     def getGetRateAvg(self):
         rate = 0
         for server in self.servers:
             rate += server.getGetRate()
-        return rate/len(self.servers)
+        if rate > 0:
+            return rate/len(self.servers)
+        else:
+            return 0
     
     def getServers(self):
         return self.servers
