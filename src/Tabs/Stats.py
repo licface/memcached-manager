@@ -1,5 +1,7 @@
 from PyQt4 import QtCore
 from PyQt4 import QtGui
+import matplotlib
+matplotlib.use('QT4Agg')
 from matplotlib import pyplot
 import datetime
 import os.path
