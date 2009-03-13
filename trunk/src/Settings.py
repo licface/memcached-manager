@@ -11,7 +11,13 @@ def getSaveLocation():
 			os.makedirs(path, 0755)
 		return path
 	except Exception, e:
-		return os.getcwd()
+		try:
+			path = os.path.join(os.environ.get('HOMEPATH', os.getcwd()), '.MemcachedManager')
+			if not os.path.exists(path):
+				os.makedirs(path, 0755)
+			return path
+		except Exception, e:
+			return os.getcwd()
 
 class Settings:
 	settings = None
