@@ -62,16 +62,19 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		
 		self.treeCMServer = QtGui.QMenu()
 		self.treeCMServerActions = {"deleteServer": QtGui.QAction(self)}
-		self.treeCMServerActions['deleteServer'].setText("Delete Server")
+		self.treeCMServerActions['deleteServer'].setText("Delete")
 		self.treeCMServer.addAction(self.treeCMServerActions['deleteServer'])
+		self.connect(self.treeCMServerActions['deleteServer'], QtCore.SIGNAL("triggered()"), self.deleteServer)
 
 
 		self.treeCMCluster = QtGui.QMenu()
 		self.treeCMClusterActions = {"deleteCluster": QtGui.QAction(self), "makeActive": QtGui.QAction(self)}
-		self.treeCMClusterActions['deleteCluster'].setText("Delete Cluster")
+		self.treeCMClusterActions['deleteCluster'].setText("Delete")
 		self.treeCMCluster.addAction(self.treeCMClusterActions['deleteCluster'])
 		self.treeCMClusterActions['makeActive'].setText("Make Active")
 		self.treeCMCluster.addAction(self.treeCMClusterActions['makeActive'])
+		self.connect(self.treeCMClusterActions['deleteCluster'], QtCore.SIGNAL("triggered()"), self.deleteCluster)
+		self.connect(self.treeCMClusterActions['makeActive'], QtCore.SIGNAL("triggered()"), self.setClusterByContextMenu)
 			
 	def mainTabChanged(self, tab):
 		"""
@@ -92,8 +95,18 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		Starts of the context menu for the Tree
 		"""
 		#TODO: Finish Tree Context Menu System
-		#self.treeCluster.indexAt(point)
-		self.treeCMServer.popup(QtGui.QCursor.pos())
+		#print self.treeCluster.indexAt(point)
+		found = False
+		for cluster in self.settings.servers.getClusters():
+			if cluster.treeItem == self.treeCluster.currentItem():
+				self.treeCMCluster.popup(QtGui.QCursor.pos())
+				found = True
+				break
+		if found is False:
+			for server in self.settings.servers.getAllServers():
+				if server.tree == self.treeCluster.currentItem():
+					self.treeCMServer.popup(QtGui.QCursor.pos())
+					break
 	
 	def displayAdd(self):
 		"""
@@ -119,20 +132,18 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		"""
 		Adds a Cluster to the Tree View.
 		"""
-		
 		cluster.initTreeView(self.treeCluster)
 			
 	def deleteCluster(self):
 		"""
 		Deletes a Cluster and its Servers from the Tree View and Menu
 		"""
-		#action = self.sender()
-		#cluster = self.settings.servers.getClusterByMenuItem(action)
-		#if cluster is not None:
-		#	self.settings.servers.deleteCluster(cluster)
-			
-		#self.addDialog.updateClusters()
-		#self.settings.servers.save()
+		for cluster in self.settings.servers.getClusters():
+			if cluster.treeItem == self.treeCluster.currentItem():
+				self.settings.servers.deleteCluster(cluster)
+				self.addDialog.updateClusters()
+				self.settings.servers.save()
+				break
 			
 	def setClusterByTree(self, treeItem, column, *args, **kargs):
 		"""
@@ -141,6 +152,13 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		for cluster in self.settings.servers.getClusters():
 			if cluster.treeItem == treeItem:
 				self.makeClusterActive(cluster)
+				break
+		
+	def setClusterByContextMenu(self):
+		for cluster in self.settings.servers.getClusters():
+			if cluster.treeItem == self.treeCluster.currentItem():
+				self.makeClusterActive(cluster)
+				break
 			
 	def makeClusterActive(self, cluster):
 		"""
@@ -154,9 +172,12 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		"""
 		Delete a Server from the Tree
 		"""
-		#action = self.sender()
-		#server.delete()
-		#self.settings.servers.save()
+		for server in self.settings.servers.getAllServers():
+			if server.tree == self.treeCluster.currentItem():
+				server.delete()
+				self.settings.servers.save()
+				break
+		
 		
 if __name__ == '__main__':
 	app = QtGui.QApplication(sys.argv)
