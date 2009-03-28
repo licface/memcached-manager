@@ -94,7 +94,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		"""
 		Starts of the context menu for the Tree
 		"""
-		#TODO: Finish Tree Context Menu System
 		#print self.treeCluster.indexAt(point)
 		found = False
 		for cluster in self.settings.servers.getClusters():
