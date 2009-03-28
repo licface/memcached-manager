@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Sat Mar  7 12:20:31 2009
+# Created: Wed Mar 25 19:45:40 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,7 +12,7 @@ from PyQt4 import QtCore, QtGui
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(669, 591)
+        MainWindow.resize(722, 591)
         MainWindow.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("Icons/Globe.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -110,7 +110,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
         self.scrollAreaWidgetContents_2 = QtGui.QWidget(self.scrollArea_2)
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 382, 600))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 371, 620))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
         self.verticalLayout_3 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
@@ -161,7 +161,6 @@ class Ui_MainWindow(object):
         self.lblConnections.setObjectName("lblConnections")
         self.gridLayout_3.addWidget(self.lblConnections, 2, 1, 1, 1)
         self.lblCurrentConnectionsTxt = QtGui.QLabel(self.gbTotals)
-        self.lblCurrentConnectionsTxt.setFrameShape(QtGui.QFrame.StyledPanel)
         self.lblCurrentConnectionsTxt.setObjectName("lblCurrentConnectionsTxt")
         self.gridLayout_3.addWidget(self.lblCurrentConnectionsTxt, 3, 0, 1, 1)
         self.lblCurrentConnections = QtGui.QLabel(self.gbTotals)
@@ -263,7 +262,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtGui.QWidget(self.scrollArea)
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 397, 360))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 386, 335))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout = QtGui.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -287,7 +286,7 @@ class Ui_MainWindow(object):
         self.saServerInfo.setWidgetResizable(True)
         self.saServerInfo.setObjectName("saServerInfo")
         self.scrollAreaWidgetContents_3 = QtGui.QWidget(self.saServerInfo)
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 1443, 436))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 371, 453))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
         self.verticalLayout_6 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
@@ -414,7 +413,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5.addWidget(self.tabsMain)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 669, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 722, 22))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtGui.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
@@ -450,7 +449,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menu_Servers.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabsMain.setCurrentIndex(0)
+        self.tabsMain.setCurrentIndex(2)
         self.tabsStats.setCurrentIndex(0)
         QtCore.QObject.connect(self.actionQuit, QtCore.SIGNAL("activated()"), MainWindow.close)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
