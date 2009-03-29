@@ -66,6 +66,7 @@ class Stats:
 		self.mainWindow.lblMisses.setText(str(stats.getMisses()))
 		self.mainWindow.lblGets.setText(str(stats.getGets()))
 		self.mainWindow.lblSets.setText(str(stats.getSets()))
+		self.mainWindow.lblThreads.setText(str(stats.getThreads()))
 		
 		tSpace = stats.getSpaceString(stats.getTotalSpace())
 		self.mainWindow.lblSpace.setText(tSpace)
@@ -298,6 +299,17 @@ class Stats:
 			lblServerXConnections.setObjectName("lblServer"+ hostStr +"Connections")
 			lblServerXConnections.setText(str(s.getConnections()))
 			gridLayout_5.addWidget(lblServerXConnections, itemCounter, 1, 1, 1)
+			itemCounter += 1
+			
+			#Threads
+			lblServerXThreadsTxt = QtGui.QLabel(gbServerX)
+			lblServerXThreadsTxt.setObjectName("lblServer"+ hostStr +"ThreadsTxt")
+			lblServerXThreadsTxt.setText('Threads:')
+			gridLayout_5.addWidget(lblServerXThreadsTxt, itemCounter, 0, 1, 1)
+			lblServerXThreads = QtGui.QLabel(gbServerX)
+			lblServerXThreads.setObjectName("lblServer"+ hostStr +"Connections")
+			lblServerXThreads.setText(str(s.getThreads()))
+			gridLayout_5.addWidget(lblServerXThreads, itemCounter, 1, 1, 1)
 			itemCounter += 1
 			
 			#Hits
