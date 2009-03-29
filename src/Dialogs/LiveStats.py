@@ -34,7 +34,6 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		self.currentCluster = cluster
 		
 	def startMonitor(self):
-		print "Start Monitor"
 		self.monitor = True
 		self.threadInterupt = False
 		if self.thread is None:
@@ -43,7 +42,6 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 			self.thread.start()
 	
 	def stopMonitor(self):
-		print "Stop Monitor"
 		self.monitor = False
 		self.threadInterupt = True
 		self.stats = []
@@ -55,7 +53,6 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 			self.startMonitor()
 			
 	def updateGraphs(self):
-		print 'Refresh'
 		self.graphConnections()
 		self.graphGetsSets()
 		self.graphHistMisses()
@@ -94,13 +91,78 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		self.lblConnectionsGraph.setPixmap(QtGui.QPixmap(path))
 	
 	def graphGetsSets(self):
-		pass
+		figure = pyplot.figure(figsize=(5.5,2.51), linewidth=2)
+		matplotlib.rc('lines', linewidth=2)
+		matplotlib.rc('font', size=10)
+		
+		y = []
+		legend = ['Gets', 'Sets']
+		for s in self.stats:
+			y.append((s['stats'].getGets(), s['stats'].getSets()))
+			
+		ax = figure.add_subplot(111)
+		ax.plot(y)
+		
+		def format_date(x, pos=None):
+			return self.stats[int(x)]['date'].strftime('%I:%M:%S')
+		ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(format_date))
+		ax.legend(legend, prop=matplotlib.font_manager.FontProperties(size=8))
+		figure.autofmt_xdate()
+		
+		path = os.path.join(Settings.getSaveLocation(), 'ActiveGetsSets.png')
+		figure.savefig(path)
+		self.lblGetsGraph.setPixmap(QtGui.QPixmap(path))
 	
 	def graphHistMisses(self):
-		pass
+		figure = pyplot.figure(figsize=(5.5,2.51), linewidth=2)
+		matplotlib.rc('lines', linewidth=2)
+		matplotlib.rc('font', size=10)
+		
+		y = []
+		legend = ['Hits', 'Misses']
+		for s in self.stats:
+			y.append((s['stats'].getHits(), s['stats'].getMisses()))
+			
+		ax = figure.add_subplot(111)
+		ax.plot(y)
+		
+		def format_date(x, pos=None):
+			return self.stats[int(x)]['date'].strftime('%I:%M:%S')
+		ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(format_date))
+		ax.legend(legend, prop=matplotlib.font_manager.FontProperties(size=8))
+		figure.autofmt_xdate()
+		
+		path = os.path.join(Settings.getSaveLocation(), 'ActiveHitsMisses.png')
+		figure.savefig(path)
+		self.lblHitsMissesGraph.setPixmap(QtGui.QPixmap(path))
 	
 	def graphMemory(self):
-		pass
+		figure = pyplot.figure(figsize=(5.5,2.51), linewidth=2)
+		matplotlib.rc('lines', linewidth=2)
+		matplotlib.rc('font', size=10)
+		
+		y = []
+		legend = ['Free', 'Used']
+		for s in self.stats:
+			y.append((s['stats'].getFreeSpace(), s['stats'].getUsedSpace()))
+			
+		ax = figure.add_subplot(111)
+		ax.plot(y)
+		
+		def format_date(x, pos=None):
+			return self.stats[int(x)]['date'].strftime('%I:%M:%S')
+		
+		def format_size(y, pos=None):
+			return self.stats[0]['stats'].getSpaceString(int(y), length=0)
+		
+		ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(format_date))
+		ax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(format_size))
+		ax.legend(legend, prop=matplotlib.font_manager.FontProperties(size=8))
+		figure.autofmt_xdate()
+		
+		path = os.path.join(Settings.getSaveLocation(), 'ActiveMemory.png')
+		figure.savefig(path)
+		self.lblMemoryGraph.setPixmap(QtGui.QPixmap(path))
 		
 			
 #class Monitor(threading.Thread):

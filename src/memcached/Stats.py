@@ -72,21 +72,28 @@ class MemcachedStats(object):
 		else:
 			return {'b': 0, 'k': 0, 'm': 0, 'g': 0, 't': 0, 'p': 0}
 		
-	def getSpaceString(self, space):
+	def getSpaceString(self, space, length = 6):
 		total = self.calcSpaceBreakdown(space)
 		tStr = ''
+		currentLength = 0
 		if total['p'] != 0:
 			tStr += str(total['p']) +'PB '
-		if total['t'] != 0:
+			currentLength +=1
+		if total['t'] != 0 and length >= currentLength:
 			tStr += str(total['t']) +'TB '
-		if total['g'] != 0:
+			currentLength +=1
+		if total['g'] != 0 and length >= currentLength:
 			tStr += str(total['g']) +'GB '
-		if total['m'] != 0:
+			currentLength +=1
+		if total['m'] != 0 and length >= currentLength:
 			tStr += str(total['m']) +'MB '
-		if total['k'] != 0:
+			currentLength +=1
+		if total['k'] != 0 and length >= currentLength:
 			tStr += str(total['k']) +'KB '
-		if total['b'] != 0:
+			currentLength +=1
+		if total['b'] != 0 and length >= currentLength:
 			tStr += str(total['b']) +'B '
+			currentLength +=1
 			
 		if tStr == '':
 			tStr = '0B'
