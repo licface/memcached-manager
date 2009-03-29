@@ -238,7 +238,7 @@ p, li { white-space: pre-wrap; }
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>371</width>
+                 <width>435</width>
                  <height>620</height>
                 </rect>
                </property>
@@ -263,56 +263,56 @@ p, li { white-space: pre-wrap; }
                      </property>
                     </widget>
                    </item>
-                   <item row="4" column="0" >
+                   <item row="5" column="0" >
                     <widget class="QLabel" name="lblHitsTxt" >
                      <property name="text" >
                       <string>Hits:</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="4" column="1" >
+                   <item row="5" column="1" >
                     <widget class="QLabel" name="lblHits" >
                      <property name="text" >
                       <string>n/a</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="5" column="0" >
+                   <item row="6" column="0" >
                     <widget class="QLabel" name="lblMissesTxt" >
                      <property name="text" >
                       <string>Misses:</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="5" column="1" >
+                   <item row="6" column="1" >
                     <widget class="QLabel" name="lblMisses" >
                      <property name="text" >
                       <string>n/a</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="9" column="0" >
+                   <item row="10" column="0" >
                     <widget class="QLabel" name="lblFreeTxt" >
                      <property name="text" >
                       <string>Free Space:</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="9" column="1" >
+                   <item row="10" column="1" >
                     <widget class="QLabel" name="lblFree" >
                      <property name="text" >
                       <string>n/a</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="10" column="0" >
+                   <item row="11" column="0" >
                     <widget class="QLabel" name="lblUsedTxt" >
                      <property name="text" >
                       <string>Used Space:</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="10" column="1" >
+                   <item row="11" column="1" >
                     <widget class="QLabel" name="lblUsed" >
                      <property name="text" >
                       <string>n/a</string>
@@ -361,43 +361,57 @@ p, li { white-space: pre-wrap; }
                      </property>
                     </widget>
                    </item>
-                   <item row="6" column="0" >
+                   <item row="7" column="0" >
                     <widget class="QLabel" name="lblGetsTxt" >
                      <property name="text" >
                       <string>Gets:</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="6" column="1" >
+                   <item row="7" column="1" >
                     <widget class="QLabel" name="lblGets" >
                      <property name="text" >
                       <string>n/a</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="7" column="0" >
+                   <item row="8" column="0" >
                     <widget class="QLabel" name="lblSetsTxt" >
                      <property name="text" >
                       <string>Sets:</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="7" column="1" >
+                   <item row="8" column="1" >
                     <widget class="QLabel" name="lblSets" >
                      <property name="text" >
                       <string>n/a</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="8" column="0" >
+                   <item row="9" column="0" >
                     <widget class="QLabel" name="lblSpaceTxt" >
                      <property name="text" >
                       <string>Space:</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="8" column="1" >
+                   <item row="9" column="1" >
                     <widget class="QLabel" name="lblSpace" >
+                     <property name="text" >
+                      <string>n/a</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="0" >
+                    <widget class="QLabel" name="lblThreadsTxt" >
+                     <property name="text" >
+                      <string>Total Threads:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="1" >
+                    <widget class="QLabel" name="lblThreads" >
                      <property name="text" >
                       <string>n/a</string>
                      </property>
@@ -579,8 +593,8 @@ p, li { white-space: pre-wrap; }
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>150</width>
-                 <height>91</height>
+                 <width>128</width>
+                 <height>84</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout" >
@@ -626,8 +640,8 @@ p, li { white-space: pre-wrap; }
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>201</width>
-                 <height>453</height>
+                 <width>435</width>
+                 <height>436</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_6" >
@@ -912,7 +926,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>722</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile" >
