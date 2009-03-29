@@ -10,3 +10,6 @@ class Slabs:
 		Event called by MemcachedManager when this tab gains focus
 		"""
 		pass
+	
+	def onClose(self):
+		pass
