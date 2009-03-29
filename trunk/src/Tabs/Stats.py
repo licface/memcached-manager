@@ -28,7 +28,11 @@ class Stats:
 		"""
 		Display the Live Stats Dialog
 		"""
-		self.liveStatsDialog.show()
+		if self.mainWindow.currentCluster is not None:
+			self.liveStatsDialog.setCluster(self.mainWindow.currentCluster)
+			self.liveStatsDialog.show()
+		else:
+			QtGui.QMessageBox.critical(self.mainWindow, "No Cluster Selected", "You do not have an Active Cluster")
 		
 	def _updateStats(self):
 		"""
