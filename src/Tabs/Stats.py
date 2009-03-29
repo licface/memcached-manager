@@ -46,6 +46,7 @@ class Stats:
 		"""
 		self.mainWindow.pbStats.setValue(0)
 		if self.mainWindow.currentCluster is not None:
+			matplotlib.rc('font', size=12)
 			stats = self.mainWindow.currentCluster.getStats()
 			self.mainWindow.pbStats.setValue(10)
 			self._updateCachInfo(stats)
