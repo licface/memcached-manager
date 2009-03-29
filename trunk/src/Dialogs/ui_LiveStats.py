@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file './Dialogs/LiveStats.ui'
 #
-# Created: Sun Mar 29 12:27:48 2009
+# Created: Sun Mar 29 15:52:02 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,14 +12,14 @@ from PyQt4 import QtCore, QtGui
 class Ui_liveStatsDialog(object):
     def setupUi(self, liveStatsDialog):
         liveStatsDialog.setObjectName("liveStatsDialog")
-        liveStatsDialog.resize(650, 453)
+        liveStatsDialog.resize(650, 628)
         self.verticalLayout = QtGui.QVBoxLayout(liveStatsDialog)
         self.verticalLayout.setObjectName("verticalLayout")
         self.scrollArea = QtGui.QScrollArea(liveStatsDialog)
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtGui.QWidget(self.scrollArea)
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 628, 431))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -590, 613, 1196))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_4 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
@@ -28,6 +28,7 @@ class Ui_liveStatsDialog(object):
         self.verticalLayout_3 = QtGui.QVBoxLayout(self.gbConnections)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.lblConnectionsGraph = QtGui.QLabel(self.gbConnections)
+        self.lblConnectionsGraph.setMinimumSize(QtCore.QSize(550, 250))
         self.lblConnectionsGraph.setObjectName("lblConnectionsGraph")
         self.verticalLayout_3.addWidget(self.lblConnectionsGraph)
         self.verticalLayout_4.addWidget(self.gbConnections)
@@ -36,6 +37,7 @@ class Ui_liveStatsDialog(object):
         self.verticalLayout_5 = QtGui.QVBoxLayout(self.gbGetsSets)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.lblGetsGraph = QtGui.QLabel(self.gbGetsSets)
+        self.lblGetsGraph.setMinimumSize(QtCore.QSize(550, 250))
         self.lblGetsGraph.setObjectName("lblGetsGraph")
         self.verticalLayout_5.addWidget(self.lblGetsGraph)
         self.verticalLayout_4.addWidget(self.gbGetsSets)
@@ -44,6 +46,7 @@ class Ui_liveStatsDialog(object):
         self.verticalLayout_7 = QtGui.QVBoxLayout(self.gbHitsMisses)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
         self.lblHitsMissesGraph = QtGui.QLabel(self.gbHitsMisses)
+        self.lblHitsMissesGraph.setMinimumSize(QtCore.QSize(550, 250))
         self.lblHitsMissesGraph.setObjectName("lblHitsMissesGraph")
         self.verticalLayout_7.addWidget(self.lblHitsMissesGraph)
         self.verticalLayout_4.addWidget(self.gbHitsMisses)
@@ -51,9 +54,10 @@ class Ui_liveStatsDialog(object):
         self.gbMemoryUsage.setObjectName("gbMemoryUsage")
         self.verticalLayout_2 = QtGui.QVBoxLayout(self.gbMemoryUsage)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.lblMemoryUsage = QtGui.QLabel(self.gbMemoryUsage)
-        self.lblMemoryUsage.setObjectName("lblMemoryUsage")
-        self.verticalLayout_2.addWidget(self.lblMemoryUsage)
+        self.lblMemoryGraph = QtGui.QLabel(self.gbMemoryUsage)
+        self.lblMemoryGraph.setMinimumSize(QtCore.QSize(550, 250))
+        self.lblMemoryGraph.setObjectName("lblMemoryGraph")
+        self.verticalLayout_2.addWidget(self.lblMemoryGraph)
         self.verticalLayout_4.addWidget(self.gbMemoryUsage)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout.addWidget(self.scrollArea)
@@ -70,5 +74,5 @@ class Ui_liveStatsDialog(object):
         self.gbHitsMisses.setTitle(QtGui.QApplication.translate("liveStatsDialog", "Hits vs. Misses", None, QtGui.QApplication.UnicodeUTF8))
         self.lblHitsMissesGraph.setText(QtGui.QApplication.translate("liveStatsDialog", "Hits vs. Misses Graph", None, QtGui.QApplication.UnicodeUTF8))
         self.gbMemoryUsage.setTitle(QtGui.QApplication.translate("liveStatsDialog", "Memory Usage", None, QtGui.QApplication.UnicodeUTF8))
-        self.lblMemoryUsage.setText(QtGui.QApplication.translate("liveStatsDialog", "Memory Usage Graph", None, QtGui.QApplication.UnicodeUTF8))
+        self.lblMemoryGraph.setText(QtGui.QApplication.translate("liveStatsDialog", "Memory Usage Graph", None, QtGui.QApplication.UnicodeUTF8))
 

@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>650</width>
-    <height>453</height>
+    <height>628</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -22,9 +22,9 @@
       <property name="geometry" >
        <rect>
         <x>0</x>
-        <y>0</y>
-        <width>628</width>
-        <height>431</height>
+        <y>-590</y>
+        <width>613</width>
+        <height>1196</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_4" >
@@ -36,6 +36,12 @@
          <layout class="QVBoxLayout" name="verticalLayout_3" >
           <item>
            <widget class="QLabel" name="lblConnectionsGraph" >
+            <property name="minimumSize" >
+             <size>
+              <width>550</width>
+              <height>250</height>
+             </size>
+            </property>
             <property name="text" >
              <string>Active Connections Graph</string>
             </property>
@@ -52,6 +58,12 @@
          <layout class="QVBoxLayout" name="verticalLayout_5" >
           <item>
            <widget class="QLabel" name="lblGetsGraph" >
+            <property name="minimumSize" >
+             <size>
+              <width>550</width>
+              <height>250</height>
+             </size>
+            </property>
             <property name="text" >
              <string>Gets &amp; Sets Graph</string>
             </property>
@@ -68,6 +80,12 @@
          <layout class="QVBoxLayout" name="verticalLayout_7" >
           <item>
            <widget class="QLabel" name="lblHitsMissesGraph" >
+            <property name="minimumSize" >
+             <size>
+              <width>550</width>
+              <height>250</height>
+             </size>
+            </property>
             <property name="text" >
              <string>Hits vs. Misses Graph</string>
             </property>
@@ -83,7 +101,13 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2" >
           <item>
-           <widget class="QLabel" name="lblMemoryUsage" >
+           <widget class="QLabel" name="lblMemoryGraph" >
+            <property name="minimumSize" >
+             <size>
+              <width>550</width>
+              <height>250</height>
+             </size>
+            </property>
             <property name="text" >
              <string>Memory Usage Graph</string>
             </property>
