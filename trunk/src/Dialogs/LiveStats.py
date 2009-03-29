@@ -62,22 +62,31 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		self.graphMemory()
 			
 	def graphConnections(self):
-		figure = pyplot.figure(figsize=(5.5,2.51), facecolor='#D4CCBA', edgecolor='#AB9675')
+		figure = pyplot.figure(figsize=(5.5,2.51), linewidth=2)
+		matplotlib.rc('lines', linewidth=2)
+		matplotlib.rc('font', size=10)
 		
-		x = []
 		y = []
-		count = 0
+		legend = ['Total']
+		for s in self.stats[0]['stats'].getServers():
+			legend.append(s.getName())
+			
 		for s in self.stats:
-			x.append(count)
-			y.append(s['stats'].getConnections())
-			count += 1
+			values = []
+			values.append(s['stats'].getConnections())
+			for server in s['stats'].getServers():
+				values.append(server.getConnections())
+			y.append(values)
 			
 		ax = figure.add_subplot(111)
-		ax.plot(x,y)
+		#TODO: Added Preference Values for Colors
+		#ax.set_color_cycle(['c', 'm', 'y', 'k'])
+		ax.plot(y)
 		
 		def format_date(x, pos=None):
 			return self.stats[int(x)]['date'].strftime('%I:%M:%S')
 		ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(format_date))
+		ax.legend(legend, prop=matplotlib.font_manager.FontProperties(size=8))
 		figure.autofmt_xdate()
 		
 		path = os.path.join(Settings.getSaveLocation(), 'ActiveConnections.png')
