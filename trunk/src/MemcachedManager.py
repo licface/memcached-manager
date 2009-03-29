@@ -43,6 +43,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.preferencesDialog = Preferences.Preferences()
 		self.settings = Settings()
 		
+		self.connect(self, QtCore.SIGNAL('destroyed(QObject*)'), self.closeAll)
+		
 		self.connect(self.actionAddClusterServer, QtCore.SIGNAL("triggered()"), self.displayAdd)
 		self.connect(self.addDialog, QtCore.SIGNAL('savedCluster'), self.addCluster)
 		
@@ -76,6 +78,15 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.connect(self.treeCMClusterActions['deleteCluster'], QtCore.SIGNAL("triggered()"), self.deleteCluster)
 		self.connect(self.treeCMClusterActions['makeActive'], QtCore.SIGNAL("triggered()"), self.setClusterByContextMenu)
 			
+	def closeAll(self, *args, **kargs):
+		print 'Closing'
+		self.Stats.onClose()
+		self.Slabs.onClose()
+		self.ManagementTasks.onClose()
+		
+		self.addDialog.close()
+		self.preferencesDialog.close()
+		
 	def mainTabChanged(self, tab):
 		"""
 		Signal Capture for when the Main set of tabs change.

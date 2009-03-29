@@ -1,9 +1,15 @@
+import matplotlib
+matplotlib.use('QT4Agg')
+from matplotlib import pyplot
+
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 from Dialogs.ui_LiveStats import Ui_liveStatsDialog
 import time
 import threading
 import Settings
+import os
+import datetime
 
 class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 	def __init__(self):
@@ -13,6 +19,7 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		self.monitor = False
 		self.thread = None
 		self.threadInterupt = False
+		self.stats = []
 		
 		self.settings = Settings.Settings()
 		
@@ -21,6 +28,7 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 	def show(self):
 		QtGui.QDialog.show(self)
 		self.startMonitor()
+		self.stats = []
 		
 	def setCluster(self, cluster):
 		self.currentCluster = cluster
@@ -28,14 +36,17 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 	def startMonitor(self):
 		print "Start Monitor"
 		self.monitor = True
-		self.thread = Monitor(self)
-		self.thread.start()
-		
+		self.threadInterupt = False
+		if self.thread is None:
+			self.thread = Monitor(self)
+			self.connect(self.thread, QtCore.SIGNAL('refresh'), self.updateGraphs)
+			self.thread.start()
 	
 	def stopMonitor(self):
 		print "Stop Monitor"
 		self.monitor = False
 		self.threadInterupt = True
+		self.stats = []
 		
 	def toggleMonitor(self):
 		if self.monitor:
@@ -43,18 +54,59 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		else:
 			self.startMonitor()
 			
-class Monitor(threading.Thread):
+	def updateGraphs(self):
+		print 'Refresh'
+		self.graphConnections()
+		self.graphGetsSets()
+		self.graphHistMisses()
+		self.graphMemory()
+			
+	def graphConnections(self):
+		figure = pyplot.figure(figsize=(5.5,2.51), facecolor='#D4CCBA', edgecolor='#AB9675')
+		
+		x = []
+		y = []
+		count = 0
+		for s in self.stats:
+			x.append(count)
+			y.append(s['stats'].getConnections())
+			count += 1
+			
+		ax = figure.add_subplot(111)
+		ax.plot(x,y)
+		
+		def format_date(x, pos=None):
+			return self.stats[int(x)]['date'].strftime('%I:%M:%S')
+		ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(format_date))
+		figure.autofmt_xdate()
+		
+		path = os.path.join(Settings.getSaveLocation(), 'ActiveConnections.png')
+		figure.savefig(path)
+		self.lblConnectionsGraph.setPixmap(QtGui.QPixmap(path))
+	
+	def graphGetsSets(self):
+		pass
+	
+	def graphHistMisses(self):
+		pass
+	
+	def graphMemory(self):
+		pass
+		
+			
+#class Monitor(threading.Thread):
+class Monitor(QtCore.QThread):
 	def __init__(self, dialog):
-		threading.Thread.__init__(self)
+		#threading.Thread.__init__(self)
+		QtCore.QThread.__init__(self)
 		self.dialog = dialog
-		self.stats = []
 		
 	def run(self):
 		while not self.dialog.threadInterupt:
 			stats = self.dialog.currentCluster.getStats()
-			self.stats.append(stats)
-			if len(self.stats) > 20:
-				self.stats.pop(0)
+			self.dialog.stats.append({'date':datetime.datetime.today().time(), 'stats':stats})
+			if len(self.dialog.stats) > 20:
+				self.dialog.stats.pop(0)
 				
-			print self.stats
+			self.emit(QtCore.SIGNAL('refresh'), None)
 			time.sleep(int(self.dialog.settings.settings.config['Stats']['RefreshInterval']))

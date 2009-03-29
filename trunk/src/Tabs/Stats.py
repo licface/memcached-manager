@@ -23,6 +23,9 @@ class Stats:
 		"""
 		if self.settings.settings.config['Stats']['AutoRefresh'] is True:
 			self._updateStats()
+			
+	def onClose(self):
+		self.liveStatsDialog.close()
 		
 	def watchLiveStats(self):
 		"""
