@@ -98,7 +98,10 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		y = []
 		legend = ['Gets', 'Sets']
 		for s in self.stats:
-			y.append((s['stats'].getGets(), s['stats'].getSets()))
+			total = s['stats'].getGets() + s['stats'].getSets()
+			sets = (float(s['stats'].getSets())/total)*100
+			gets = (float(s['stats'].getGets())/total)*100
+			y.append((gets, sets))
 			
 		ax = figure.add_subplot(111)
 		ax.plot(y)
@@ -121,7 +124,10 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		y = []
 		legend = ['Hits', 'Misses']
 		for s in self.stats:
-			y.append((s['stats'].getHits(), s['stats'].getMisses()))
+			total = s['stats'].getHits() + s['stats'].getMisses()
+			hits = (float(s['stats'].getHits())/total)*100
+			misses = (float(s['stats'].getMisses())/total)*100
+			y.append((hits, misses))
 			
 		ax = figure.add_subplot(111)
 		ax.plot(y)
@@ -144,7 +150,10 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		y = []
 		legend = ['Free', 'Used']
 		for s in self.stats:
-			y.append((s['stats'].getFreeSpace(), s['stats'].getUsedSpace()))
+			total = s['stats'].getTotalSpace()
+			free = (float(s['stats'].getFreeSpace())/total)*100
+			used = (float(s['stats'].getUsedSpace())/total)*100
+			y.append((free, used))
 			
 		ax = figure.add_subplot(111)
 		ax.plot(y)
