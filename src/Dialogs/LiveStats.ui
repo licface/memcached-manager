@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>650</width>
+    <width>694</width>
     <height>628</height>
    </rect>
   </property>
@@ -22,28 +22,47 @@
       <property name="geometry" >
        <rect>
         <x>0</x>
-        <y>-590</y>
-        <width>613</width>
-        <height>1196</height>
+        <y>0</y>
+        <width>651</width>
+        <height>877</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_4" >
        <item>
         <widget class="QGroupBox" name="gbConnections" >
+         <property name="minimumSize" >
+          <size>
+           <width>0</width>
+           <height>250</height>
+          </size>
+         </property>
          <property name="title" >
           <string>Active Connections</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_3" >
+         <layout class="QHBoxLayout" name="horizontalLayout" >
+          <item>
+           <widget class="QLabel" name="lblTotalConnectionsGraph" >
+            <property name="minimumSize" >
+             <size>
+              <width>275</width>
+              <height>250</height>
+             </size>
+            </property>
+            <property name="text" >
+             <string>Total Connections Graph</string>
+            </property>
+           </widget>
+          </item>
           <item>
            <widget class="QLabel" name="lblConnectionsGraph" >
             <property name="minimumSize" >
              <size>
-              <width>550</width>
+              <width>275</width>
               <height>250</height>
              </size>
             </property>
             <property name="text" >
-             <string>Active Connections Graph</string>
+             <string>Connections Graph</string>
             </property>
            </widget>
           </item>
@@ -51,48 +70,52 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="gbGetsSets" >
-         <property name="title" >
-          <string>Gets &amp;&amp; Sets</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_5" >
-          <item>
-           <widget class="QLabel" name="lblGetsGraph" >
-            <property name="minimumSize" >
-             <size>
-              <width>550</width>
-              <height>250</height>
-             </size>
-            </property>
-            <property name="text" >
-             <string>Gets &amp; Sets Graph</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="gbHitsMisses" >
-         <property name="title" >
-          <string>Hits vs. Misses</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_7" >
-          <item>
-           <widget class="QLabel" name="lblHitsMissesGraph" >
-            <property name="minimumSize" >
-             <size>
-              <width>550</width>
-              <height>250</height>
-             </size>
-            </property>
-            <property name="text" >
-             <string>Hits vs. Misses Graph</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout_2" >
+         <item>
+          <widget class="QGroupBox" name="gbGetsSets" >
+           <property name="title" >
+            <string>Gets &amp;&amp; Sets</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_5" >
+            <item>
+             <widget class="QLabel" name="lblGetsGraph" >
+              <property name="minimumSize" >
+               <size>
+                <width>270</width>
+                <height>250</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>Gets &amp; Sets Graph</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="gbHitsMisses" >
+           <property name="title" >
+            <string>Hits vs. Misses</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_7" >
+            <item>
+             <widget class="QLabel" name="lblHitsMissesGraph" >
+              <property name="minimumSize" >
+               <size>
+                <width>270</width>
+                <height>250</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>Hits vs. Misses Graph</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
         <widget class="QGroupBox" name="gbMemoryUsage" >
