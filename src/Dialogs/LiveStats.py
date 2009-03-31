@@ -81,7 +81,10 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		ax.plot(y)
 		
 		def format_date(x, pos=None):
-			return self.stats[int(x)]['date'].strftime('%I:%M:%S')
+                        if int(x) >= len(self.stats):
+                                return ''
+                        else:
+        			return self.stats[int(x)]['date'].strftime('%I:%M:%S')
 		ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(format_date))
 		ax.legend(legend, prop=matplotlib.font_manager.FontProperties(size=8))
 		figure.autofmt_xdate()
@@ -107,7 +110,10 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		ax.plot(y)
 		
 		def format_date(x, pos=None):
-			return self.stats[int(x)]['date'].strftime('%I:%M:%S')
+			if int(x) >= len(self.stats):
+                                return ''
+                        else:
+        			return self.stats[int(x)]['date'].strftime('%I:%M:%S')
 		ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(format_date))
 		ax.legend(legend, prop=matplotlib.font_manager.FontProperties(size=8))
 		figure.autofmt_xdate()
@@ -133,7 +139,10 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		ax.plot(y)
 		
 		def format_date(x, pos=None):
-			return self.stats[int(x)]['date'].strftime('%I:%M:%S')
+			if int(x) >= len(self.stats):
+                                return ''
+                        else:
+        			return self.stats[int(x)]['date'].strftime('%I:%M:%S')
 		ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(format_date))
 		ax.legend(legend, prop=matplotlib.font_manager.FontProperties(size=8))
 		figure.autofmt_xdate()
@@ -159,7 +168,10 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		ax.plot(y)
 		
 		def format_date(x, pos=None):
-			return self.stats[int(x)]['date'].strftime('%I:%M:%S')
+			if int(x) >= len(self.stats):
+                                return ''
+                        else:
+        			return self.stats[int(x)]['date'].strftime('%I:%M:%S')
 		
 		ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(format_date))
 		ax.legend(legend, prop=matplotlib.font_manager.FontProperties(size=8))
@@ -179,10 +191,17 @@ class Monitor(QtCore.QThread):
 		
 	def run(self):
 		while not self.dialog.threadInterupt:
-			stats = self.dialog.currentCluster.getStats()
-			self.dialog.stats.append({'date':datetime.datetime.today().time(), 'stats':stats})
-			if len(self.dialog.stats) > 20:
-				self.dialog.stats.pop(0)
+                        try:
+        			stats = self.dialog.currentCluster.getStats()
+        		except Exception, e:
+                                try:
+                                        stats = self.dialog.currentCluster.getStats()
+                                except Exception, e:
+                                        stats = None
+                        if stats is not None:
+                                self.dialog.stats.append({'date':datetime.datetime.today().time(), 'stats':stats})
+                                if len(self.dialog.stats) > 20:
+                                        self.dialog.stats.pop(0)
 				
-			self.emit(QtCore.SIGNAL('refresh'), None)
-			time.sleep(int(self.dialog.settings.settings.config['Stats']['RefreshInterval']))
+                                self.emit(QtCore.SIGNAL('refresh'), None)
+                                time.sleep(int(self.dialog.settings.settings.config['Stats']['RefreshInterval']))
