@@ -161,11 +161,7 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		def format_date(x, pos=None):
 			return self.stats[int(x)]['date'].strftime('%I:%M:%S')
 		
-		def format_size(y, pos=None):
-			return self.stats[0]['stats'].getSpaceString(int(y), length=0)
-		
 		ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(format_date))
-		ax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(format_size))
 		ax.legend(legend, prop=matplotlib.font_manager.FontProperties(size=8))
 		figure.autofmt_xdate()
 		
