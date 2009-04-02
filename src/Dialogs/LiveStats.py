@@ -10,6 +10,7 @@ import threading
 import Settings
 import os
 import datetime
+import gc
 
 class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 	def __init__(self):
@@ -45,6 +46,10 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		self.monitor = False
 		self.threadInterupt = True
 		self.stats = []
+		self.lblConnectionsGraph.clear()
+		self.lblGetsGraph.clear()
+		self.lblHitsMissesGraph.clear()
+		self.lblMemoryGraph.clear()
 		
 	def toggleMonitor(self):
 		if self.monitor:
@@ -57,6 +62,7 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		self.graphGetsSets()
 		self.graphHistMisses()
 		self.graphMemory()
+		gc.collect()
 			
 	def graphConnections(self):
 		figure = pyplot.figure(figsize=(5.5,2.51), linewidth=2)
@@ -88,9 +94,9 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(format_date))
 		ax.legend(legend, prop=matplotlib.font_manager.FontProperties(size=8))
 		figure.autofmt_xdate()
-		
 		path = os.path.join(Settings.getSaveLocation(), 'ActiveConnections.png')
 		figure.savefig(path)
+		figure.clear()
 		self.lblConnectionsGraph.setPixmap(QtGui.QPixmap(path))
 	
 	def graphGetsSets(self):
@@ -120,6 +126,7 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		
 		path = os.path.join(Settings.getSaveLocation(), 'ActiveGetsSets.png')
 		figure.savefig(path)
+		figure.clear()
 		self.lblGetsGraph.setPixmap(QtGui.QPixmap(path))
 	
 	def graphHistMisses(self):
@@ -149,6 +156,7 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		
 		path = os.path.join(Settings.getSaveLocation(), 'ActiveHitsMisses.png')
 		figure.savefig(path)
+		figure.clear()
 		self.lblHitsMissesGraph.setPixmap(QtGui.QPixmap(path))
 	
 	def graphMemory(self):
@@ -179,6 +187,7 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		
 		path = os.path.join(Settings.getSaveLocation(), 'ActiveMemory.png')
 		figure.savefig(path)
+		figure.clear()
 		self.lblMemoryGraph.setPixmap(QtGui.QPixmap(path))
 		
 			
