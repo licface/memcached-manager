@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Sun Mar 29 15:52:02 2009
+# Created: Wed Apr  8 20:57:19 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -110,7 +110,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
         self.scrollAreaWidgetContents_2 = QtGui.QWidget(self.scrollArea_2)
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 435, 620))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 182, 620))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
         self.verticalLayout_3 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
@@ -292,7 +292,7 @@ class Ui_MainWindow(object):
         self.saServerInfo.setWidgetResizable(True)
         self.saServerInfo.setObjectName("saServerInfo")
         self.scrollAreaWidgetContents_3 = QtGui.QWidget(self.saServerInfo)
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 435, 436))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 165, 436))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
         self.verticalLayout_6 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
@@ -425,6 +425,8 @@ class Ui_MainWindow(object):
         self.menuFile.setObjectName("menuFile")
         self.menu_Servers = QtGui.QMenu(self.menubar)
         self.menu_Servers.setObjectName("menu_Servers")
+        self.menu_About = QtGui.QMenu(self.menubar)
+        self.menu_About.setObjectName("menu_About")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -445,14 +447,18 @@ class Ui_MainWindow(object):
         self.actionTest_Sub_Item.setObjectName("actionTest_Sub_Item")
         self.actionPreferences = QtGui.QAction(MainWindow)
         self.actionPreferences.setObjectName("actionPreferences")
+        self.actionAbout = QtGui.QAction(MainWindow)
+        self.actionAbout.setObjectName("actionAbout")
         self.menuFile.addAction(self.actionPreferences)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionSave)
         self.menuFile.addAction(self.actionQuit)
         self.menu_Servers.addAction(self.actionAddClusterServer)
         self.menu_Servers.addSeparator()
+        self.menu_About.addAction(self.actionAbout)
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menu_Servers.menuAction())
+        self.menubar.addAction(self.menu_About.menuAction())
 
         self.retranslateUi(MainWindow)
         self.tabsMain.setCurrentIndex(0)
@@ -573,6 +579,7 @@ class Ui_MainWindow(object):
         self.tabsMain.setTabToolTip(self.tabsMain.indexOf(self.Stats), QtGui.QApplication.translate("MainWindow", "Memcached Server Stats", None, QtGui.QApplication.UnicodeUTF8))
         self.menuFile.setTitle(QtGui.QApplication.translate("MainWindow", "&File", None, QtGui.QApplication.UnicodeUTF8))
         self.menu_Servers.setTitle(QtGui.QApplication.translate("MainWindow", "&Servers", None, QtGui.QApplication.UnicodeUTF8))
+        self.menu_About.setTitle(QtGui.QApplication.translate("MainWindow", "&Help", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAddClusterServer.setText(QtGui.QApplication.translate("MainWindow", "&Add Cluster and/or Server", None, QtGui.QApplication.UnicodeUTF8))
         self.actionSave.setText(QtGui.QApplication.translate("MainWindow", "Sa&ve", None, QtGui.QApplication.UnicodeUTF8))
         self.actionQuit.setText(QtGui.QApplication.translate("MainWindow", "&Quit", None, QtGui.QApplication.UnicodeUTF8))
@@ -581,4 +588,5 @@ class Ui_MainWindow(object):
         self.actionPreferences.setText(QtGui.QApplication.translate("MainWindow", "&Preferences", None, QtGui.QApplication.UnicodeUTF8))
         self.actionPreferences.setIconText(QtGui.QApplication.translate("MainWindow", "&Preferences", None, QtGui.QApplication.UnicodeUTF8))
         self.actionPreferences.setToolTip(QtGui.QApplication.translate("MainWindow", "&Preferences", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionAbout.setText(QtGui.QApplication.translate("MainWindow", "&About", None, QtGui.QApplication.UnicodeUTF8))
 
