@@ -14,4 +14,8 @@ pyuic4 -o ./Dialogs/ui_Preferences.py ./Dialogs/Preferences.ui
 echo "Compiling Add.ui"
 pyuic4 -o ./Dialogs/ui_Add.py ./Dialogs/Add.ui
 
+#About Dialog
+echo "Compiling About.ui"
+pyuic4 -o ./Dialogs/ui_About.py ./Dialogs/About.ui
+
 echo "Done"

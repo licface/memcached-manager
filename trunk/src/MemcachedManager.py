@@ -21,13 +21,31 @@ Detailed Documentation
 ======================
 
 You can read more documentation at U{http://code.google.com/p/memcached-manager/}
+
+Copyright
+=========
+
+Copyright (C) 2008,2009  Nick Verbeck <nerdynick@gmail.com>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 from Tabs import ManagementTasks, Slabs, Stats
 from ui_MainWindow import Ui_MainWindow
-from Dialogs import Preferences, Add
+from Dialogs import Preferences, Add, About
 import sys
 from Settings import Settings
 
@@ -41,11 +59,14 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		
 		self.addDialog = Add.AddServersClusters()
 		self.preferencesDialog = Preferences.Preferences()
+		self.aboutDialog = About.About()
+		
 		self.settings = Settings()
 		
 		self.connect(self, QtCore.SIGNAL('destroyed(QObject*)'), self.closeAll)
 		
 		self.connect(self.actionAddClusterServer, QtCore.SIGNAL("triggered()"), self.displayAdd)
+		self.connect(self.actionAbout, QtCore.SIGNAL("triggered()"), self.displayAbout)
 		self.connect(self.addDialog, QtCore.SIGNAL('savedCluster'), self.addCluster)
 		
 		self.connect(self.actionSave, QtCore.SIGNAL('triggered()'), self.save)
@@ -78,6 +99,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.connect(self.treeCMClusterActions['deleteCluster'], QtCore.SIGNAL("triggered()"), self.deleteCluster)
 		self.connect(self.treeCMClusterActions['makeActive'], QtCore.SIGNAL("triggered()"), self.setClusterByContextMenu)
 			
+	def displayAbout(self):
+		self.aboutDialog.show()
+	
 	def closeAll(self, *args, **kargs):
 		print 'Closing'
 		self.Stats.onClose()
