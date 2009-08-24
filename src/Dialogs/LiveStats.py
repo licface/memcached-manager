@@ -24,6 +24,11 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		
 		self.settings = Settings.Settings()
 		
+		self.lblConnectionsGraph.clear()
+		self.lblGetsGraph.clear()
+		self.lblHitsMissesGraph.clear()
+		self.lblMemoryGraph.clear()
+		
 		self.connect(self, QtCore.SIGNAL('finished(int)'), self.stopMonitor)
 		
 	def show(self):
@@ -59,9 +64,9 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 			
 	def updateGraphs(self):
 		self.graphConnections()
-		self.graphGetsSets()
-		self.graphHistMisses()
-		self.graphMemory()
+		#self.graphGetsSets()
+		#self.graphHistMisses()
+		#self.graphMemory()
 		gc.collect()
 			
 	def graphConnections(self):
@@ -97,7 +102,7 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		path = os.path.join(Settings.getSaveLocation(), 'ActiveConnections.png')
 		figure.savefig(path)
 		figure.clear()
-		self.lblConnectionsGraph.setPixmap(QtGui.QPixmap(path))
+		#self.lblConnectionsGraph.setPixmap(QtGui.QPixmap(path))
 	
 	def graphGetsSets(self):
 		figure = pyplot.figure(figsize=(5.5,2.51), linewidth=2)
