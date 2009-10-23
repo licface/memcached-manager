@@ -363,6 +363,17 @@ class Stats:
 			lblServerXSets.setText(str(s.getSets()))
 			gridLayout_5.addWidget(lblServerXSets, itemCounter, 1, 1, 1)
 			itemCounter += 1
+			
+			#Evictions
+			lblServerXMissesTxt = QtGui.QLabel(gbServerX)
+			lblServerXMissesTxt.setObjectName("lblServer"+ hostStr +"EvictionsTxt")
+			lblServerXMissesTxt.setText('Evictions:')
+			gridLayout_5.addWidget(lblServerXMissesTxt, itemCounter, 0, 1, 1)
+			lblServerXMisses = QtGui.QLabel(gbServerX)
+			lblServerXMisses.setObjectName("lblServer"+ hostStr +"Evictions")
+			lblServerXMisses.setText(str(s.getEvictions()))
+			gridLayout_5.addWidget(lblServerXMisses, itemCounter, 1, 1, 1)
+			itemCounter += 1
 		
 			#Total Space
 			lblServerXTotalSpaceTxt = QtGui.QLabel(gbServerX)
@@ -449,6 +460,17 @@ class Stats:
 			lblServerXGetRate = QtGui.QLabel(gbServerX)
 			lblServerXGetRate.setObjectName("lblServer"+ hostStr +"GetRate")
 			lblServerXGetRate.setText("%.2f cache requests/second"% (s.getGetRate(),))
+			gridLayout_5.addWidget(lblServerXGetRate, itemCounter, 1, 1, 1)
+			itemCounter += 1
+			
+			#Eviction Rate
+			lblServerXGetRateTxt = QtGui.QLabel(gbServerX)
+			lblServerXGetRateTxt.setObjectName("lblServer"+ hostStr +"EvictionRateTxt")
+			lblServerXGetRateTxt.setText('Eviction Rate:')
+			gridLayout_5.addWidget(lblServerXGetRateTxt, itemCounter, 0, 1, 1)
+			lblServerXGetRate = QtGui.QLabel(gbServerX)
+			lblServerXGetRate.setObjectName("lblServer"+ hostStr +"EvictionRate")
+			lblServerXGetRate.setText("%.2f evictions/second"% (s.getEvictionRate(),))
 			gridLayout_5.addWidget(lblServerXGetRate, itemCounter, 1, 1, 1)
 			itemCounter += 1
 			
