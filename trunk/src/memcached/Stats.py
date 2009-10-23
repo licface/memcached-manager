@@ -148,6 +148,12 @@ class MemcachedStats(object):
 			rate += server.getGetRate()
 		return rate
 	
+	def getEvictionRate(self):
+		rate = 0
+		for server in self.servers:
+			rate += server.getEvictionRate()
+		return rate
+	
 	def getRequestRateAvg(self):
 		rate = 0
 		for server in self.servers:
@@ -188,6 +194,15 @@ class MemcachedStats(object):
 		rate = 0
 		for server in self.servers:
 			rate += server.getGetRate()
+		if rate > 0:
+			return rate/len(self.servers)
+		else:
+			return 0
+	
+	def getEvictionRateAvg(self):
+		rate = 0
+		for server in self.servers:
+			rate += server.getEvictionRate()
 		if rate > 0:
 			return rate/len(self.servers)
 		else:
@@ -280,4 +295,8 @@ class StatsServer(object):
 		return self.Uptime
 	def getUptimeUnix(self):
 		return self.UptimeTimestamp
+	def getEvictions(self):
+		return self.Evictions
+	def getEvictionRate(self):
+		return float(self.getEvictions())/float(self.getUptimeUnix())
 		
