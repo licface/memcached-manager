@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file './Dialogs/Add.ui'
 #
-# Created: Wed Apr  8 20:57:19 2009
+# Created: Fri Oct 23 23:35:06 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -71,6 +71,13 @@ class Ui_AddDialog(object):
         self.retranslateUi(AddDialog)
         QtCore.QObject.connect(self.btnClose, QtCore.SIGNAL("clicked()"), AddDialog.close)
         QtCore.QMetaObject.connectSlotsByName(AddDialog)
+        AddDialog.setTabOrder(self.txtClusterName, self.btnAddCluster)
+        AddDialog.setTabOrder(self.btnAddCluster, self.cbClusters)
+        AddDialog.setTabOrder(self.cbClusters, self.txtServerName)
+        AddDialog.setTabOrder(self.txtServerName, self.txtServerAddress)
+        AddDialog.setTabOrder(self.txtServerAddress, self.txtServerPort)
+        AddDialog.setTabOrder(self.txtServerPort, self.btnAddServer)
+        AddDialog.setTabOrder(self.btnAddServer, self.btnClose)
 
     def retranslateUi(self, AddDialog):
         AddDialog.setWindowTitle(QtGui.QApplication.translate("AddDialog", "Add Clusters & Servers", None, QtGui.QApplication.UnicodeUTF8))
