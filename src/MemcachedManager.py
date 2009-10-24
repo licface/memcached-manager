@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 Memcached Server Manager
 
@@ -41,6 +42,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+import matplotlib
+matplotlib.use('QT4Agg')
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 from Tabs import ManagementTasks, Slabs, Stats

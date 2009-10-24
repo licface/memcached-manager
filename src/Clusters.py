@@ -1,4 +1,8 @@
-import md5
+try:
+	from hashlib import md5 
+except Exception, e:
+	from md5 import md5
+	
 import memcached.memcache
 import memcached.Stats
 from PyQt4.QtGui import QTreeWidgetItem
@@ -10,7 +14,7 @@ class Cluster:
 		self.name = name
 		self.treeItem = None
 		self.treeItemParent = None
-		self.key = md5.new(self.name).hexdigest()
+		self.key = md5(self.name).hexdigest()
 		
 	def initTreeView(self, parent):
 		self.treeItemParent = parent

@@ -1,5 +1,4 @@
 import matplotlib
-matplotlib.use('QT4Agg')
 from matplotlib import pyplot
 
 from PyQt4 import QtGui
