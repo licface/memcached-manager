@@ -1,302 +1,293 @@
 from datetime import datetime
 import time
 
+def breakdownSize(space):
+	if space > 0:
+		bytes = space % 1024
+		space = int(space/1024)
+		kbytes = space % 1024
+		space = int(space/1024)
+		mbytes = space % 1024
+		space = int(space/1024)
+		gbytes = space % 1024
+		space = int(space/1024)
+		tbytes = space % 1024
+		space = int(space/1024)
+		pbytes = space % 1024
+		return {'b': bytes, 'k': kbytes, 'm': mbytes, 'g': gbytes, 't': tbytes, 'p': pbytes}
+	else:
+		return {'b': 0, 'k': 0, 'm': 0, 'g': 0, 't': 0, 'p': 0}
+	
+def formatSize(space, length = 6):
+	total = breakdownSize(space)
+	tStr = ''
+	currentLength = 0
+	if total['p'] != 0:
+		tStr += str(total['p']) +'PB '
+		currentLength +=1
+	if total['t'] != 0 and length >= currentLength:
+		tStr += str(total['t']) +'TB '
+		currentLength +=1
+	if total['g'] != 0 and length >= currentLength:
+		tStr += str(total['g']) +'GB '
+		currentLength +=1
+	if total['m'] != 0 and length >= currentLength:
+		tStr += str(total['m']) +'MB '
+		currentLength +=1
+	if total['k'] != 0 and length >= currentLength:
+		tStr += str(total['k']) +'KB '
+		currentLength +=1
+	if total['b'] != 0 and length >= currentLength:
+		tStr += str(total['b']) +'B '
+		currentLength +=1
+		
+	if tStr == '':
+		tStr = '0B'
+		
+	return tStr
+
 class MemcachedStats(object):
-	def __init__(self, stats):
+	def __init__(self, mcClient):
 		self.servers = []
-		for server in stats:
-			self.servers.append(StatsServer(server))
+		for server in mcClient.get_stats():
+			self.servers.append(StatsServer(server[0], server[1]))
+	
+	def getServers(self):
+		return self.servers
 	
 	def getTotalItems(self):
-		totalItems = 0
-		for server in self.servers:
-			totalItems += server.getTotalItems()
-		return totalItems
+		return self._getServersAttrib('TotalItems')
 	
 	def getItems(self):
-		items = 0
-		for server in self.servers:
-			items += server.getItems()
-		return items
+		return self._getServersAttrib('CurrItems')
 	
 	def getTotalConnections(self):
-		totalConnections = 0
-		for server in self.servers:
-			totalConnections += server.getTotalConnections()
-		return totalConnections
+		return self._getServersAttrib('TotalConnections')
 	
 	def getConnections(self):
-		connections = 0
-		for server in self.servers:
-			connections += server.getConnections()
-		return connections
+		return self._getServersAttrib('CurrConnections')
 	
 	def getHits(self):
-		hits = 0
-		for server in self.servers:
-			hits += server.getHits()
-		return hits
+		return self._getServersAttrib('GetHits')
 	
 	def getMisses(self):
-		misses = 0
-		for server in self.servers:
-			misses += server.getMisses()
-		return misses
+		return self._getServersAttrib('GetMisses')
 	
 	def getGets(self):
-		gets = 0
-		for server in self.servers:
-			gets += server.getGets()
-		return gets
+		return self._getServersAttrib('CMDGet')
 	
 	def getSets(self):
-		sets = 0
-		for server in self.servers:
-			sets += server.getSets()
-		return sets
-	
-	def calcSpaceBreakdown(self, space):
-		if space > 0:
-			bytes = space % 1024
-			space = int(space/1024)
-			kbytes = space % 1024
-			space = int(space/1024)
-			mbytes = space % 1024
-			space = int(space/1024)
-			gbytes = space % 1024
-			space = int(space/1024)
-			tbytes = space % 1024
-			space = int(space/1024)
-			pbytes = space % 1024
-			return {'b': bytes, 'k': kbytes, 'm': mbytes, 'g': gbytes, 't': tbytes, 'p': pbytes}
-		else:
-			return {'b': 0, 'k': 0, 'm': 0, 'g': 0, 't': 0, 'p': 0}
-		
-	def getSpaceString(self, space, length = 6):
-		total = self.calcSpaceBreakdown(space)
-		tStr = ''
-		currentLength = 0
-		if total['p'] != 0:
-			tStr += str(total['p']) +'PB '
-			currentLength +=1
-		if total['t'] != 0 and length >= currentLength:
-			tStr += str(total['t']) +'TB '
-			currentLength +=1
-		if total['g'] != 0 and length >= currentLength:
-			tStr += str(total['g']) +'GB '
-			currentLength +=1
-		if total['m'] != 0 and length >= currentLength:
-			tStr += str(total['m']) +'MB '
-			currentLength +=1
-		if total['k'] != 0 and length >= currentLength:
-			tStr += str(total['k']) +'KB '
-			currentLength +=1
-		if total['b'] != 0 and length >= currentLength:
-			tStr += str(total['b']) +'B '
-			currentLength +=1
-			
-		if tStr == '':
-			tStr = '0B'
-			
-		return tStr
+		return self._getServersAttrib('CMDSet')
 	
 	def getTotalSpace(self):
-		space = 0
-		for server in self.servers:
-			space += server.getTotalSpace()
-		return space
+		return self._getServersAttrib('LimitMaxBytes')
+	def getFormatedTotalSpace(self):
+		return formatSize(self.getTotalSpace())
 	
 	def getFreeSpace(self):
-		space = 0
-		for server in self.servers:
-			space += server.getFreeSpace()
-		return space
+		return self._callServersFunc('getFreeSpace')
+	def getFormatedFreeSpace(self):
+		return formatSize(self.getFreeSpace())
 	
 	def getUsedSpace(self):
-		space = 0
-		for server in self.servers:
-			space += server.getUsedSpace()
-		return space
+		return self._getServersAttrib('Bytes')
+	def getFormatedUsedSpace(self):
+		return formatSize(self.getUsedSpace())
 	
 	def getRequestRate(self):
-		rate = 0
-		for server in self.servers:
-			rate += server.getRequestRate()
-		return rate
+		return self._callServersFunc('getRequestRate')
 	
 	def getHitRate(self):
-		rate = 0
-		for server in self.servers:
-			rate += server.getHitRate()
-		return rate
+		return self._callServersFunc('getHitRate')
 	
 	def getMissRate(self):
-		rate = 0
-		for server in self.servers:
-			rate += server.getMissRate()
-		return rate
+		return self._callServersFunc('getMissRate')
 	
 	def getSetRate(self):
-		rate = 0
-		for server in self.servers:
-			rate += server.getSetRate()
-		return rate
+		return self._callServersFunc('getSetRate')
 	
 	def getGetRate(self):
-		rate = 0
-		for server in self.servers:
-			rate += server.getGetRate()
-		return rate
+		return self._callServersFunc('getGetRate')
 	
 	def getEvictionRate(self):
-		rate = 0
-		for server in self.servers:
-			rate += server.getEvictionRate()
-		return rate
+		return self._callServersFunc('getEvictionRate')
 	
 	def getRequestRateAvg(self):
-		rate = 0
+		"""
+		Avg Request Rate per server
+		"""
+		rate = self._callServersFunc('getRequestRate')
 		for server in self.servers:
 			rate += server.getRequestRate()
-		if rate > 0:
-			return rate/len(self.servers)
-		else:
-			return 0
-	
-	def getHitRateAvg(self):
-		rate = 0
-		for server in self.servers:
-			rate += server.getHitRate()
-		if rate > 0:
-			return rate/len(self.servers)
-		else:
-			return 0
-	
-	def getMissRateAvg(self):
-		rate = 0
-		for server in self.servers:
-			rate += server.getMissRate()
 		if rate > 0:
 			return rate/len(self.servers)
 		else:
 			return 0
 	
 	def getSetRateAvg(self):
-		rate = 0
-		for server in self.servers:
-			rate += server.getSetRate()
+		"""
+		Avg Set Rate per server
+		"""
+		rate = self._callServersFunc('getSetRate')
 		if rate > 0:
 			return rate/len(self.servers)
 		else:
 			return 0
 	
 	def getGetRateAvg(self):
-		rate = 0
-		for server in self.servers:
-			rate += server.getGetRate()
+		"""
+		Avg Get Rate per server
+		"""
+		rate = self._callServersFunc('getGetRate')
+		if rate > 0:
+			return rate/len(self.servers)
+		else:
+			return 0
+	
+	def getHitRateAvg(self):
+		"""
+		Avg Hit Rate per server
+		"""
+		rate = self._callServersFunc('getHitRate')
+		if rate > 0:
+			return rate/len(self.servers)
+		else:
+			return 0
+	
+	def getMissRateAvg(self):
+		"""
+		Avg Miss Rate per server
+		"""
+		rate = self._callServersFunc('getMissRate')
 		if rate > 0:
 			return rate/len(self.servers)
 		else:
 			return 0
 	
 	def getEvictionRateAvg(self):
-		rate = 0
-		for server in self.servers:
-			rate += server.getEvictionRate()
+		"""
+		Avg Evistion Rate per server
+		"""
+		rate = self._callServersFunc('getEvictionRate')
 		if rate > 0:
 			return rate/len(self.servers)
 		else:
 			return 0
 	
-	def getServers(self):
-		return self.servers
-	
 	def getThreads(self):
-		threads = 0
+		return self._getServersAttrib('Threads')
+	
+	def _getServersAttrib(self, attribute):
+		total = 0
 		for server in self.servers:
-			threads += server.getThreads()
-		
-		return threads
+			total += server.__getattribute__(attribute)
+		return total
+	
+	def _callServersFunc(self, function):
+		total = 0
+		for server in self.servers:
+			total += server.__getattribute__(function)()
+		return total
 		
 class StatsServer(object):
-	def __init__(self, stats):
+	def __init__(self, name, items):
 		self.CurrentTime = datetime.today()
 		
-		self.Name = stats[0]
-		self.PID = int(stats[1]['pid'])
-		self.TotalItems = int(stats[1]['total_items'])
-		self.Uptime = datetime.fromtimestamp(int(stats[1]['uptime']))
-		self.UptimeTimestamp = int(stats[1]['uptime'])
-		self.Version = stats[1]['version']
-		self.LimitMaxBytes = int(stats[1]['limit_maxbytes'])
-		self.RUsageUser = stats[1]['rusage_user']
-		self.BytesRead = int(stats[1]['bytes_read'])
-		self.RUsageSystem = stats[1]['rusage_system']
-		self.CMDGet = int(stats[1]['cmd_get'])
-		self.CurrConnections = int(stats[1]['curr_connections'])
-		self.Threads = int(stats[1]['threads'])
-		self.TotalConnections = int(stats[1]['total_connections'])
-		self.CMDSet = int(stats[1]['cmd_set'])
-		self.CurrItems = int(stats[1]['curr_items'])
-		self.GetMisses = int(stats[1]['get_misses'])
-		self.Evictions = stats[1]['evictions']
-		self.Bytes = int(stats[1]['bytes'])
-		self.ConnectionStructures = int(stats[1]['connection_structures'])
-		self.BytesWritten = int(stats[1]['bytes_written'])
-		self.Time = datetime.fromtimestamp(int(stats[1]['time']))
-		self.Timestamp = int(stats[1]['time'])
-		self.PointerSize = int(stats[1]['pointer_size'])
-		self.GetHits = int(stats[1]['get_hits'])
-		self.Threads = int(stats[1]['threads'])
+		self.Name = name
+		self.PID = items.get('pid', 0)
+		self.Uptime = datetime.fromtimestamp(int(items.get('uptime', 0)))
+		self.UptimeTimestamp = int(items.get('uptime', 0))
+		self.Time = datetime.fromtimestamp(int(items.get('time', 0)))
+		self.Timestamp = int(items.get('time', 0))
+		self.Version = items.get('version', 'N/A')
 		
-	def getThreads(self):
-		return self.Threads
-	def getVersion(self):
-		return self.Version
-	def getName(self):
-		return self.Name
-	def getTotalItems(self):
-		return self.TotalItems
-	def getItems(self):
-		return self.CurrItems
-	def getTotalConnections(self):
-		return self.TotalConnections
-	def getConnections(self):
-		return self.CurrConnections
-	def getHits(self):
-		return self.GetHits
-	def getMisses(self):
-		return self.GetMisses
-	def getGets(self):
-		return self.CMDGet
-	def getSets(self):
-		return self.CMDSet
-	def getTotalSpace(self):
-		return self.LimitMaxBytes
+		#Default size of pointers on the host OS (generally 32 or 64)
+		self.PointerSize = int(items.get('pointer_size', 0))
+		
+		#Accumulated user time for this process (seconds:microseconds)
+		self.RUsageUser = items.get('rusage_user', 0)
+		
+		#Accumulated system time for this process (seconds:microseconds)
+		self.RUsageSystem = items.get('rusage_system', 0)
+		
+		self.CurrConnections = int(items.get('curr_connections', 0))
+		self.TotalConnections = int(items.get('total_connections', 0))
+		
+		#Number of connection structures allocated by the serve
+		self.ConnectionStructures = int(items.get('connection_structures', 0))
+		
+		self.CMDGet = int(items.get('cmd_get', 0))
+		self.CMDSet = int(items.get('cmd_set', 0))
+		self.CMDFlush = int(items.get('cmd_flush', 0))
+		self.GetHits = int(items.get('get_hits', 0))
+		self.GetMisses = int(items.get('get_misses', 0))
+		self.DeleteMisses = int(items.get('delete_misses', 0))
+		self.DeleteHits = int(items.get('delete_hits', 0))
+		self.IncrMisses = int(items.get('incr_misses', 0))
+		self.IncrHits = int(items.get('incr_hits', 0))
+		self.DecrMisses = int(items.get('decr_misses', 0))
+		self.DecrHits = int(items.get('decr_hits', 0))
+		self.CasMisses = int(items.get('cas_misses', 0))
+		self.CasHits = int(items.get('cas_hits', 0))
+		self.CasBadval = int(items.get('cas_badval', 0))
+		
+		#Total number of bytes read by this server from network
+		self.BytesRead = int(items.get('bytes_read', 0))
+		
+		#Total number of bytes sent by this server from network
+		self.BytesWritten = int(items.get('bytes_written', 0))
+		
+		#Number of bytes this server is allowed to use for storage.
+		self.LimitMaxBytes = int(items.get('limit_maxbytes', 0))
+		
+		self.AcceptingConns = int(items.get('accepting_conns', 0))
+		self.ListenDisabledNum = int(items.get('listen_disabled_num', 0))
+		self.Threads = int(items.get('threads', 0))
+		self.ConnYields = int(items.get('conn_yields', 0))
+		
+		#Current number of bytes used by this server to store items
+		self.Bytes = int(items.get('bytes', 0))
+		
+		self.CurrItems = int(items.get('curr_items', 0))
+		self.TotalItems = int(items.get('total_items', 0))
+		self.Evictions = items.get('evictions', 0)
+		
 	def getFreeSpace(self):
-		return self.getTotalSpace()-self.getUsedSpace()
-	def getUsedSpace(self):
-		return self.Bytes
+		return self.LimitMaxBytes-self.Bytes
+	def getFormatedFreeSpace(self):
+		return formatSize(self.getFreeSpace())
+	def getFormatedUsedSpace(self):
+		return formatSize(self.Bytes)
+	def getFormatedTotalSpace(self):
+		return formatSize(self.LimitMaxBytes)
+	def getFormatedBytesRead(self):
+		return formatSize(self.BytesRead)
+	def getFormatedBytesWrite(self):
+		return formatSize(self.BytesWritten)
+	
+	def getTotalRequests(self):
+		return self.CMDSet + self.CMDGet + self.CMDFlush
+	
 	def getRequestRate(self):
-		return (float(self.getSets()) + float(self.getGets()))/float(self.getUptimeUnix())
-	def getHitRate(self):
-		return float(self.getHits())/float(self.getUptimeUnix())
-	def getMissRate(self):
-		return float(self.getMisses())/float(self.getUptimeUnix())
+		return (float(self.getTotalRequests()))/float(self.UptimeTimestamp)
+	
 	def getSetRate(self):
-		return float(self.getSets())/float(self.getUptimeUnix())
+		return float(self.CMDSet)/float(self.UptimeTimestamp)
 	def getGetRate(self):
-		return float(self.getGets())/float(self.getUptimeUnix())
-	def getTime(self):
-		return self.Time
-	def getTimeUnix(self):
-		return self.Timestamp
-	def getUptime(self):
-		return self.Uptime
-	def getUptimeUnix(self):
-		return self.UptimeTimestamp
-	def getEvictions(self):
-		return self.Evictions
+		return float(self.CMDGet)/float(self.UptimeTimestamp)
+	def getFlushRate(self):
+		return float(self.CMDFlush)/float(self.UptimeTimestamp)
+	
+	def getHitRate(self):
+		return float(self.GetHits)/float(self.UptimeTimestamp)
+	def getMissRate(self):
+		return float(self.GetMisses)/float(self.UptimeTimestamp)
+	
 	def getEvictionRate(self):
-		return float(self.getEvictions())/float(self.getUptimeUnix())
+		return float(self.Evictions)/float(self.UptimeTimestamp)
 		
+if __name__ == '__main__':
+	import memcache
+	stats = MemcachedStats(memcache.Client(['localhost:11211']))
+	for server in stats.getServers():
+		print server.__dict__
