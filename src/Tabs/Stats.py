@@ -76,14 +76,9 @@ class Stats:
 		self.mainWindow.lblSets.setText(str(stats.getSets()))
 		self.mainWindow.lblThreads.setText(str(stats.getThreads()))
 		
-		tSpace = stats.getSpaceString(stats.getTotalSpace())
-		self.mainWindow.lblSpace.setText(tSpace)
-		
-		fSpace = stats.getSpaceString(stats.getFreeSpace())
-		self.mainWindow.lblFree.setText(fSpace)
-		
-		uSpace = stats.getSpaceString(stats.getUsedSpace())
-		self.mainWindow.lblUsed.setText(uSpace)
+		self.mainWindow.lblSpace.setText(stats.getFormatedTotalSpace())
+		self.mainWindow.lblFree.setText(stats.getFormatedFreeSpace())
+		self.mainWindow.lblUsed.setText(stats.getFormatedUsedSpace())
 		
 		self.mainWindow.lblRequestRate.setText("%.2f cache requests/second"% (stats.getRequestRate(),))
 		self.mainWindow.lblHitRate.setText("%.2f cache requests/second"% (stats.getHitRate(),))
@@ -122,8 +117,8 @@ class Stats:
 			else:
 				freePerc = 0
 				
-			if(server.getUsedSpace() > 0):
-				usedPerc = (float(server.getUsedSpace())/totalSpace)*100
+			if(server.Bytes > 0):
+				usedPerc = (float(server.Bytes)/totalSpace)*100
 			else:
 				usedPerc = 0
 				
@@ -202,34 +197,41 @@ class Stats:
 		self.mainWindow.verticalLayout_6 = QtGui.QVBoxLayout(self.mainWindow.scrollAreaWidgetContents_3)
 		self.mainWindow.verticalLayout_6.setObjectName("verticalLayout_6")
 		
+		def renderItem(gbBox, grid, serverName, itemCounter, itemName, itemValue):
+			cleanName = itemName.replace(':', '').replace(' ', '')
+			lblServerXStartedTxt = QtGui.QLabel(gbBox)
+			lblServerXStartedTxt.setObjectName("lblServer"+ serverName+cleanName +"Txt")
+			lblServerXStartedTxt.setText(itemName+':')
+			grid.addWidget(lblServerXStartedTxt, itemCounter, 0, 1, 1)
+			lblServerXStarted = QtGui.QLabel(gbBox)
+			lblServerXStarted.setObjectName("lblServer"+ serverName+cleanName)
+			lblServerXStarted.setText(str(itemValue))
+			grid.addWidget(lblServerXStarted, itemCounter, 1, 1, 1)
+		
 		#Add each server
 		for s in stats.servers:
-			hostStr = s.getName().replace(':', '').replace('.', '').replace('-', '')
+			hostStr = str(s.Name).replace(':', '').replace('.', '').replace('-', '')
 			itemCounter = 0
 			#Create Group Box
 			gbServerX = QtGui.QGroupBox(self.mainWindow.scrollAreaWidgetContents_3)
 			gbServerX.setObjectName("gbServer"+ hostStr)
-			gbServerX.setTitle(str(s.getName())+ " - V"+ str(s.getVersion()))
+			gbServerX.setTitle(str(s.Name)+ " - V"+ str(s.Version))
 			
 			#Create Group Box Layout
 			gridLayout_5 = QtGui.QGridLayout(gbServerX)
 			gridLayout_5.setObjectName("gridLayout_5")
 			
-			#Start Time
-			starttime = datetime.datetime.fromtimestamp(0) + (s.getTime() - s.getUptime())
+			#PID
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'PID', s.PID)
+			itemCounter += 1
 			
-			lblServerXStartedTxt = QtGui.QLabel(gbServerX)
-			lblServerXStartedTxt.setObjectName("lblServer"+ hostStr +"StartedTxt")
-			lblServerXStartedTxt.setText('Started:')
-			gridLayout_5.addWidget(lblServerXStartedTxt, itemCounter, 0, 1, 1)
-			lblServerXStarted = QtGui.QLabel(gbServerX)
-			lblServerXStarted.setObjectName("lblServer"+ hostStr +"Started")
-			lblServerXStarted.setText(starttime.ctime())
-			gridLayout_5.addWidget(lblServerXStarted, itemCounter, 1, 1, 1)
+			#Start Time
+			starttime = (datetime.datetime.fromtimestamp(0) + (s.Time - s.Uptime)).ctime()
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Started', starttime)
 			itemCounter += 1
 			
 			#Uptime
-			uptime = s.getUptimeUnix()
+			uptime = s.UptimeTimestamp
 			sec =  uptime % 60
 			uptime = int(uptime/60)
 			min = uptime % 60
@@ -255,223 +257,163 @@ class Stats:
 			elif sec == 1:
 				uptimeStr += str(sec) +" sec "
 				 
-			lblServerXUptimeTxt = QtGui.QLabel(gbServerX)
-			lblServerXUptimeTxt.setObjectName("lblServer"+ hostStr +"UptimeTxt")
-			lblServerXUptimeTxt.setText('Uptime:')
-			gridLayout_5.addWidget(lblServerXUptimeTxt, itemCounter, 0, 1, 1)
-			lblServerXUptime = QtGui.QLabel(gbServerX)
-			lblServerXUptime.setObjectName("lblServer"+ hostStr +"Uptime")
-			lblServerXUptime.setText(uptimeStr)
-			gridLayout_5.addWidget(lblServerXUptime, itemCounter, 1, 1, 1)
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Uptime', uptimeStr)
 			itemCounter += 1
 			
 			#Total Items
-			lblServerXTotalItemsTxt = QtGui.QLabel(gbServerX)
-			lblServerXTotalItemsTxt.setObjectName("lblServer"+ hostStr +"TotalItemsTxt")
-			lblServerXTotalItemsTxt.setText('Total Items:')
-			gridLayout_5.addWidget(lblServerXTotalItemsTxt, itemCounter, 0, 1, 1)
-			lblServerXTotalItems = QtGui.QLabel(gbServerX)
-			lblServerXTotalItems.setObjectName("lblServer"+ hostStr +"TotalItems")
-			lblServerXTotalItems.setText(str(s.getTotalItems()))
-			gridLayout_5.addWidget(lblServerXTotalItems, itemCounter, 1, 1, 1)
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Total Items', s.TotalItems)
 			itemCounter += 1
 			
 			#Current Items
-			lblServerXItemsTxt = QtGui.QLabel(gbServerX)
-			lblServerXItemsTxt.setObjectName("lblServer"+ hostStr +"ItemsTxt")
-			lblServerXItemsTxt.setText('Current Items:')
-			gridLayout_5.addWidget(lblServerXItemsTxt, itemCounter, 0, 1, 1)
-			lblServerXItems = QtGui.QLabel(gbServerX)
-			lblServerXItems.setObjectName("lblServer"+ hostStr +"Items")
-			lblServerXItems.setText(str(s.getItems()))
-			gridLayout_5.addWidget(lblServerXItems, itemCounter, 1, 1, 1)
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Current Items', s.CurrItems)
 			itemCounter += 1
 			
 			#Total Connections
-			lblServerXTotalConnectionsTxt = QtGui.QLabel(gbServerX)
-			lblServerXTotalConnectionsTxt.setObjectName("lblServer"+ hostStr +"TotalConnectionsTxt")
-			lblServerXTotalConnectionsTxt.setText('Total Connections:')
-			gridLayout_5.addWidget(lblServerXTotalConnectionsTxt, itemCounter, 0, 1, 1)
-			lblServerXTotalConnections = QtGui.QLabel(gbServerX)
-			lblServerXTotalConnections.setObjectName("lblServer"+ hostStr +"TotalConnections")
-			lblServerXTotalConnections.setText(str(s.getTotalConnections()))
-			gridLayout_5.addWidget(lblServerXTotalConnections, itemCounter, 1, 1, 1)
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Total Connections', s.TotalItems)
 			itemCounter += 1
 			
 			#Connections
-			lblServerXConnectionsTxt = QtGui.QLabel(gbServerX)
-			lblServerXConnectionsTxt.setObjectName("lblServer"+ hostStr +"ConnectionsTxt")
-			lblServerXConnectionsTxt.setText('Connections:')
-			gridLayout_5.addWidget(lblServerXConnectionsTxt, itemCounter, 0, 1, 1)
-			lblServerXConnections = QtGui.QLabel(gbServerX)
-			lblServerXConnections.setObjectName("lblServer"+ hostStr +"Connections")
-			lblServerXConnections.setText(str(s.getConnections()))
-			gridLayout_5.addWidget(lblServerXConnections, itemCounter, 1, 1, 1)
-			itemCounter += 1
-			
-			#Threads
-			lblServerXThreadsTxt = QtGui.QLabel(gbServerX)
-			lblServerXThreadsTxt.setObjectName("lblServer"+ hostStr +"ThreadsTxt")
-			lblServerXThreadsTxt.setText('Threads:')
-			gridLayout_5.addWidget(lblServerXThreadsTxt, itemCounter, 0, 1, 1)
-			lblServerXThreads = QtGui.QLabel(gbServerX)
-			lblServerXThreads.setObjectName("lblServer"+ hostStr +"Connections")
-			lblServerXThreads.setText(str(s.getThreads()))
-			gridLayout_5.addWidget(lblServerXThreads, itemCounter, 1, 1, 1)
-			itemCounter += 1
-			
-			#Hits
-			lblServerXHitsTxt = QtGui.QLabel(gbServerX)
-			lblServerXHitsTxt.setObjectName("lblServer"+ hostStr +"HitsTxt")
-			lblServerXHitsTxt.setText('Hits:')
-			gridLayout_5.addWidget(lblServerXHitsTxt, itemCounter, 0, 1, 1)
-			lblServerXHits = QtGui.QLabel(gbServerX)
-			lblServerXHits.setObjectName("lblServer"+ hostStr +"Hits")
-			lblServerXHits.setText(str(s.getHits()))
-			gridLayout_5.addWidget(lblServerXHits, itemCounter, 1, 1, 1)
-			itemCounter += 1
-			
-			#Misses
-			lblServerXMissesTxt = QtGui.QLabel(gbServerX)
-			lblServerXMissesTxt.setObjectName("lblServer"+ hostStr +"MissesTxt")
-			lblServerXMissesTxt.setText('Misses:')
-			gridLayout_5.addWidget(lblServerXMissesTxt, itemCounter, 0, 1, 1)
-			lblServerXMisses = QtGui.QLabel(gbServerX)
-			lblServerXMisses.setObjectName("lblServer"+ hostStr +"Misses")
-			lblServerXMisses.setText(str(s.getMisses()))
-			gridLayout_5.addWidget(lblServerXMisses, itemCounter, 1, 1, 1)
-			itemCounter += 1
-			
-			#Gets
-			lblServerXGetsTxt = QtGui.QLabel(gbServerX)
-			lblServerXGetsTxt.setObjectName("lblServer"+ hostStr +"GetsTxt")
-			lblServerXGetsTxt.setText('Gets:')
-			gridLayout_5.addWidget(lblServerXGetsTxt, itemCounter, 0, 1, 1)
-			lblServerXGets = QtGui.QLabel(gbServerX)
-			lblServerXGets.setObjectName("lblServer"+ hostStr +"Gets")
-			lblServerXGets.setText(str(s.getGets()))
-			gridLayout_5.addWidget(lblServerXGets, itemCounter, 1, 1, 1)
-			itemCounter += 1
-			
-			#Sets
-			lblServerXSetsTxt = QtGui.QLabel(gbServerX)
-			lblServerXSetsTxt.setObjectName("lblServer"+ hostStr +"SetsTxt")
-			lblServerXSetsTxt.setText('Sets:')
-			gridLayout_5.addWidget(lblServerXSetsTxt, itemCounter, 0, 1, 1)
-			lblServerXSets = QtGui.QLabel(gbServerX)
-			lblServerXSets.setObjectName("lblServer"+ hostStr +"Sets")
-			lblServerXSets.setText(str(s.getSets()))
-			gridLayout_5.addWidget(lblServerXSets, itemCounter, 1, 1, 1)
-			itemCounter += 1
-			
-			#Evictions
-			lblServerXMissesTxt = QtGui.QLabel(gbServerX)
-			lblServerXMissesTxt.setObjectName("lblServer"+ hostStr +"EvictionsTxt")
-			lblServerXMissesTxt.setText('Evictions:')
-			gridLayout_5.addWidget(lblServerXMissesTxt, itemCounter, 0, 1, 1)
-			lblServerXMisses = QtGui.QLabel(gbServerX)
-			lblServerXMisses.setObjectName("lblServer"+ hostStr +"Evictions")
-			lblServerXMisses.setText(str(s.getEvictions()))
-			gridLayout_5.addWidget(lblServerXMisses, itemCounter, 1, 1, 1)
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Connections', s.CurrConnections)
 			itemCounter += 1
 		
 			#Total Space
-			lblServerXTotalSpaceTxt = QtGui.QLabel(gbServerX)
-			lblServerXTotalSpaceTxt.setObjectName("lblServer"+ hostStr +"TotalSpaceTxt")
-			lblServerXTotalSpaceTxt.setText('Total Space:')
-			gridLayout_5.addWidget(lblServerXTotalSpaceTxt, itemCounter, 0, 1, 1)
-			lblServerXTotalSpace = QtGui.QLabel(gbServerX)
-			lblServerXTotalSpace.setObjectName("lblServer"+ hostStr +"TotalSpace")
-			lblServerXTotalSpace.setText(str(stats.getSpaceString(s.getTotalSpace())))
-			gridLayout_5.addWidget(lblServerXTotalSpace, itemCounter, 1, 1, 1)
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Total Space', s.getFormatedTotalSpace())
 			itemCounter += 1
 			
 			#Free Space
-			lblServerXFreeSpaceTxt = QtGui.QLabel(gbServerX)
-			lblServerXFreeSpaceTxt.setObjectName("lblServer"+ hostStr +"FreeSpaceTxt")
-			lblServerXFreeSpaceTxt.setText('Free Space:')
-			gridLayout_5.addWidget(lblServerXFreeSpaceTxt, itemCounter, 0, 1, 1)
-			lblServerXFreeSpace = QtGui.QLabel(gbServerX)
-			lblServerXFreeSpace.setObjectName("lblServer"+ hostStr +"FreeSpace")
-			lblServerXFreeSpace.setText(str(stats.getSpaceString(s.getFreeSpace())))
-			gridLayout_5.addWidget(lblServerXFreeSpace, itemCounter, 1, 1, 1)
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Free Space', s.getFormatedFreeSpace())
 			itemCounter += 1
 			
 			#Used Space
-			lblServerXUsedSpaceTxt = QtGui.QLabel(gbServerX)
-			lblServerXUsedSpaceTxt.setObjectName("lblServer"+ hostStr +"UsedSpaceTxt")
-			lblServerXUsedSpaceTxt.setText('Used Space:')
-			gridLayout_5.addWidget(lblServerXUsedSpaceTxt, itemCounter, 0, 1, 1)
-			lblServerXUsedSpace = QtGui.QLabel(gbServerX)
-			lblServerXUsedSpace.setObjectName("lblServer"+ hostStr +"UsedSpace")
-			lblServerXUsedSpace.setText(str(stats.getSpaceString(s.getUsedSpace())))
-			gridLayout_5.addWidget(lblServerXUsedSpace, itemCounter, 1, 1, 1)
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Used Space', s.getFormatedUsedSpace())
+			itemCounter += 1
+			
+			#Requests
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Total Requests', s.getTotalRequests())
+			itemCounter += 1
+			
+			#Gets
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Gets', s.CMDGet)
+			itemCounter += 1
+			
+			#Sets
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Sets', s.CMDSet)
+			itemCounter += 1
+			
+			#Flushes
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Flushes', s.CMDFlush)
+			itemCounter += 1
+			
+			#Evictions
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Evictions', s.Evictions)
+			itemCounter += 1
+			
+			#Get Hits
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Get Hits', s.GetHits)
+			itemCounter += 1
+			
+			#Get Misses
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Get Misses', s.GetMisses)
+			itemCounter += 1
+			
+			#Delete Hits
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Delete Hits', s.DeleteHits)
+			itemCounter += 1
+			
+			#Delete Misses
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Delete Misses', s.DeleteMisses)
+			itemCounter += 1
+			
+			#Incr Hits
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Incr Hits', s.IncrHits)
+			itemCounter += 1
+			
+			#Incr Misses
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Incr Misses', s.IncrMisses)
+			itemCounter += 1
+			
+			#Decr Hits
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Decr Hits', s.DecrHits)
+			itemCounter += 1
+			
+			#Decr Misses
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Decr Misses', s.DecrMisses)
+			itemCounter += 1
+			
+			#Cas Hits
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'CAS Hits', s.CasHits)
+			itemCounter += 1
+			
+			#Cas Misses
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'CAS Misses', s.CasMisses)
+			itemCounter += 1
+			
+			#Cas Badval
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'CAS Misses', s.CasBadval)
+			itemCounter += 1
+			
+			#Bytes Written
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Net Out', s.getFormatedBytesWrite())
+			itemCounter += 1
+			
+			#Bytes Read
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Net In', s.getFormatedBytesRead())
+			itemCounter += 1
+			
+			#Pointer Size
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Pointer Size', s.PointerSize)
+			itemCounter += 1
+			
+			#Threads
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Threads', s.Threads)
+			itemCounter += 1
+			
+			#RUsage User
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'CPU User Time', s.RUsageUser)
+			itemCounter += 1
+			
+			#RUsage System
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'CPU System Time', s.RUsageSystem)
+			itemCounter += 1
+			
+			#Connection Structures
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Connection Structures', s.ConnectionStructures)
+			itemCounter += 1
+			
+			#Accepting Conns
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Accepting Connections', s.AcceptingConns)
+			itemCounter += 1
+			
+			#Listen Disabled Num
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Listen Disabled Num', s.ListenDisabledNum)
+			itemCounter += 1
+			
+			#Conn Yields
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Connection Yields', s.ConnYields)
 			itemCounter += 1
 			
 			#Request Rate
-			lblServerXRequestRateTxt = QtGui.QLabel(gbServerX)
-			lblServerXRequestRateTxt.setObjectName("lblServer"+ hostStr +"RequestRateTxt")
-			lblServerXRequestRateTxt.setText('Request Rate:')
-			gridLayout_5.addWidget(lblServerXRequestRateTxt, itemCounter, 0, 1, 1)
-			lblServerXRequestRate = QtGui.QLabel(gbServerX)
-			lblServerXRequestRate.setObjectName("lblServer"+ hostStr +"RequestRate")
-			lblServerXRequestRate.setText("%.2f cache requests/second"% (s.getRequestRate(),))
-			gridLayout_5.addWidget(lblServerXRequestRate, itemCounter, 1, 1, 1)
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Request Rate', "%.2f cache requests/second"% (s.getRequestRate(),))
 			itemCounter += 1
 			
 			#Hit Rate
-			lblServerXHitRateTxt = QtGui.QLabel(gbServerX)
-			lblServerXHitRateTxt.setObjectName("lblServer"+ hostStr +"HitRateTxt")
-			lblServerXHitRateTxt.setText('Hit Rate:')
-			gridLayout_5.addWidget(lblServerXHitRateTxt, itemCounter, 0, 1, 1)
-			lblServerXHitRate = QtGui.QLabel(gbServerX)
-			lblServerXHitRate.setObjectName("lblServer"+ hostStr +"HitRate")
-			lblServerXHitRate.setText("%.2f cache requests/second"% (s.getHitRate(),))
-			gridLayout_5.addWidget(lblServerXHitRate, itemCounter, 1, 1, 1)
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Hit Rate', "%.2f cache requests/second"% (s.getHitRate(),))
 			itemCounter += 1
 			
 			#Misses Rate
-			lblServerXMissRateTxt = QtGui.QLabel(gbServerX)
-			lblServerXMissRateTxt.setObjectName("lblServer"+ hostStr +"MissRateTxt")
-			lblServerXMissRateTxt.setText('Miss Rate:')
-			gridLayout_5.addWidget(lblServerXMissRateTxt, itemCounter, 0, 1, 1)
-			lblServerXMissRate = QtGui.QLabel(gbServerX)
-			lblServerXMissRate.setObjectName("lblServer"+ hostStr +"MissRate")
-			lblServerXMissRate.setText("%.2f cache requests/second"% (s.getMissRate(),))
-			gridLayout_5.addWidget(lblServerXMissRate, itemCounter, 1, 1, 1)
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Miss Rate', "%.2f cache requests/second"% (s.getMissRate(),))
 			itemCounter += 1
 			
 			#Set Rate
-			lblServerXSetRateTxt = QtGui.QLabel(gbServerX)
-			lblServerXSetRateTxt.setObjectName("lblServer"+ hostStr +"SetRateTxt")
-			lblServerXSetRateTxt.setText('Set Rate:')
-			gridLayout_5.addWidget(lblServerXSetRateTxt, itemCounter, 0, 1, 1)
-			lblServerXSetRate = QtGui.QLabel(gbServerX)
-			lblServerXSetRate.setObjectName("lblServer"+ hostStr +"SetRate")
-			lblServerXSetRate.setText("%.2f cache requests/second"% (s.getSetRate(),))
-			gridLayout_5.addWidget(lblServerXSetRate, itemCounter, 1, 1, 1)
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Set Rate', "%.2f cache requests/second"% (s.getSetRate(),))
 			itemCounter += 1
 			
 			#Get Rate
-			lblServerXGetRateTxt = QtGui.QLabel(gbServerX)
-			lblServerXGetRateTxt.setObjectName("lblServer"+ hostStr +"GetRateTxt")
-			lblServerXGetRateTxt.setText('Get Rate:')
-			gridLayout_5.addWidget(lblServerXGetRateTxt, itemCounter, 0, 1, 1)
-			lblServerXGetRate = QtGui.QLabel(gbServerX)
-			lblServerXGetRate.setObjectName("lblServer"+ hostStr +"GetRate")
-			lblServerXGetRate.setText("%.2f cache requests/second"% (s.getGetRate(),))
-			gridLayout_5.addWidget(lblServerXGetRate, itemCounter, 1, 1, 1)
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Get Rate', "%.2f cache requests/second"% (s.getGetRate(),))
 			itemCounter += 1
 			
 			#Eviction Rate
-			lblServerXGetRateTxt = QtGui.QLabel(gbServerX)
-			lblServerXGetRateTxt.setObjectName("lblServer"+ hostStr +"EvictionRateTxt")
-			lblServerXGetRateTxt.setText('Eviction Rate:')
-			gridLayout_5.addWidget(lblServerXGetRateTxt, itemCounter, 0, 1, 1)
-			lblServerXGetRate = QtGui.QLabel(gbServerX)
-			lblServerXGetRate.setObjectName("lblServer"+ hostStr +"EvictionRate")
-			lblServerXGetRate.setText("%.2f evictions/second"% (s.getEvictionRate(),))
-			gridLayout_5.addWidget(lblServerXGetRate, itemCounter, 1, 1, 1)
+			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Eviction Rate', "%.2f cache requests/second"% (s.getEvictionRate(),))
 			itemCounter += 1
 			
 			self.mainWindow.verticalLayout_6.addWidget(gbServerX)
