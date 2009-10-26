@@ -73,6 +73,6 @@ class Cluster:
 		
 	def getStats(self):
 		mc = self.getMemcached()
-		stats = memcached.Stats.MemcachedStats(mc)
+		stats = memcached.Stats.MemcachedClusterStats(mc)
 		mc.disconnect_all()
 		return stats
