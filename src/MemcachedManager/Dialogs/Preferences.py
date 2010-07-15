@@ -1,9 +1,9 @@
 from PyQt4 import QtGui
 from PyQt4 import QtCore
-from Dialogs.ui_Preferences import Ui_PrefWindow
+from MemcachedManager.Dialogs.ui_Preferences import Ui_PrefWindow
 import time
 import threading
-from Settings import Settings
+from MemcachedManager.Settings import Settings
 
 class Preferences(QtGui.QDialog, Ui_PrefWindow):
 	def __init__(self):

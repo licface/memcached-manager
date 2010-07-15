@@ -4,17 +4,16 @@ import matplotlib
 from matplotlib import pyplot
 import datetime
 import os.path
-from Dialogs import LiveStats
-import Settings
+from MemcachedManager.Dialogs import LiveStats
+import MemcachedManager.Settings
 
 class Stats:
-	def __init__(self, mainWindow):
-		self.mainWindow = mainWindow
-		self.mainWindow.connect(self.mainWindow.btnWatch, QtCore.SIGNAL("clicked()"), self.watchLiveStats)
-		self.mainWindow.connect(self.mainWindow.btnRefresh, QtCore.SIGNAL('clicked()'), self._updateStats)
+	def __init__(self):
+		self.connect(self.btnWatch, QtCore.SIGNAL("clicked()"), self.watchLiveStats)
+		self.connect(self.btnRefresh, QtCore.SIGNAL('clicked()'), self._updateStats)
 		
 		self.liveStatsDialog = LiveStats.Dialog()
-		self.settings = Settings.Settings()
+		self.settings = MemcachedManager.Settings.Settings()
 		
 	def onFocus(self):
 		"""
@@ -23,18 +22,18 @@ class Stats:
 		if self.settings.settings.config['Stats']['AutoRefresh'] is True:
 			self._updateStats()
 			
-	def onClose(self):
+	def closeEvent(self):
 		self.liveStatsDialog.close()
 		
 	def watchLiveStats(self):
 		"""
 		Display the Live Stats Dialog
 		"""
-		if self.mainWindow.currentCluster is not None:
-			self.liveStatsDialog.setCluster(self.mainWindow.currentCluster)
+		if self.currentCluster is not None:
+			self.liveStatsDialog.setCluster(self.currentCluster)
 			self.liveStatsDialog.show()
 		else:
-			QtGui.QMessageBox.critical(self.mainWindow, "No Cluster Selected", "You do not have an Active Cluster")
+			QtGui.QMessageBox.critical(self, "No Cluster Selected", "You do not have an Active Cluster")
 		
 	def _updateStats(self):
 		"""
@@ -43,53 +42,53 @@ class Stats:
 		Fires off all the seperate events needed to update each 
 		stats tab and updates the prograss bar
 		"""
-		self.mainWindow.pbStats.setValue(0)
-		if self.mainWindow.currentCluster is not None:
+		self.pbStats.setValue(0)
+		if self.currentCluster is not None:
 			matplotlib.rc('font', size=12)
-			stats = self.mainWindow.currentCluster.getStats()
-			self.mainWindow.pbStats.setValue(10)
+			stats = self.currentCluster.getStats()
+			self.pbStats.setValue(10)
 			self._updateCachInfo(stats)
-			self.mainWindow.pbStats.setValue(30)
+			self.pbStats.setValue(30)
 			self._updateDiagrams_CacheUsage(stats)
-			self.mainWindow.pbStats.setValue(60)
+			self.pbStats.setValue(60)
 			self._updateDiagrams_HitsMisses(stats)
-			self.mainWindow.pbStats.setValue(80)
+			self.pbStats.setValue(80)
 			self._updateDiagrams_GetsSets(stats)
-			self.mainWindow.pbStats.setValue(90)
+			self.pbStats.setValue(90)
 			self._updateServerInfo(stats)
-			self.mainWindow.pbStats.setValue(100)
+			self.pbStats.setValue(100)
 		else:
-			QtGui.QMessageBox.critical(self.mainWindow, "No Cluster Selected", "You do not have an Active Cluster")
+			QtGui.QMessageBox.critical(self, "No Cluster Selected", "You do not have an Active Cluster")
 		
 	def _updateCachInfo(self, stats):
 		"""
 		Updates the Cache Info Tab
 		"""
-		self.mainWindow.lblItems.setText(str(stats.getTotalItems()))
-		self.mainWindow.lblCurrentItems.setText(str(stats.getItems()))
-		self.mainWindow.lblConnections.setText(str(stats.getTotalConnections()))
-		self.mainWindow.lblCurrentConnections.setText(str(stats.getConnections()))
-		self.mainWindow.lblHits.setText(str(stats.getHits()))
-		self.mainWindow.lblMisses.setText(str(stats.getMisses()))
-		self.mainWindow.lblGets.setText(str(stats.getGets()))
-		self.mainWindow.lblSets.setText(str(stats.getSets()))
-		self.mainWindow.lblThreads.setText(str(stats.getThreads()))
+		self.lblItems.setText(str(stats.getTotalItems()))
+		self.lblCurrentItems.setText(str(stats.getItems()))
+		self.lblConnections.setText(str(stats.getTotalConnections()))
+		self.lblCurrentConnections.setText(str(stats.getConnections()))
+		self.lblHits.setText(str(stats.getHits()))
+		self.lblMisses.setText(str(stats.getMisses()))
+		self.lblGets.setText(str(stats.getGets()))
+		self.lblSets.setText(str(stats.getSets()))
+		self.lblThreads.setText(str(stats.getThreads()))
 		
-		self.mainWindow.lblSpace.setText(stats.getFormatedTotalSpace())
-		self.mainWindow.lblFree.setText(stats.getFormatedFreeSpace())
-		self.mainWindow.lblUsed.setText(stats.getFormatedUsedSpace())
+		self.lblSpace.setText(stats.getFormatedTotalSpace())
+		self.lblFree.setText(stats.getFormatedFreeSpace())
+		self.lblUsed.setText(stats.getFormatedUsedSpace())
 		
-		self.mainWindow.lblRequestRate.setText("%.2f cache requests/second"% (stats.getRequestRate(),))
-		self.mainWindow.lblHitRate.setText("%.2f cache requests/second"% (stats.getHitRate(),))
-		self.mainWindow.lblMissRate.setText("%.2f cache requests/second"% (stats.getMissRate(),))
-		self.mainWindow.lblSetRate.setText("%.2f cache requests/second"% (stats.getSetRate(),))
-		self.mainWindow.lblGetRate.setText("%.2f cache requests/second"% (stats.getGetRate(),))
+		self.lblRequestRate.setText("%.2f cache requests/second"% (stats.getRequestRate(),))
+		self.lblHitRate.setText("%.2f cache requests/second"% (stats.getHitRate(),))
+		self.lblMissRate.setText("%.2f cache requests/second"% (stats.getMissRate(),))
+		self.lblSetRate.setText("%.2f cache requests/second"% (stats.getSetRate(),))
+		self.lblGetRate.setText("%.2f cache requests/second"% (stats.getGetRate(),))
 		
-		self.mainWindow.lblRequestRateAvg.setText("%.2f cache requests/second"% (stats.getRequestRateAvg(),))
-		self.mainWindow.lblHitRateAvg.setText("%.2f cache requests/second"% (stats.getHitRateAvg(),))
-		self.mainWindow.lblMissRateAvg.setText("%.2f cache requests/second"% (stats.getMissRateAvg(),))
-		self.mainWindow.lblSetRateAvg.setText("%.2f cache requests/second"% (stats.getSetRateAvg(),))
-		self.mainWindow.lblGetRateAvg.setText("%.2f cache requests/second"% (stats.getGetRateAvg(),))
+		self.lblRequestRateAvg.setText("%.2f cache requests/second"% (stats.getRequestRateAvg(),))
+		self.lblHitRateAvg.setText("%.2f cache requests/second"% (stats.getHitRateAvg(),))
+		self.lblMissRateAvg.setText("%.2f cache requests/second"% (stats.getMissRateAvg(),))
+		self.lblSetRateAvg.setText("%.2f cache requests/second"% (stats.getSetRateAvg(),))
+		self.lblGetRateAvg.setText("%.2f cache requests/second"% (stats.getGetRateAvg(),))
 		
 	def _updateDiagrams_CacheUsage(self, stats):
 		"""
@@ -126,9 +125,9 @@ class Stats:
 		pyplot.pie(values, labels=labels, shadow=True, autopct="%1.1f%%", colors=colors)
 		
 		pyplot.title('Cache Usage')
-		path = os.path.join(Settings.getSaveLocation(), 'CacheUsage.png')
+		path = os.path.join(MemcachedManager.Settings.getSaveLocation(), 'CacheUsage.png')
 		figure.savefig(path)
-		self.mainWindow.lblCacheUsageGraph.setPixmap(QtGui.QPixmap(path))
+		self.lblCacheUsageGraph.setPixmap(QtGui.QPixmap(path))
 		
 	def _updateDiagrams_HitsMisses(self, stats):
 		"""
@@ -149,9 +148,9 @@ class Stats:
 		pyplot.gca().text(bar[0].get_x()+bar[0].get_width()/2.0, 1.0*bar[0].get_height(), "%1.2f%%"%(hits,), ha='center', va='bottom')
 		pyplot.gca().text(bar[1].get_x()+bar[1].get_width()/2.0, 1.0*bar[1].get_height(), "%1.2f%%"%(misses,), ha='center', va='bottom')
 
-		path = os.path.join(Settings.getSaveLocation(), 'HitsMisses.png')
+		path = os.path.join(MemcachedManager.Settings.getSaveLocation(), 'HitsMisses.png')
 		figure.savefig(path)
-		self.mainWindow.lblHitsMissesGraph.setPixmap(QtGui.QPixmap(path))
+		self.lblHitsMissesGraph.setPixmap(QtGui.QPixmap(path))
 		
 	def _updateDiagrams_GetsSets(self, stats):
 		"""
@@ -172,29 +171,29 @@ class Stats:
 		pyplot.gca().text(bar[0].get_x()+bar[0].get_width()/2.0, 1.0*bar[0].get_height(), "%1.2f%%"%(gets,), ha='center', va='bottom')
 		pyplot.gca().text(bar[1].get_x()+bar[1].get_width()/2.0, 1.0*bar[1].get_height(), "%1.2f%%"%(sets,), ha='center', va='bottom')
 
-		path = os.path.join(Settings.getSaveLocation(), 'GetsSets.png')
+		path = os.path.join(MemcachedManager.Settings.getSaveLocation(), 'GetsSets.png')
 		figure.savefig(path)
-		self.mainWindow.lblGetSetGraph.setPixmap(QtGui.QPixmap(path))
+		self.lblGetSetGraph.setPixmap(QtGui.QPixmap(path))
 		
 	def _updateServerInfo(self, stats):
 		"""
 		Updates the Server Info Tab
 		"""
 		#Destroy the Scroll Area
-		self.mainWindow.horizontalLayout_6.removeWidget(self.mainWindow.saServerInfo)
+		self.horizontalLayout_6.removeWidget(self.saServerInfo)
 		QtCore.Qt.WA_DeleteOnClose
-		self.mainWindow.saServerInfo.setAttribute(QtCore.Qt.WA_DeleteOnClose)
-		self.mainWindow.saServerInfo.close()
+		self.saServerInfo.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+		self.saServerInfo.close()
 		
 		#Rebuild the Scroll Area
-		self.mainWindow.saServerInfo = QtGui.QScrollArea(self.mainWindow.ServerInfo)
-		self.mainWindow.saServerInfo.setWidgetResizable(True)
-		self.mainWindow.saServerInfo.setObjectName("saServerInfo")
-		self.mainWindow.scrollAreaWidgetContents_3 = QtGui.QWidget(self.mainWindow.saServerInfo)
-		self.mainWindow.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 262, 436))
-		self.mainWindow.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
-		self.mainWindow.verticalLayout_6 = QtGui.QVBoxLayout(self.mainWindow.scrollAreaWidgetContents_3)
-		self.mainWindow.verticalLayout_6.setObjectName("verticalLayout_6")
+		self.saServerInfo = QtGui.QScrollArea(self.ServerInfo)
+		self.saServerInfo.setWidgetResizable(True)
+		self.saServerInfo.setObjectName("saServerInfo")
+		self.scrollAreaWidgetContents_3 = QtGui.QWidget(self.saServerInfo)
+		self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 262, 436))
+		self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
+		self.verticalLayout_6 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents_3)
+		self.verticalLayout_6.setObjectName("verticalLayout_6")
 		
 		def renderItem(gbBox, grid, serverName, itemCounter, itemName, itemValue):
 			cleanName = itemName.replace(':', '').replace(' ', '')
@@ -212,7 +211,7 @@ class Stats:
 			hostStr = str(s.Name).replace(':', '').replace('.', '').replace('-', '')
 			itemCounter = 0
 			#Create Group Box
-			gbServerX = QtGui.QGroupBox(self.mainWindow.scrollAreaWidgetContents_3)
+			gbServerX = QtGui.QGroupBox(self.scrollAreaWidgetContents_3)
 			gbServerX.setObjectName("gbServer"+ hostStr)
 			gbServerX.setTitle(str(s.Name)+ " - V"+ str(s.Version))
 			
@@ -415,7 +414,7 @@ class Stats:
 			renderItem(gbServerX, gridLayout_5, hostStr, itemCounter, 'Eviction Rate', "%.2f cache requests/second"% (s.getEvictionRate(),))
 			itemCounter += 1
 			
-			self.mainWindow.verticalLayout_6.addWidget(gbServerX)
+			self.verticalLayout_6.addWidget(gbServerX)
 			
-		self.mainWindow.saServerInfo.setWidget(self.mainWindow.scrollAreaWidgetContents_3)
-		self.mainWindow.horizontalLayout_6.addWidget(self.mainWindow.saServerInfo)
+		self.saServerInfo.setWidget(self.scrollAreaWidgetContents_3)
+		self.horizontalLayout_6.addWidget(self.saServerInfo)

@@ -2,8 +2,8 @@ from PyQt4 import QtCore
 from PyQt4 import QtGui
 
 class Slabs:
-	def __init__(self, mainWindow):
-		self.mainWindow = mainWindow
+	def __init__(self):
+		pass
 		
 	def onFocus(self):
 		"""
@@ -11,5 +11,5 @@ class Slabs:
 		"""
 		pass
 	
-	def onClose(self):
+	def closeEvent(self):
 		pass
