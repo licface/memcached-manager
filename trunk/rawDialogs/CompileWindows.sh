@@ -18,4 +18,8 @@ pyuic4 -o ../src/Dialogs/ui_Add.py Add.ui
 echo "Compiling About.ui"
 pyuic4 -o ../src/Dialogs/ui_About.py About.ui
 
+#Cached Item Dialog
+echo "Compiling About.ui"
+pyuic4 -o ../src/Dialogs/ui_CachedItem.py CachedItem.ui
+
 echo "Done"

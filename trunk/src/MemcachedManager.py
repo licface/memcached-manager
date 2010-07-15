@@ -48,7 +48,7 @@ from PyQt4 import QtGui
 from PyQt4 import QtCore
 from Tabs import ManagementTasks, Slabs, Stats
 from ui_MainWindow import Ui_MainWindow
-from Dialogs import Preferences, Add, About
+from Dialogs import Preferences, Add, About, CachedItem
 import sys
 from Settings import Settings
 
@@ -56,6 +56,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	def __init__(self):
 		QtGui.QMainWindow.__init__(self)
 		self.setupUi(self)
+		
+		#Setup Tab Management Interfaces
 		self.ManagementTasks = ManagementTasks.ManagementTasks(self)
 		self.Slabs = Slabs.Slabs(self)
 		self.Stats = Stats.Stats(self)
@@ -63,6 +65,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.addDialog = Add.AddServersClusters()
 		self.preferencesDialog = Preferences.Preferences()
 		self.aboutDialog = About.About()
+		self.cachedItemDialog = CachedItem.CachedItem()
 		
 		self.settings = Settings()
 		

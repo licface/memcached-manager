@@ -105,11 +105,22 @@
             </layout>
            </item>
            <item>
-            <widget class="QPushButton" name="btnCacheKeys">
-             <property name="text">
-              <string>Delete Key(s)</string>
-             </property>
-            </widget>
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
+              <widget class="QPushButton" name="btnGetCacheKeys">
+               <property name="text">
+                <string>Get Key(s)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnDelCacheKeys">
+               <property name="text">
+                <string>Delete Key(s)</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
            <item>
             <widget class="QPushButton" name="btnFlushCache">
@@ -239,8 +250,8 @@ p, li { white-space: pre-wrap; }
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>432</width>
-                 <height>612</height>
+                 <width>436</width>
+                 <height>502</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -594,8 +605,8 @@ p, li { white-space: pre-wrap; }
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>149</width>
-                 <height>84</height>
+                 <width>126</width>
+                 <height>69</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout">
@@ -641,8 +652,8 @@ p, li { white-space: pre-wrap; }
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>189</width>
-                 <height>432</height>
+                 <width>169</width>
+                 <height>352</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -927,7 +938,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>722</width>
-     <height>27</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1011,7 +1022,6 @@ p, li { white-space: pre-wrap; }
   <tabstop>treeCluster</tabstop>
   <tabstop>tabsMain</tabstop>
   <tabstop>txtCacheKeys</tabstop>
-  <tabstop>btnCacheKeys</tabstop>
   <tabstop>btnFlushCache</tabstop>
   <tabstop>txtSearchKey</tabstop>
   <tabstop>cbRegEx</tabstop>
