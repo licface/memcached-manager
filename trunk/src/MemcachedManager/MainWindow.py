@@ -10,25 +10,30 @@ from PyQt4 import QtCore
 from Tabs import ManagementTasks, Slabs, Stats
 from ui_MainWindow import Ui_MainWindow
 from Dialogs import Preferences, Add, About, CachedItem
-import os
 from Settings import Settings
 import Main
 
 class MainWindow(QtGui.QMainWindow, Ui_MainWindow, ManagementTasks.ManagementTasks, Slabs.Slabs, Stats.Stats):
     def __init__(self):
+        #Build out UI
         QtGui.QMainWindow.__init__(self)
         self.setupUi(self)
+        
+        #Setup Inherited Tab Classes
         ManagementTasks.ManagementTasks.__init__(self)
         Slabs.Slabs.__init__(self)
         Stats.Stats.__init__(self)
         
+        #Startup the Dialogs
         self.addDialog = Add.AddServersClusters()
         self.preferencesDialog = Preferences.Preferences()
         self.aboutDialog = About.About()
         self.cachedItemDialog = CachedItem.CachedItem()
         
+        #Load Settings
         self.settings = Settings()
         
+        #Bind to events
         self.connect(self.actionAddClusterServer, QtCore.SIGNAL("triggered()"), self.displayAdd)
         self.connect(self.actionAbout, QtCore.SIGNAL("triggered()"), self.displayAbout)
         self.connect(self.addDialog, QtCore.SIGNAL('savedCluster'), self.addCluster)
@@ -43,9 +48,11 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow, ManagementTasks.ManagementTas
         
         self.currentCluster = None
         
+        #Build out Cluster Tree
         for cluster in self.settings.servers.getClusters():
             self.addCluster(cluster)
             
+        #Create the Icons
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(Main.getIconPath("Globe.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         addIcon = QtGui.QIcon()
@@ -55,8 +62,10 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow, ManagementTasks.ManagementTas
         activeIcon = QtGui.QIcon()
         activeIcon.addPixmap(QtGui.QPixmap(Main.getIconPath("Active.png")), QtGui.QIcon.Normal, QtGui.QIcon.On)
         
+        #Reset the Window Icon as paths change
         self.setWindowIcon(icon)
         
+        #Build out the Cluster Tree Context Menus
         self.treeCMServer = QtGui.QMenu()
         self.treeCMServerActions = {"addServer": QtGui.QAction(self),
                                 "deleteServer": QtGui.QAction(self)}
