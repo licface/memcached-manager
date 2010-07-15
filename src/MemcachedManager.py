@@ -50,6 +50,7 @@ from Tabs import ManagementTasks, Slabs, Stats
 from ui_MainWindow import Ui_MainWindow
 from Dialogs import Preferences, Add, About, CachedItem
 import sys
+import os
 from Settings import Settings
 
 class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
@@ -88,20 +89,47 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		for cluster in self.settings.servers.getClusters():
 			self.addCluster(cluster)
 			
+		addIcon = QtGui.QIcon()
+		addIcon.addPixmap(QtGui.QPixmap("Icons/Add.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+		removeIcon = QtGui.QIcon()
+		removeIcon.addPixmap(QtGui.QPixmap("Icons/Remove.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+		activeIcon = QtGui.QIcon()
+		activeIcon.addPixmap(QtGui.QPixmap("Icons/Active.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
 		
 		self.treeCMServer = QtGui.QMenu()
-		self.treeCMServerActions = {"deleteServer": QtGui.QAction(self)}
+		self.treeCMServerActions = {"addServer": QtGui.QAction(self),
+								"deleteServer": QtGui.QAction(self)}
+		
+		self.treeCMServerActions['addServer'].setText("Add Server/Cluster")
+		self.treeCMServerActions['addServer'].setIcon(addIcon)
+		self.treeCMServer.addAction(self.treeCMServerActions['addServer'])
+		
 		self.treeCMServerActions['deleteServer'].setText("Delete")
+		self.treeCMServerActions['deleteServer'].setIcon(removeIcon)
 		self.treeCMServer.addAction(self.treeCMServerActions['deleteServer'])
+		
+		self.connect(self.treeCMServerActions['addServer'], QtCore.SIGNAL("triggered()"), self.displayAdd)
 		self.connect(self.treeCMServerActions['deleteServer'], QtCore.SIGNAL("triggered()"), self.deleteServer)
 
 
 		self.treeCMCluster = QtGui.QMenu()
-		self.treeCMClusterActions = {"deleteCluster": QtGui.QAction(self), "makeActive": QtGui.QAction(self)}
+		self.treeCMClusterActions = {"addServer": QtGui.QAction(self),
+									"deleteCluster": QtGui.QAction(self), 
+									"makeActive": QtGui.QAction(self)}
+		
+		self.treeCMClusterActions['addServer'].setText("Add Server/Cluster")
+		self.treeCMClusterActions['addServer'].setIcon(addIcon)
+		self.treeCMCluster.addAction(self.treeCMClusterActions['addServer'])
+		
 		self.treeCMClusterActions['deleteCluster'].setText("Delete")
+		self.treeCMClusterActions['deleteCluster'].setIcon(removeIcon)
 		self.treeCMCluster.addAction(self.treeCMClusterActions['deleteCluster'])
+		
 		self.treeCMClusterActions['makeActive'].setText("Make Active")
+		self.treeCMClusterActions['makeActive'].setIcon(activeIcon)
 		self.treeCMCluster.addAction(self.treeCMClusterActions['makeActive'])
+		
+		self.connect(self.treeCMClusterActions['addServer'], QtCore.SIGNAL("triggered()"), self.displayAdd)
 		self.connect(self.treeCMClusterActions['deleteCluster'], QtCore.SIGNAL("triggered()"), self.deleteCluster)
 		self.connect(self.treeCMClusterActions['makeActive'], QtCore.SIGNAL("triggered()"), self.setClusterByContextMenu)
 			
@@ -109,7 +137,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.aboutDialog.show()
 	
 	def closeAll(self, *args, **kargs):
-		print 'Closing'
 		self.Stats.onClose()
 		self.Slabs.onClose()
 		self.ManagementTasks.onClose()
