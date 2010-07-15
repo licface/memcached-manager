@@ -1,23 +1,16 @@
 import os
-import sys
 from Clusters import Cluster
 from Servers import Server
 import pickle
 		
 def getSaveLocation():
 	try:
-		path = os.path.join(os.environ.get('HOME', os.getcwd()), '.MemcachedManager')
+		path = os.path.join(os.environ.get('HOME', os.environ.get('HOMEPATH', os.getcwd())), '.MemcachedManager')
 		if not os.path.exists(path):
 			os.makedirs(path, 0755)
 		return path
 	except Exception, e:
-		try:
-			path = os.path.join(os.environ.get('HOMEPATH', os.getcwd()), '.MemcachedManager')
-			if not os.path.exists(path):
-				os.makedirs(path, 0755)
-			return path
-		except Exception, e:
-			return os.getcwd()
+		return os.getcwd()
 
 class Settings:
 	settings = None
