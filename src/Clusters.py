@@ -65,6 +65,13 @@ class Cluster:
 		mc = self.getMemcached()
 		mc.delete_multi(keys)
 		mc.disconnect_all()
+			
+	def getKey(self, key, unpickel=True):
+		keys = key.split(';')
+		mc = self.getMemcached()
+		values = mc.get_multi(keys, unpickel=unpickel)
+		mc.disconnect_all()
+		return values
 		
 	def flushKeys(self):
 		mc = self.getMemcached()

@@ -5,7 +5,8 @@ class ManagementTasks:
 	def __init__(self, mainWindow):
 		self.mainWindow = mainWindow
 		
-		self.mainWindow.connect(self.mainWindow.btnCacheKeys, QtCore.SIGNAL("clicked()"), self.deleteKeys)
+		self.mainWindow.connect(self.mainWindow.btnDelCacheKeys, QtCore.SIGNAL("clicked()"), self.deleteKeys)
+		self.mainWindow.connect(self.mainWindow.btnGetCacheKeys, QtCore.SIGNAL("clicked()"), self.getKeys)
 		self.mainWindow.connect(self.mainWindow.btnFlushCache, QtCore.SIGNAL("clicked()"), self.flushServers)
 		self.mainWindow.connect(self.mainWindow.btnKeySearch, QtCore.SIGNAL("clicked()"), self.keySearch)
 		
@@ -17,6 +18,16 @@ class ManagementTasks:
 	
 	def onClose(self):
 		pass
+	
+	def getKeys(self):
+		value = self.mainWindow.txtCacheKeys.text()
+		if self.mainWindow.currentCluster is not None:
+			self.mainWindow.cachedItemDialog.hide()
+			self.mainWindow.cachedItemDialog.show()
+			self.mainWindow.cachedItemDialog.setCluster(self.mainWindow.currentCluster)
+			self.mainWindow.cachedItemDialog.setKeys(value)
+		else:
+			QtGui.QMessageBox.critical(self.mainWindow, "Not Cluster Selected", "You do not have an Active Cluster")
 		
 	def deleteKeys(self):
 		"""
