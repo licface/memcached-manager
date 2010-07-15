@@ -1,8 +1,8 @@
 from PyQt4 import QtGui
 from PyQt4 import QtCore
-from Dialogs.ui_Add import Ui_AddDialog
-from Settings import Settings
-from Clusters import Cluster
+from MemcachedManager.Dialogs.ui_Add import Ui_AddDialog
+from MemcachedManager.Settings import Settings
+from MemcachedManager.Clusters import Cluster
 
 class AddServersClusters(QtGui.QDialog, Ui_AddDialog):
 	def __init__(self):

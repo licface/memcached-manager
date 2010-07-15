@@ -4,7 +4,7 @@ Created on Apr 8, 2009
 @author: nick
 '''
 from PyQt4 import QtGui
-from Dialogs.ui_About import Ui_dialogAbout
+from MemcachedManager.Dialogs.ui_About import Ui_dialogAbout
 
 class About(QtGui.QDialog, Ui_dialogAbout):
 	def __init__(self):

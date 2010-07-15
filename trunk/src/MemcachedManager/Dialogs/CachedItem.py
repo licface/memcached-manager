@@ -5,7 +5,7 @@ Created on Jul 14, 2010
 '''
 from PyQt4 import QtGui
 from PyQt4 import QtCore
-from Dialogs.ui_CachedItem import Ui_CacheItem
+from MemcachedManager.Dialogs.ui_CachedItem import Ui_CacheItem
 import json
 
 class CachedItem(QtGui.QDialog, Ui_CacheItem):

@@ -50,18 +50,25 @@ from Tabs import ManagementTasks, Slabs, Stats
 from ui_MainWindow import Ui_MainWindow
 from Dialogs import Preferences, Add, About, CachedItem
 import sys
-import os
 from Settings import Settings
 
-class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
+__version__ = "0.1"
+
+def launch():
+	app = QtGui.QApplication(sys.argv)
+	window = MainWindow()
+	window.show()
+	app.connect(app, QtCore.SIGNAL("lastWindowClosed()"), app, QtCore.SLOT("quit()"))
+	sys.exit(app.exec_())
+	
+
+class MainWindow(QtGui.QMainWindow, Ui_MainWindow, ManagementTasks.ManagementTasks, Slabs.Slabs, Stats.Stats):
 	def __init__(self):
 		QtGui.QMainWindow.__init__(self)
 		self.setupUi(self)
-		
-		#Setup Tab Management Interfaces
-		self.ManagementTasks = ManagementTasks.ManagementTasks(self)
-		self.Slabs = Slabs.Slabs(self)
-		self.Stats = Stats.Stats(self)
+		ManagementTasks.ManagementTasks.__init__(self)
+		Slabs.Slabs.__init__(self)
+		Stats.Stats.__init__(self)
 		
 		self.addDialog = Add.AddServersClusters()
 		self.preferencesDialog = Preferences.Preferences()
@@ -69,8 +76,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.cachedItemDialog = CachedItem.CachedItem()
 		
 		self.settings = Settings()
-		
-		self.connect(self, QtCore.SIGNAL('destroyed(QObject*)'), self.closeAll)
 		
 		self.connect(self.actionAddClusterServer, QtCore.SIGNAL("triggered()"), self.displayAdd)
 		self.connect(self.actionAbout, QtCore.SIGNAL("triggered()"), self.displayAbout)
@@ -136,13 +141,14 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	def displayAbout(self):
 		self.aboutDialog.show()
 	
-	def closeAll(self, *args, **kargs):
-		self.Stats.onClose()
-		self.Slabs.onClose()
-		self.ManagementTasks.onClose()
+	def closeEvent(self, *args):
+		Stats.Stats.closeEvent(self)
+		Slabs.Slabs.closeEvent(self)
+		ManagementTasks.ManagementTasks.closeEvent(self)
 		
 		self.addDialog.close()
 		self.preferencesDialog.close()
+		self.cachedItemDialog.close()
 		
 	def mainTabChanged(self, tab):
 		"""
@@ -152,11 +158,11 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		allowing them to update data if needed or preferances saying to. 
 		"""
 		if tab.objectName() == 'Stats':
-			self.Stats.onFocus()
+			Stats.Stats.onFocus(self)
 		elif tab.objectName() == 'SKInfo':
-			self.Slabs.onFocus()
+			Slabs.Slabs.onFocus(self)
 		elif tab.objectName() == 'MTasks':
-			self.ManagementTasks.onFocus()
+			ManagementTasks.ManagementTasks.onFocus(self)
 
 	def displayTreeContextMenu(self, point):
 		"""
@@ -247,9 +253,5 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		
 		
 if __name__ == '__main__':
-	app = QtGui.QApplication(sys.argv)
-	window = MainWindow()
-	window.show()
-	app.connect(app, QtCore.SIGNAL("lastWindowClosed()"), app, QtCore.SLOT("quit()"))
-	sys.exit(app.exec_())
+	launch()
 	

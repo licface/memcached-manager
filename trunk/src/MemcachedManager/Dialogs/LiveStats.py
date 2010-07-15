@@ -3,10 +3,10 @@ from matplotlib import pyplot
 
 from PyQt4 import QtGui
 from PyQt4 import QtCore
-from Dialogs.ui_LiveStats import Ui_liveStatsDialog
+from MemcachedManager.Dialogs.ui_LiveStats import Ui_liveStatsDialog
 import time
 import threading
-import Settings
+import MemcachedManager.Settings
 import os
 import datetime
 import gc
@@ -21,7 +21,7 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		self.threadInterupt = False
 		self.stats = []
 		
-		self.settings = Settings.Settings()
+		self.settings = MemcachedManager.Settings.Settings()
 		
 		self.lblConnectionsGraph.clear()
 		self.lblGetsGraph.clear()
@@ -91,14 +91,15 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		ax.plot(y)
 		
 		def format_date(x, pos=None):
-                        if int(x) >= len(self.stats):
-                                return ''
-                        else:
-        			return self.stats[int(x)]['date'].strftime('%I:%M:%S')
+			if int(x) >= len(self.stats):
+				return ''
+			else:
+				return self.stats[int(x)]['date'].strftime('%I:%M:%S')
+			
 		ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(format_date))
 		ax.legend(legend, prop=matplotlib.font_manager.FontProperties(size=8))
 		figure.autofmt_xdate()
-		path = os.path.join(Settings.getSaveLocation(), 'ActiveConnections.png')
+		path = os.path.join(MemcachedManager.Settings.getSaveLocation(), 'ActiveConnections.png')
 		figure.savefig(path)
 		figure.clear()
 		#self.lblConnectionsGraph.setPixmap(QtGui.QPixmap(path))
@@ -121,14 +122,15 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		
 		def format_date(x, pos=None):
 			if int(x) >= len(self.stats):
-                                return ''
-                        else:
-        			return self.stats[int(x)]['date'].strftime('%I:%M:%S')
+				return ''
+			else:
+				return self.stats[int(x)]['date'].strftime('%I:%M:%S')
+			
 		ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(format_date))
 		ax.legend(legend, prop=matplotlib.font_manager.FontProperties(size=8))
 		figure.autofmt_xdate()
 		
-		path = os.path.join(Settings.getSaveLocation(), 'ActiveGetsSets.png')
+		path = os.path.join(MemcachedManager.Settings.getSaveLocation(), 'ActiveGetsSets.png')
 		figure.savefig(path)
 		figure.clear()
 		self.lblGetsGraph.setPixmap(QtGui.QPixmap(path))
@@ -151,14 +153,14 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		
 		def format_date(x, pos=None):
 			if int(x) >= len(self.stats):
-                                return ''
-                        else:
-        			return self.stats[int(x)]['date'].strftime('%I:%M:%S')
+				return ''
+			else:
+				return self.stats[int(x)]['date'].strftime('%I:%M:%S')
 		ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(format_date))
 		ax.legend(legend, prop=matplotlib.font_manager.FontProperties(size=8))
 		figure.autofmt_xdate()
 		
-		path = os.path.join(Settings.getSaveLocation(), 'ActiveHitsMisses.png')
+		path = os.path.join(MemcachedManager.Settings.getSaveLocation(), 'ActiveHitsMisses.png')
 		figure.savefig(path)
 		figure.clear()
 		self.lblHitsMissesGraph.setPixmap(QtGui.QPixmap(path))
@@ -181,15 +183,15 @@ class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 		
 		def format_date(x, pos=None):
 			if int(x) >= len(self.stats):
-                                return ''
-                        else:
-        			return self.stats[int(x)]['date'].strftime('%I:%M:%S')
+				return ''
+			else:
+				return self.stats[int(x)]['date'].strftime('%I:%M:%S')
 		
 		ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(format_date))
 		ax.legend(legend, prop=matplotlib.font_manager.FontProperties(size=8))
 		figure.autofmt_xdate()
 		
-		path = os.path.join(Settings.getSaveLocation(), 'ActiveMemory.png')
+		path = os.path.join(MemcachedManager.Settings.getSaveLocation(), 'ActiveMemory.png')
 		figure.savefig(path)
 		figure.clear()
 		self.lblMemoryGraph.setPixmap(QtGui.QPixmap(path))
