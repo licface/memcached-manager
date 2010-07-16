@@ -1,19 +1,11 @@
-#labels Featured
-= Feature List =
-
-This is a some what complete list of features as it stands. You may also check the [https://blueprints.launchpad.net/memcached-manager Blueprints] page for upcoming features that may not be documented yet.
-
-== Features Planned for V0.1 ==
+#labels Featured,Phase-Design
+= Feature List Current =
+ * Grouping of Server into Clusters
  * Management Tasks
-  * Delete Key(s) - 1 or more at a time
-  * Flush Keys across whole cluster
-  * Group Memcached Servers into a Cluster
-  * Fetch Keys
-   * Fetch Keys Normal or by RegEx
- * Slabs and Key Info
-  * View slabs on each server
-   * View keys in each slab
-    * View data for each key 
+  * Get Key(s)
+   * JSON, Pickle, PHP Serialize, and Raw Conversion support
+  * Delete Key(s)
+  * Flush Keys
  * Statistics
   * Cache Info
    * Total Number of Items
@@ -38,6 +30,6 @@ This is a some what complete list of features as it stands. You may also check t
   * Live Traffic Diagrams and Stats
    * Number of Connections over time
 
-== Features Planned for V0.2 ==
+= Features Planned =
  * Proxy'd Server Connections 
  * Add Support for PHP Storage Algorithm in Key Fetching
