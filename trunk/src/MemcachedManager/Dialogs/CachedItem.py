@@ -7,6 +7,7 @@ from PyQt4 import QtGui
 from PyQt4 import QtCore
 from MemcachedManager.Dialogs.ui_CachedItem import Ui_CacheItem
 import json
+from MemcachedManager.PHPUnserialize import PHPUnserialize
 
 class CachedItem(QtGui.QDialog, Ui_CacheItem):
     def __init__(self):
@@ -37,7 +38,7 @@ class CachedItem(QtGui.QDialog, Ui_CacheItem):
             value = self.currentCluster.getKey(self.currentKeys, unpickel=unpickel)
             if encoding == 'PHP Serialized':
                 #TODO: PHP Deserialize
-                value = ["=== "+ str(k) +" ===\n\n"+ v for k,v in dict(value).iteritems()]
+                value = ["=== "+ str(k) +" ===\n\n"+ str(PHPUnserialize().unserialize(v)) for k,v in dict(value).iteritems()]
             elif encoding == 'JSON':
                 value = ["=== "+ str(k) +" ===\n\n"+ str(json.dumps(json.loads(v), sort_keys=True, indent=4)) for k,v in dict(value).iteritems()]
             else:
