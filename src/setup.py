@@ -4,10 +4,9 @@ Created on Jul 14, 2010
 @author: nick
 '''
 from distutils.core import setup
-import MemcachedManager.Main
 
-setup(name="Memcached Manager",
-      version=MemcachedManager.Main.__version__,
+setup(name="MemcachedManager",
+      version="0.1a1.6",
       description="Memcached Server Manager allows you to view stats about your Memcached cluster and Manage the data in that cluster and much more.",
       author="Nick Verbeck",
       author_email="nerdynick@gmail.com",
