@@ -9,7 +9,31 @@
 
 You must have installed all the Pre-Reqs. before continuing on.
 
-== SVN (Source Control) ==
+== PyPi Install ==
+
+This is the simplest install route. 
+
+{{{
+#Install
+sudo easy_install MemcachedManager
+
+#Launch/Run
+MemcachedManager
+}}}
+
+== Source Download ==
+
+{{{
+#Install
+tar -xzf Memcached\ Manager-0.1a1.5.tar.gz
+cd Memcached\ Manager
+python setup.py install
+
+#Launch/Run
+MemcachedManager
+}}}
+
+== SVN for Dev ==
 
 This is currently the only way to try out Memcached-Manager. It should be pretty simple for anyone with a bit of programming experience.
 
@@ -21,23 +45,5 @@ svn checkout http://memcached-manager.googlecode.com/svn/trunk/src/ memcached-ma
 cd memcached-manager
 
 # Execute MemcachedManager
-python MemcachedManager.py
-}}}
-
-== Download ==
-
-Currently their is only Tarballs of the code up for download. All you need to do is download and extract the contained folder and run MemcachedManager.py
-
-{{{
-#Dowload
-wget http://memcached-manager.googlecode.com/files/Memcached-Manager_0.1a1.tar.gz
-
-#extract
-tar -xzf Memcached-Manager_0.1a1.tar.gz
-
-#Change Directory
-cd Memcached-Manager_0.1a1
-
-#Run Memcached-Manager
-python MemcachedManager.py
+python Main.py
 }}}
