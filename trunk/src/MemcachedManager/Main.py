@@ -48,7 +48,7 @@ import sys
 import os
 import MainWindow
 
-__version__ = "0.1"
+__version__ = "0.1a1.5"
 
 def launch():
 	app = QtGui.QApplication(sys.argv)
