@@ -6,7 +6,7 @@ Created on Jul 14, 2010
 from distutils.core import setup
 
 setup(name="MemcachedManager",
-      version="0.1a1.6",
+      version="0.1a2",
       description="Memcached Server Manager allows you to view stats about your Memcached cluster and Manage the data in that cluster and much more.",
       author="Nick Verbeck",
       author_email="nerdynick@gmail.com",
@@ -16,6 +16,7 @@ setup(name="MemcachedManager",
       package_data={'MemcachedManager': ['Icons/Active.png',
                         'Icons/Add.png',
                         'Icons/Globe.png',
+                        'Icons/memLogo.png',
                         'Icons/Remove.png',
                         'Icons/UnActive.png']}
       )

@@ -54,7 +54,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow, ManagementTasks.ManagementTas
             
         #Create the Icons
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(Main.getIconPath("Globe.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(Main.getIconPath("memLogo.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         addIcon = QtGui.QIcon()
         addIcon.addPixmap(QtGui.QPixmap(Main.getIconPath("Add.png")), QtGui.QIcon.Normal, QtGui.QIcon.On)
         removeIcon = QtGui.QIcon()
