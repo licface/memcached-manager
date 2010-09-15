@@ -15,7 +15,7 @@ class Ui_MainWindow(object):
         MainWindow.resize(722, 591)
         MainWindow.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("Icons/Globe.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("Icons/memLogo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet("None")
         self.centralwidget = QtGui.QWidget(MainWindow)
