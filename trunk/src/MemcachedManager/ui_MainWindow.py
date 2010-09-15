@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Wed Sep 15 13:13:46 2010
+# Created: Wed Sep 15 14:07:20 2010
 #      by: PyQt4 UI code generator 4.7.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -101,6 +101,13 @@ class Ui_MainWindow(object):
         self.tabsMain.addTab(self.MTasks, "")
         self.SKInfo = QtGui.QWidget()
         self.SKInfo.setObjectName("SKInfo")
+        self.verticalLayout_9 = QtGui.QVBoxLayout(self.SKInfo)
+        self.verticalLayout_9.setObjectName("verticalLayout_9")
+        self.label = QtGui.QLabel(self.SKInfo)
+        self.label.setObjectName("label")
+        self.verticalLayout_9.addWidget(self.label)
+        spacerItem1 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        self.verticalLayout_9.addItem(spacerItem1)
         self.tabsMain.addTab(self.SKInfo, "")
         self.Stats = QtGui.QWidget()
         self.Stats.setObjectName("Stats")
@@ -118,7 +125,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
         self.scrollAreaWidgetContents_2 = QtGui.QWidget(self.scrollArea_2)
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 436, 502))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 179, 458))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
         self.verticalLayout_3 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
@@ -276,7 +283,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtGui.QWidget(self.scrollArea)
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 126, 69))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 104, 63))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout = QtGui.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -300,7 +307,7 @@ class Ui_MainWindow(object):
         self.saServerInfo.setWidgetResizable(True)
         self.saServerInfo.setObjectName("saServerInfo")
         self.scrollAreaWidgetContents_3 = QtGui.QWidget(self.saServerInfo)
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 169, 352))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 149, 320))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
         self.verticalLayout_6 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
@@ -427,7 +434,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5.addWidget(self.tabsMain)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 722, 19))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 722, 17))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtGui.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
@@ -507,6 +514,7 @@ class Ui_MainWindow(object):
         self.btnKeySearch.setText(QtGui.QApplication.translate("MainWindow", "Search for Key", None, QtGui.QApplication.UnicodeUTF8))
         self.tabsMain.setTabText(self.tabsMain.indexOf(self.MTasks), QtGui.QApplication.translate("MainWindow", "Management Tasks", None, QtGui.QApplication.UnicodeUTF8))
         self.tabsMain.setTabToolTip(self.tabsMain.indexOf(self.MTasks), QtGui.QApplication.translate("MainWindow", "Cluster Management Tasks", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("MainWindow", "Slab and Key Info is currently under development. Planned for the 0.2 release.", None, QtGui.QApplication.UnicodeUTF8))
         self.tabsMain.setTabText(self.tabsMain.indexOf(self.SKInfo), QtGui.QApplication.translate("MainWindow", "Slab && Key Info", None, QtGui.QApplication.UnicodeUTF8))
         self.tabsMain.setTabToolTip(self.tabsMain.indexOf(self.SKInfo), QtGui.QApplication.translate("MainWindow", "Slabs, Keys, & Values", None, QtGui.QApplication.UnicodeUTF8))
         self.gbTotals.setTitle(QtGui.QApplication.translate("MainWindow", "Totals", None, QtGui.QApplication.UnicodeUTF8))
