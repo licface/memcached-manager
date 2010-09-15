@@ -57,4 +57,4 @@ class ManagementTasks:
 		#pBar = pbKeySearch
 		#RegEx = cbRegEx
 		#Text = txtSearchKey
-		QtGui.QMessageBox.information(self, "Key Search", "Key Search is currently under development.")
+		QtGui.QMessageBox.information(self, "Key Search", "Key Search is currently under development. It is planned for the 0.2 release.")
