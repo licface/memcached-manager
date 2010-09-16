@@ -1,27 +1,37 @@
 #labels Featured,Phase-Design
 = Screenshots V0.1=
+[http://picasaweb.google.com/nerdynick/MemcachedManagerScreenshots Picasa Screenshot Album]
 
 == Main Window ==
 
-[http://picasaweb.google.com/nerdynick/MemcachedManagerScreenshots Picasa Screenshot Album]
-
 === Management Tab ===
-http://lh5.ggpht.com/nerdynick/SPJ2VkzwEbI/AAAAAAAAAFQ/-Yfym19iFxc/Screenshot-MainWindow.png
+
+http://lh3.ggpht.com/_MvJxpVDN8xE/TJKMli5yFYI/AAAAAAAAAbo/dsllWi8GzV0/Management_Tasks.png
+
 === Statistics Tabs ==
-Cache Info
 
-http://lh3.ggpht.com/_MvJxpVDN8xE/SRdv_GFLokI/AAAAAAAAAGg/w-Vy3rKJ2f4/MainWindow-Stats-Cache_Info-2.png
+==== Cache Info ====
 
-Diagrams
+http://lh3.ggpht.com/_MvJxpVDN8xE/TJKMmaMPrjI/AAAAAAAAAbw/rxeyNYRjBWs/Stats-Cache_Info.png
 
-http://lh6.ggpht.com/_MvJxpVDN8xE/SRfhviYU7HI/AAAAAAAAAGo/VckgZljZt28/s576/MainWindow-Stats-Diagrams.png
+==== Diagrams ====
 
-Server Info
+http://lh5.ggpht.com/_MvJxpVDN8xE/TJKMmbe9DJI/AAAAAAAAAb0/2Y8UukRPzbI/s640/Stats-Diagrams.png
 
-http://lh5.ggpht.com/_MvJxpVDN8xE/SSDtd9wlV_I/AAAAAAAAAGw/Usd1c0WZo1Y/s576/Memcached_Manager-Stats-Server_Information.png
+==== Server Info ====
 
-== Add Server ==
-http://lh4.ggpht.com/nerdynick/SPJ2V7x6pNI/AAAAAAAAAFY/eQFsv5F4I_w/Screenshot-Add%20Server.png
+http://lh3.ggpht.com/_MvJxpVDN8xE/TJKMr2eNgLI/AAAAAAAAAb8/7_UDTopEwbE/s640/Stats-Server_Info.png
 
-== Add Cluster ==
-http://lh3.ggpht.com/nerdynick/SPJ2V3cJD_I/AAAAAAAAAFg/rjedaawIaS8/Screenshot-Add%20Cluster.png
+==== Live Stats ====
+
+http://lh6.ggpht.com/_MvJxpVDN8xE/TJKMr9N4olI/AAAAAAAAAb4/8XX5P7Hr80k/Stats-Live_Stats.png
+
+== Dialogs ==
+
+=== Manage Cluster ===
+
+http://lh4.ggpht.com/_MvJxpVDN8xE/TJKMlQZ8bvI/AAAAAAAAAbk/qRwox4E3FZY/Manage_Cluster.png
+
+=== Preferences ===
+
+http://lh3.ggpht.com/_MvJxpVDN8xE/TJKMl8755qI/AAAAAAAAAbs/YT41dZIryYM/Prefs.png
