@@ -1,5 +1,4 @@
 from datetime import datetime
-import time
 
 def breakdownSize(space):
 	"""
@@ -368,7 +367,7 @@ class MemcachedServerStats(object):
 		#Number of Items ever in cache
 		self.TotalItems = int(items.get('total_items', 0))
 		#Number of evictions on server
-		self.Evictions = items.get('evictions', 0)
+		self.Evictions = int(items.get('evictions', 0))
 		
 	def getFreeSpace(self):
 		"""
@@ -439,14 +438,14 @@ class MemcachedServerStats(object):
 		"""
 		return float(self.GetMisses)/float(self.UptimeTimestamp)
 	
+	def getHitPerc(self):
+		return (float(self.GetHits)/(self.GetMisses+self.GetHits))
+	
+	def getMissPerc(self):
+		return (float(self.GetMisses)/(self.GetMisses+self.GetHits))
+	
 	def getEvictionRate(self):
 		"""
 		Eviction Rate of Memcached Instance
 		"""
 		return float(self.Evictions)/float(self.UptimeTimestamp)
-		
-if __name__ == '__main__':
-	import memcache
-	stats = MemcachedStats(memcache.Client(['localhost:11211']))
-	for server in stats.getServers():
-		print server.__dict__

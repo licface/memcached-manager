@@ -3,7 +3,6 @@ from PyQt4 import QtCore
 from MemcachedManager.Dialogs.ui_LiveStats import Ui_liveStatsDialog
 import time
 import MemcachedManager.Settings
-import locale
 
 class Dialog(QtGui.QDialog, Ui_liveStatsDialog):
 	def __init__(self):
@@ -65,7 +64,18 @@ class MonitorTableModel(QtCore.QAbstractTableModel):
 	def __init__(self, parent=None):
 		QtCore.QAbstractTableModel.__init__(self, parent)
 		self.stats = None
-		self.headerdata = ["Server", 'No. Items', 'No. Connections', 'Hits', 'Misses', 'Gets', 'Sets', 'Free Space', 'Used Space']
+		self.headerdata = ["Server", 
+						'No. Items', 
+						'No. Connections', 
+						'Hits', 
+						'% Hits',
+						'Misses', 
+						'% Misses',
+						'Gets', 
+						'Sets', 
+						'Evictions',
+						'Free Space', 
+						'Used Space']
 		
 	def updateStats(self, stats):
 		self.emit(QtCore.SIGNAL("layoutAboutToBeChanged()"))
@@ -95,20 +105,26 @@ class MonitorTableModel(QtCore.QAbstractTableModel):
 		if index.column() == 0:
 			value = server.Name
 		elif index.column() == 1:
-			value =  locale.format ('%d', server.CurrItems, True)
+			value =  "{0:n}".format(server.CurrItems)
 		elif index.column() == 2:
-			value = locale.format ('%d', server.CurrConnections, True)
+			value = "{0:n}".format(server.CurrConnections)
 		elif index.column() == 3:
-			value = locale.format ('%d', server.GetHits, True)
+			value = "{0:n}".format(server.GetHits)
 		elif index.column() == 4:
-			value = locale.format ('%d', server.GetMisses, True)
+			value = "{0:.2%}".format(server.getHitPerc())
 		elif index.column() == 5:
-			value = locale.format ('%d', server.CMDGet, True)
+			value = "{0:n}".format(server.GetMisses)
 		elif index.column() == 6:
-			value = locale.format ('%d', server.CMDSet, True)
+			value = "{0:.2%}".format(server.getMissPerc())
 		elif index.column() == 7:
-			value = server.getFormatedFreeSpace()
+			value = "{0:n}".format(server.CMDGet)
 		elif index.column() == 8:
+			value = "{0:n}".format(server.CMDSet)
+		elif index.column() == 9:
+			value = "{0:n}".format(server.Evictions)
+		elif index.column() == 10:
+			value = server.getFormatedFreeSpace()
+		elif index.column() == 11:
 			value = server.getFormatedUsedSpace()
 		else:	
 			value = ''
