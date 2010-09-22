@@ -23,6 +23,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow, ManagementTasks.ManagementTas
         ManagementTasks.ManagementTasks.__init__(self)
         Slabs.Slabs.__init__(self)
         Stats.Stats.__init__(self)
+        self.currentTab = 'MTasks'
         
         #Startup the Dialogs
         self.addDialog = Add.AddServersClusters()
@@ -122,6 +123,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow, ManagementTasks.ManagementTas
         This is used to cann an onFocus even for each tab 
         allowing them to update data if needed or preferances saying to. 
         """
+        self.currentTab = tab.objectName()
         if tab.objectName() == 'Stats':
             Stats.Stats.onFocus(self)
         elif tab.objectName() == 'SKInfo':
@@ -204,6 +206,14 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow, ManagementTasks.ManagementTas
         """
         self.currentCluster = cluster
         self.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Memcached Manager ("+ str(self.currentCluster.name) +")", None, QtGui.QApplication.UnicodeUTF8))
+        
+        #Update Stats Tab if we are currently on it
+        if self.currentTab == 'Stats':
+            self._updateStats()
+        
+        #Update Live Stats if its showing
+        if not self.liveStatsDialog.isHidden():
+            self.liveStatsDialog.setCluster(self.currentCluster)
 
         
     def deleteServer(self):
