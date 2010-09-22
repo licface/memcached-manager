@@ -122,6 +122,12 @@ class MemcachedClusterStats(object):
 		"""
 		return self._getServersAttrib('CMDSet')
 	
+	def getEvictions(self):
+		"""
+		Returns the total number of evictions
+		"""
+		return self._getServersAttrib('Evictions')
+	
 	def getTotalSpace(self):
 		"""
 		Returns the total size of the cluster
