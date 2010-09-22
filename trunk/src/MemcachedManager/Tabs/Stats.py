@@ -78,17 +78,20 @@ class Stats:
 		self.lblFree.setText(stats.getFormatedFreeSpace())
 		self.lblUsed.setText(stats.getFormatedUsedSpace())
 		
-		self.lblRequestRate.setText("%.2f cache requests/second"% (stats.getRequestRate(),))
-		self.lblHitRate.setText("%.2f cache requests/second"% (stats.getHitRate(),))
-		self.lblMissRate.setText("%.2f cache requests/second"% (stats.getMissRate(),))
-		self.lblSetRate.setText("%.2f cache requests/second"% (stats.getSetRate(),))
-		self.lblGetRate.setText("%.2f cache requests/second"% (stats.getGetRate(),))
+		self.lblEvic.setText(str(stats.getEvictions()))
 		
-		self.lblRequestRateAvg.setText("%.2f cache requests/second"% (stats.getRequestRateAvg(),))
-		self.lblHitRateAvg.setText("%.2f cache requests/second"% (stats.getHitRateAvg(),))
-		self.lblMissRateAvg.setText("%.2f cache requests/second"% (stats.getMissRateAvg(),))
-		self.lblSetRateAvg.setText("%.2f cache requests/second"% (stats.getSetRateAvg(),))
-		self.lblGetRateAvg.setText("%.2f cache requests/second"% (stats.getGetRateAvg(),))
+		self.lblRequestRate.setText("%.2f cache requests/second"% (stats.getRequestRate(),))
+		self.lblHitRate.setText("%.2f hits/second"% (stats.getHitRate(),))
+		self.lblMissRate.setText("%.2f misses/second"% (stats.getMissRate(),))
+		self.lblSetRate.setText("%.2f sets/second"% (stats.getSetRate(),))
+		self.lblGetRate.setText("%.2f gets/second"% (stats.getGetRate(),))
+		self.lblEvicRate.setText("%.2f evictions/second"% (stats.getEvictionRate(),))
+		
+		self.lblRequestRateAvg.setText("%.2f requests/second"% (stats.getRequestRateAvg(),))
+		self.lblHitRateAvg.setText("%.2f hits/second"% (stats.getHitRateAvg(),))
+		self.lblMissRateAvg.setText("%.2f misses/second"% (stats.getMissRateAvg(),))
+		self.lblSetRateAvg.setText("%.2f sets/second"% (stats.getSetRateAvg(),))
+		self.lblGetRateAvg.setText("%.2f gets/second"% (stats.getGetRateAvg(),))
 		
 	def _updateDiagrams_CacheUsage(self, stats):
 		"""
